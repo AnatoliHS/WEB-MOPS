@@ -815,7 +815,7 @@ section {
 }
 
 .highlight-text p {
-  font-size: 1.05rem;
+  font-size: 1.25rem;
   color: var(--text-light);
   line-height: 1.7;
 }
@@ -972,27 +972,97 @@ section {
 }
 
 /* 8. FAQ Section (Details/Summary Accordion) */
+/* 9. FAQ Section Grid & Sticky Left Layout */
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1.8fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.faq-left {
+  position: sticky;
+  top: 140px;
+}
+
+.faq-badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #05152a;
+  background-color: rgba(5, 21, 42, 0.08);
+  padding: 6px 16px;
+  border-radius: 50px;
+  margin-bottom: 24px;
+}
+
+.faq-title {
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-family: var(--font-serif);
+  color: #e8274e;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.faq-lead {
+  font-size: 1.15rem;
+  color: #05152a;
+  opacity: 0.85;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+.faq-cta-box {
+  background: var(--white);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(5, 21, 42, 0.06);
+  padding: 30px;
+  border-radius: var(--radius-md);
+}
+
+.faq-cta-box p {
+  font-weight: 600;
+  color: #05152a;
+  margin-bottom: 16px;
+  font-size: 1.1rem;
+}
+
+.faq-cta-box .btn {
+  width: 100%;
+}
+
+.faq-cta-box .btn-outline {
+  border-color: #05152a;
+  color: #05152a;
+}
+
+.faq-cta-box .btn-outline:hover {
+  background-color: #05152a;
+  color: var(--white);
+}
+
+/* 9.1 Modern Accordion */
 .faq-accordion {
-  max-width: 1000px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 0;
 }
 
 .faq-accordion details {
-  background: var(--white);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow);
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+  border-bottom: 1px solid rgba(5, 21, 42, 0.15);
   overflow: hidden;
   opacity: 0;
   transform: translateY(30px);
   transition:
     opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1) calc(var(--faq-idx, 0) * 0.12s),
     transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) calc(var(--faq-idx, 0) * 0.12s),
-    border-color 0.4s cubic-bezier(0.25, 1, 0.5, 1) 0s,
-    box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1) 0s;
+    background-color 0.4s ease;
 }
 
 .faq-accordion details.visible {
@@ -1002,60 +1072,117 @@ section {
 
 .faq-accordion details[open],
 .faq-accordion details.is-open {
+  background-color: var(--white);
   box-shadow: var(--shadow-md);
-  border-color: rgba(254, 149, 2, 0.25);
+  border-radius: var(--radius-sm);
+  border-bottom-color: transparent;
+}
+
+.faq-accordion details[open] summary,
+.faq-accordion details.is-open summary {
+  color: #e8274e;
+}
+
+.faq-accordion details[open] summary:hover,
+.faq-accordion details.is-open summary:hover {
+  color: #e8274e;
+}
+
+.faq-accordion details[open] summary:hover::after,
+.faq-accordion details.is-open summary:hover::after {
+  background-color: #e8274e;
+  color: var(--white);
+  transform: rotate(135deg) scale(1.08);
 }
 
 .faq-accordion summary {
-  padding: 24px 30px;
+  padding: 28px 20px;
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--primary-color);
+  color: #05152a;
   cursor: pointer;
   list-style: none;
-  /* Hide default arrow */
   display: flex;
   justify-content: space-between;
   align-items: center;
   transition: var(--transition);
 }
 
-@media (max-width: 768px) {
-  .faq-accordion summary {
-    font-size: 1.1rem;
-  }
+.faq-accordion summary:hover {
+  color: #e8274e;
+  padding-left: 28px;
 }
 
 .faq-accordion summary::-webkit-details-marker {
   display: none;
-  /* Hide Safari arrow */
 }
 
-/* Custom animated arrow */
+/* Custom animated circle plus indicator */
 .faq-accordion summary::after {
   content: '+';
-  font-family: var(--font-sans);
-  font-size: 1.5rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(5, 21, 42, 0.08);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #05152a;
+  font-size: 1.4rem;
   font-weight: 300;
-  color: var(--accent-orange);
   transition: var(--transition);
-  display: inline-block;
+  flex-shrink: 0;
   line-height: 1;
+}
+
+.faq-accordion summary:hover::after {
+  background-color: #05152a;
+  color: var(--white);
+  transform: scale(1.08);
 }
 
 .faq-accordion details[open] summary::after,
 .faq-accordion details.is-open summary::after {
-  transform: rotate(45deg);
-  color: var(--accent-pink);
+  transform: rotate(135deg);
+  background-color: #e8274e;
+  color: var(--white);
 }
 
 .faq-content-wrapper {
-  padding: 0 30px 24px;
-  color: var(--text-light);
+  padding: 0 20px 28px;
+  color: #05152a;
+  opacity: 0.9;
   line-height: 1.8;
-  font-size: 1rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.02);
-  padding-top: 16px;
+  font-size: 1.05rem;
+  border-top: none;
+  padding-top: 8px;
+}
+
+/* Responsive FAQ Grid */
+@media (max-width: 992px) {
+  .faq-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .faq-left {
+    position: static;
+  }
+
+  .faq-cta-box {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .faq-accordion summary {
+    font-size: 1.1rem;
+    padding: 20px 10px;
+  }
+
+  .faq-accordion summary:hover {
+    padding-left: 18px;
+  }
 }
 
 /* 9. Contact Section & Glassmorphic Form */
@@ -1363,6 +1490,10 @@ section {
 
   .highlight-text {
     padding-right: 0;
+  }
+
+  .highlight-text p {
+    font-size: 1.05rem;
   }
 
   .contact-grid {
@@ -1702,9 +1833,214 @@ section {
   }
 }
 
+/* 11.5 Pricing Section */
+.pricing-section {
+  background-color: #e8274e !important;
+  padding: 100px 0;
+  scroll-margin-top: -100px;
+  position: relative;
+  z-index: 10;
+}
+
+.pricing-section .section-header h2 {
+  color: #05152a;
+}
+
+.pricing-section .section-header p {
+  color: #05152a;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  align-items: stretch;
+  margin-top: 20px;
+}
+
+.pricing-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 50px 35px 40px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid rgba(35, 31, 32, 0.05);
+  transition: var(--transition);
+}
+
+.pricing-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+  border-color: rgba(35, 31, 32, 0.1);
+}
+
+.pricing-grid:hover .pricing-card {
+  opacity: 0.6;
+}
+
+.pricing-grid:hover .pricing-card:hover {
+  opacity: 1;
+}
+
+/* Badge styles */
+.pricing-badge {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 6px 14px;
+  border-radius: 50px;
+  background: rgba(35, 31, 32, 0.08);
+  color: var(--primary-color);
+}
+
+.pricing-card.emergency .pricing-badge {
+  background: rgba(232, 39, 78, 0.1);
+  color: #e8274e;
+}
+
+.pricing-badge.featured {
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-orange));
+  color: var(--white);
+}
+
+.pricing-tier-name {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.pricing-price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.price-from {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.price-amount {
+  font-size: 3rem;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  color: var(--primary-color);
+  line-height: 1;
+}
+
+.price-period {
+  font-size: 0.95rem;
+  color: var(--text-light);
+}
+
+.pricing-desc {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  line-height: 1.5;
+  margin-bottom: 30px;
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex-grow: 1;
+}
+
+.pricing-features li {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  line-height: 1.4;
+}
+
+.feature-icon {
+  color: var(--accent-orange);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.pricing-card.emergency .feature-icon {
+  color: #e8274e;
+}
+
+.pricing-features li:hover .feature-icon {
+  transform: scale(1.15) translateX(2px);
+}
+
+.pricing-cta {
+  margin-top: auto;
+}
+
+.pricing-cta .btn {
+  width: 100%;
+}
+
+/* Featured / Highlighted Pro Card styling */
+.pricing-card.highlighted {
+  border: 2px solid transparent;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  background-image: linear-gradient(to right, var(--white), var(--white)),
+    linear-gradient(135deg, var(--accent-color), var(--accent-orange));
+  box-shadow: var(--shadow-lg);
+}
+
+.pricing-card.highlighted:hover {
+  box-shadow: 0 20px 40px rgba(252, 105, 65, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .pricing-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .pricing-card.emergency {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-section {
+    padding: 80px 0;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .pricing-card.emergency {
+    grid-column: span 1;
+  }
+
+  .pricing-card {
+    padding: 40px 24px 30px;
+  }
+}
+
 /* 11.6 Reviews Slider Section */
 .reviews-section {
-  background-color: var(--bg-color) !important;
+  background-color: var(--white) !important;
   padding: 100px 0;
   scroll-margin-top: -100px;
 }
@@ -1735,7 +2071,7 @@ section {
 .review-card {
   flex: 0 0 calc((100% - 60px) / 3);
   /* Desktop: 3 cards */
-  background: var(--white);
+  background: var(--bg-color);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow);
   padding: 40px 30px;
@@ -1869,6 +2205,7 @@ section {
 .intro-section,
 .trust-section,
 .mission,
+.pricing-section,
 .reviews-section,
 .cta-banner,
 .faq,
@@ -1920,16 +2257,8 @@ section {
 }
 
 .faq {
-  background-color: #e8274e !important;
+  background-color: #fafafa !important;
   scroll-margin-top: -100px;
-}
-
-.faq .section-header h2 {
-  color: #05152a;
-}
-
-.faq .section-header p {
-  color: #05152a;
 }
 
 .footer {

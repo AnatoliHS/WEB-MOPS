@@ -41,6 +41,7 @@
       <a href="#hero">Home</a>
       <a href="#trust">About</a>
       <a href="#mission">Our Mission</a>
+      <a href="#pricing">Pricing</a>
       <a href="#reviews">Reviews</a>
       <a href="#faq">FAQ</a>
       <a href="#contact" class="btn btn-primary">Contact</a>
@@ -146,6 +147,42 @@
           const isOpen = item.open;
 
           if (!isOpen) {
+            // Close other open FAQ items with a smooth transition
+            document.querySelectorAll('.faq-accordion details').forEach((otherItem) => {
+              if (otherItem !== item && (otherItem.open || otherItem.classList.contains('is-open'))) {
+                if (otherItem.dataset.animating === 'true') {
+                  otherItem.classList.remove('is-open');
+                  otherItem.open = false;
+                  otherItem.style.height = '';
+                  otherItem.style.overflow = '';
+                  otherItem.dataset.animating = 'false';
+                  return;
+                }
+
+                otherItem.dataset.animating = 'true';
+                otherItem.classList.remove('is-open');
+
+                const otherSummary = otherItem.querySelector('summary');
+                const otherStartHeight = otherItem.offsetHeight;
+                const otherEndHeight = otherSummary ? otherSummary.offsetHeight : 0;
+
+                otherItem.style.height = `${otherStartHeight}px`;
+                otherItem.style.overflow = 'hidden';
+
+                const otherAnim = otherItem.animate(
+                  { height: [`${otherStartHeight}px`, `${otherEndHeight}px`] },
+                  { duration: 300, easing: 'cubic-bezier(0.25, 1, 0.5, 1)' }
+                );
+
+                otherAnim.onfinish = () => {
+                  otherItem.open = false;
+                  otherItem.style.height = '';
+                  otherItem.style.overflow = '';
+                  otherItem.dataset.animating = 'false';
+                };
+              }
+            });
+
             item.open = true;
             item.classList.add('is-open');
 
