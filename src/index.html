@@ -98,30 +98,21 @@ main {
   transition: clip-path 0.65s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-/* Default clip — left takes the left-of-diagonal area */
-.split-panel--left {
-  clip-path: polygon(0 0, 57% 0, 43% 100%, 0 100%);
-  z-index: 1;
-}
-
-/* Default clip — right takes the right-of-diagonal area */
-.split-panel--right {
-  clip-path: polygon(57% 0, 100% 0, 100% 100%, 43% 100%);
-  z-index: 1;
-}
-
-/* ---- Expand on hover using :has() so BOTH panels update together ---- */
-.split-portal:has(.split-panel--left:hover) .split-panel--left {
+.split-portal:has(.split-panel--left:hover) .split-panel--left,
+.split-portal:has(.split-panel--left.active) .split-panel--left {
   clip-path: polygon(0 0, 67% 0, 53% 100%, 0 100%);
 }
-.split-portal:has(.split-panel--left:hover) .split-panel--right {
+.split-portal:has(.split-panel--left:hover) .split-panel--right,
+.split-portal:has(.split-panel--left.active) .split-panel--right {
   clip-path: polygon(67% 0, 100% 0, 100% 100%, 53% 100%);
 }
 
-.split-portal:has(.split-panel--right:hover) .split-panel--left {
+.split-portal:has(.split-panel--right:hover) .split-panel--left,
+.split-portal:has(.split-panel--right.active) .split-panel--left {
   clip-path: polygon(0 0, 47% 0, 33% 100%, 0 100%);
 }
-.split-portal:has(.split-panel--right:hover) .split-panel--right {
+.split-portal:has(.split-panel--right:hover) .split-panel--right,
+.split-portal:has(.split-panel--right.active) .split-panel--right {
   clip-path: polygon(47% 0, 100% 0, 100% 100%, 33% 100%);
 }
 
@@ -159,13 +150,15 @@ main {
 
 
 /* Hovered panel: zoom in + full brightness */
-.split-panel:hover .split-panel__bg {
+.split-panel:hover .split-panel__bg,
+.split-panel.active .split-panel__bg {
   transform: scale(1.06);
   filter: brightness(1.05);
 }
 
 /* Non-hovered panel dims when a sibling is hovered */
-.split-portal:has(.split-panel:hover) .split-panel:not(:hover) .split-panel__bg {
+.split-portal:has(.split-panel:hover) .split-panel:not(:hover) .split-panel__bg,
+.split-portal:has(.split-panel.active) .split-panel:not(.active) .split-panel__bg {
   filter: brightness(0.45);
 }
 
@@ -183,7 +176,8 @@ main {
 }
 
 /* Hovered: lighter overlay so image shines through */
-.split-panel:hover .split-panel__overlay {
+.split-panel:hover .split-panel__overlay,
+.split-panel.active .split-panel__overlay {
   background: linear-gradient(
     to bottom,
     rgba(5, 21, 42, 0.25) 0%,
@@ -193,7 +187,8 @@ main {
 }
 
 /* Non-hovered: heavy overlay to darken it further */
-.split-portal:has(.split-panel:hover) .split-panel:not(:hover) .split-panel__overlay {
+.split-portal:has(.split-panel:hover) .split-panel:not(:hover) .split-panel__overlay,
+.split-portal:has(.split-panel.active) .split-panel:not(.active) .split-panel__overlay {
   background: linear-gradient(
     to bottom,
     rgba(5, 21, 42, 0.75) 0%,
@@ -228,10 +223,14 @@ main {
 }
 
 /* Shift content when hovering */
-.split-portal:has(.split-panel--left:hover)  .split-panel--left .split-panel__content  { left: 28%; }
-.split-portal:has(.split-panel--left:hover)  .split-panel--right .split-panel__content { left: 78%; }
-.split-portal:has(.split-panel--right:hover) .split-panel--right .split-panel__content { left: 72%; }
-.split-portal:has(.split-panel--right:hover) .split-panel--left .split-panel__content  { left: 20%; }
+.split-portal:has(.split-panel--left:hover)  .split-panel--left .split-panel__content,
+.split-portal:has(.split-panel--left.active) .split-panel--left .split-panel__content  { left: 28%; }
+.split-portal:has(.split-panel--left:hover)  .split-panel--right .split-panel__content,
+.split-portal:has(.split-panel--left.active) .split-panel--right .split-panel__content { left: 78%; }
+.split-portal:has(.split-panel--right:hover) .split-panel--right .split-panel__content,
+.split-portal:has(.split-panel--right.active) .split-panel--right .split-panel__content { left: 72%; }
+.split-portal:has(.split-panel--right:hover) .split-panel--left .split-panel__content,
+.split-portal:has(.split-panel--right.active) .split-panel--left .split-panel__content  { left: 20%; }
 
 /* ---- Logo ---- */
 .split-logo {
@@ -240,7 +239,8 @@ main {
   filter: drop-shadow(0 4px 16px rgba(0,0,0,0.5));
   transition: transform 0.4s ease, filter 0.4s ease;
 }
-.split-panel:hover .split-logo {
+.split-panel:hover .split-logo,
+.split-panel.active .split-logo {
   transform: scale(1.05);
   filter: drop-shadow(0 6px 20px rgba(0,0,0,0.65));
 }
@@ -286,7 +286,8 @@ main {
   box-shadow: 0 4px 20px rgba(101, 45, 255, 0.35);
 }
 
-.split-panel:hover .split-panel__cta {
+.split-panel:hover .split-panel__cta,
+.split-panel.active .split-panel__cta {
   opacity: 1;
   transform: translateY(0);
 }
@@ -295,7 +296,8 @@ main {
   display: inline-block;
   transition: transform 0.3s ease;
 }
-.split-panel:hover .split-arrow { transform: translateX(4px); }
+.split-panel:hover .split-arrow,
+.split-panel.active .split-arrow { transform: translateX(4px); }
 
 
 /* ============================================================
@@ -327,18 +329,55 @@ main {
     clip-path: polygon(0 43%, 100% 57%, 100% 100%, 0 100%);
   }
 
-  .split-portal:has(.split-panel--left:hover) .split-panel--left  { clip-path: polygon(0 0, 100% 0, 100% 67%, 0 53%); }
-  .split-portal:has(.split-panel--left:hover) .split-panel--right { clip-path: polygon(0 53%, 100% 67%, 100% 100%, 0 100%); }
-  .split-portal:has(.split-panel--right:hover) .split-panel--left  { clip-path: polygon(0 0, 100% 0, 100% 47%, 0 33%); }
-  .split-portal:has(.split-panel--right:hover) .split-panel--right { clip-path: polygon(0 33%, 100% 47%, 100% 100%, 0 100%); }
+  .split-portal:has(.split-panel--left:hover) .split-panel--left,
+  .split-portal:has(.split-panel--left.active) .split-panel--left  { clip-path: polygon(0 0, 100% 0, 100% 67%, 0 53%); }
+  .split-portal:has(.split-panel--left:hover) .split-panel--right,
+  .split-portal:has(.split-panel--left.active) .split-panel--right { clip-path: polygon(0 53%, 100% 67%, 100% 100%, 0 100%); }
+  .split-portal:has(.split-panel--right:hover) .split-panel--left,
+  .split-portal:has(.split-panel--right.active) .split-panel--left  { clip-path: polygon(0 0, 100% 0, 100% 47%, 0 33%); }
+  .split-portal:has(.split-panel--right:hover) .split-panel--right,
+  .split-portal:has(.split-panel--right.active) .split-panel--right { clip-path: polygon(0 33%, 100% 47%, 100% 100%, 0 100%); }
 
   .split-panel--left .split-panel__content  { left: 50%; top: 25%; transform: translate(-50%, -50%); }
   .split-panel--right .split-panel__content { left: 50%; top: 78%; transform: translate(-50%, -50%); }
 
-  .split-portal:has(.split-panel--left:hover)  .split-panel--left .split-panel__content  { top: 28%; left: 50%; }
-  .split-portal:has(.split-panel--left:hover)  .split-panel--right .split-panel__content { top: 78%; left: 50%; }
-  .split-portal:has(.split-panel--right:hover) .split-panel--right .split-panel__content { top: 75%; left: 50%; }
-  .split-portal:has(.split-panel--right:hover) .split-panel--left .split-panel__content  { top: 22%; left: 50%; }
+  .split-portal:has(.split-panel--left:hover)  .split-panel--left .split-panel__content,
+  .split-portal:has(.split-panel--left.active)  .split-panel--left .split-panel__content  { top: 28%; left: 50%; }
+  .split-portal:has(.split-panel--left:hover)  .split-panel--right .split-panel__content,
+  .split-portal:has(.split-panel--left.active)  .split-panel--right .split-panel__content { top: 78%; left: 50%; }
+  .split-portal:has(.split-panel--right:hover) .split-panel--right .split-panel__content,
+  .split-portal:has(.split-panel--right.active) .split-panel--right .split-panel__content { top: 75%; left: 50%; }
+  .split-portal:has(.split-panel--right:hover) .split-panel--left .split-panel__content,
+  .split-portal:has(.split-panel--right.active) .split-panel--left .split-panel__content  { top: 22%; left: 50%; }
 
 }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const panels = document.querySelectorAll('.split-panel');
+
+    panels.forEach(panel => {
+      panel.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) {
+          if (!panel.classList.contains('active')) {
+            // First press: prevent navigation, make panel active
+            e.preventDefault();
+            panels.forEach(p => p.classList.remove('active'));
+            panel.classList.add('active');
+          }
+          // Second press: active class exists, navigates normally
+        }
+      });
+    });
+
+    // Reset when tapping outside panels
+    document.addEventListener('touchstart', (e) => {
+      if (window.innerWidth <= 768) {
+        if (!e.target.closest('.split-panel')) {
+          panels.forEach(p => p.classList.remove('active'));
+        }
+      }
+    });
+  });
+</script>
