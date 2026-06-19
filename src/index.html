@@ -34,6 +34,7 @@ description: "Vibrant Cleanliness for home, business, and vacation rentals. Mops
         </g>
         <path d="M413.1,193.5c-52.6,0-95.4-42.8-95.4-95.4S360.4,2.7,413.1,2.7s95.4,42.8,95.4,95.4-42.8,95.4-95.4,95.4ZM413.1,12.2c-47.4,0-85.9,38.5-85.9,85.9s38.5,85.9,85.9,85.9,85.9-38.5,85.9-85.9S460.4,12.2,413.1,12.2Z" style="fill: url(#logo-grad-left);"/>
       </svg>
+      <p class="split-panel__label">CLEANING</p>
       <span class="split-panel__cta">Cleaning Services <span class="split-arrow">→</span></span>
     </div>
     <div class="split-panel__diagonal-edge split-panel__diagonal-edge--left"></div>
@@ -45,7 +46,7 @@ description: "Vibrant Cleanliness for home, business, and vacation rentals. Mops
     <div class="split-panel__overlay"></div>
     <div class="split-panel__content">
       <img src="/assets/rest-logo.webp" alt="Restaurant Logo" class="split-logo split-logo--rest">
-
+      <p class="split-panel__label">RESTORATION</p>
       <span class="split-panel__cta">Restoration Services <span class="split-arrow">→</span></span>
     </div>
     <div class="split-panel__diagonal-edge split-panel__diagonal-edge--right"></div>
@@ -96,6 +97,18 @@ main {
   cursor: pointer;
   /* clip-path transition handles the diagonal expansion */
   transition: clip-path 0.65s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* Default clip — left takes the left-of-diagonal area */
+.split-panel--left {
+  clip-path: polygon(0 0, 57% 0, 43% 100%, 0 100%);
+  z-index: 1;
+}
+
+/* Default clip — right takes the right-of-diagonal area */
+.split-panel--right {
+  clip-path: polygon(57% 0, 100% 0, 100% 100%, 43% 100%);
+  z-index: 1;
 }
 
 .split-portal:has(.split-panel--left:hover) .split-panel--left,
@@ -248,15 +261,21 @@ main {
 /* ---- Label ---- */
 .split-panel__label {
   font-family: 'Outfit', 'Montserrat', sans-serif;
-  font-size: clamp(0.8rem, 1.2vw, 1rem);
+  font-size: clamp(1.1rem, 1.8vw, 1.6rem);
   font-weight: 500;
   letter-spacing: 0.24em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.75);
   margin: 0;
-  transition: color 0.35s ease;
+  opacity: 1;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
-.split-panel:hover .split-panel__label { color: #fff; }
+.split-panel:hover .split-panel__label,
+.split-panel.active .split-panel__label {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+}
 
 /* ---- CTA button — fades in on hover ---- */
 .split-panel__cta {
@@ -312,12 +331,12 @@ main {
   }
   .split-panel__bg--left {
     background-image: url('/assets/mops-maid-mobile.jpg');
-    height: 60vh;
+    height: 72vh;
     top: 0;
     bottom: auto;
   }
   .split-panel__bg--right {
-    height: 60vh;
+    height: 72vh;
     top: auto;
     bottom: 0;
   }
