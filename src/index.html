@@ -302,17 +302,35 @@ main {
    MOBILE — horizontal split (top / bottom)
    ============================================================ */
 @media (max-width: 768px) {
+  .split-panel__bg {
+    inset: 0;
+  }
+  .split-panel:hover .split-panel__bg {
+    transform: none;
+  }
+  .split-panel__bg--left {
+    background-image: url('/assets/mops-maid-mobile.jpg');
+    height: 60vh;
+    top: 0;
+    bottom: auto;
+  }
+  .split-panel__bg--right {
+    height: 60vh;
+    top: auto;
+    bottom: 0;
+  }
+
   .split-panel--left {
     clip-path: polygon(0 0, 100% 0, 100% 57%, 0 43%);
   }
   .split-panel--right {
-    clip-path: polygon(0 57%, 100% 43%, 100% 100%, 0 100%);
+    clip-path: polygon(0 43%, 100% 57%, 100% 100%, 0 100%);
   }
 
   .split-portal:has(.split-panel--left:hover) .split-panel--left  { clip-path: polygon(0 0, 100% 0, 100% 67%, 0 53%); }
-  .split-portal:has(.split-panel--left:hover) .split-panel--right { clip-path: polygon(0 67%, 100% 53%, 100% 100%, 0 100%); }
+  .split-portal:has(.split-panel--left:hover) .split-panel--right { clip-path: polygon(0 53%, 100% 67%, 100% 100%, 0 100%); }
   .split-portal:has(.split-panel--right:hover) .split-panel--left  { clip-path: polygon(0 0, 100% 0, 100% 47%, 0 33%); }
-  .split-portal:has(.split-panel--right:hover) .split-panel--right { clip-path: polygon(0 47%, 100% 33%, 100% 100%, 0 100%); }
+  .split-portal:has(.split-panel--right:hover) .split-panel--right { clip-path: polygon(0 33%, 100% 47%, 100% 100%, 0 100%); }
 
   .split-panel--left .split-panel__content  { left: 50%; top: 25%; transform: translate(-50%, -50%); }
   .split-panel--right .split-panel__content { left: 50%; top: 78%; transform: translate(-50%, -50%); }
