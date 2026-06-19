@@ -1,7 +1,7 @@
 <nav class="navbar" id="navbar">
   <div class="container">
     <div class="nav-brand">
-      <a href="#hero" style="display: flex; align-items: center; gap: 12px;">
+      <a href="/home/#hero" style="display: flex; align-items: center; gap: 12px;">
         <svg id="Layer_1" class="nav-logo" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" version="1.1"
           xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512.7 196.3" alt="Mops Inc. Logo">
           <defs>
@@ -38,13 +38,11 @@
     </div>
 
     <div class="nav-links" id="nav-links">
-      <a href="#hero">Home</a>
-      <a href="#trust">About</a>
-      <a href="#mission">Our Mission</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#reviews">Reviews</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contact" class="btn btn-primary">Contact</a>
+      <a href="/home/#hero">Home</a>
+      <a href="/home/#mission">Our Mission</a>
+      <a href="/home/#reviews">Reviews</a>
+      <a href="/home/#faq">FAQ</a>
+      <a href="/home/#contact" class="btn btn-primary">Contact</a>
     </div>
 
     <div class="mobile-toggle" onclick="toggleMenu()">
@@ -262,97 +260,6 @@
       countUpElements.forEach(el => countUpObserver.observe(el));
     }
 
-    // Trust Section Carousel and Timeline Progress Logic
-    const timelineItems = document.querySelectorAll('.trust-timeline-item');
-    const carouselSlides = document.querySelectorAll('.carousel-slide');
-    
-    if (timelineItems.length > 0 && carouselSlides.length > 0) {
-      let activeIndex = 0;
-      let intervalId = null;
-      let startTime = null;
-      const duration = 8000; // 8 seconds per slide
-      let paused = false;
-
-      function updateSlide(index) {
-        timelineItems.forEach((item, idx) => {
-          const line = item.querySelector('.progress-bar-line');
-          if (idx !== index) {
-            item.classList.remove('active');
-            if (line) line.style.width = '0%';
-          } else {
-            item.classList.add('active');
-          }
-        });
-
-        carouselSlides.forEach((slide, idx) => {
-          if (idx === index) {
-            slide.classList.add('active');
-          } else {
-            slide.classList.remove('active');
-          }
-        });
-
-        activeIndex = index;
-      }
-
-      function startTimer() {
-        if (intervalId) clearInterval(intervalId);
-        startTime = performance.now();
-        
-        intervalId = setInterval(() => {
-          if (!paused) {
-            let nextIndex = (activeIndex + 1) % timelineItems.length;
-            updateSlide(nextIndex);
-            startTime = performance.now();
-          }
-        }, duration);
-      }
-
-      // Progress bar smooth update frame loop
-      function drawProgress() {
-        if (intervalId) {
-          const activeItem = timelineItems[activeIndex];
-          if (activeItem && !paused) {
-            const line = activeItem.querySelector('.progress-bar-line');
-            if (line) {
-              const elapsed = performance.now() - startTime;
-              const progress = Math.min((elapsed / duration) * 100, 100);
-              line.style.width = `${progress}%`;
-            }
-          }
-        }
-        requestAnimationFrame(drawProgress);
-      }
-
-      // Initialize
-      updateSlide(0);
-      
-      const trustSection = document.querySelector('.trust-section');
-      const trustObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            startTimer();
-            requestAnimationFrame(drawProgress);
-          } else {
-            if (intervalId) {
-              clearInterval(intervalId);
-              intervalId = null;
-            }
-          }
-        });
-      }, { threshold: 0.15 });
-
-      if (trustSection) {
-        trustObserver.observe(trustSection);
-      }
-
-      timelineItems.forEach((item, index) => {
-        item.addEventListener('click', () => {
-          updateSlide(index);
-          startTimer();
-        });
-      });
-    }
 
     // Reviews Slider Logic
     const reviewsTrack = document.querySelector('.reviews-slider-track');
@@ -544,20 +451,23 @@
   }
 
   // Smooth scroll and auto-close mobile drawer
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  document.querySelectorAll('a[href^="#"], a[href^="/home/#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href');
+      const href = this.getAttribute('href');
+      const hashIndex = href.indexOf('#');
+      if (hashIndex === -1) return;
+      const targetId = href.substring(hashIndex);
       if (targetId === '#') return;
-
-      const navbar = document.getElementById('navbar');
-      const navLinks = document.getElementById('nav-links');
-
-      navbar.classList.remove('menu-open');
-      navLinks.classList.remove('open');
 
       const targetElement = document.querySelector(targetId);
       if (targetElement) {
+        e.preventDefault();
+        const navbar = document.getElementById('navbar');
+        const navLinks = document.getElementById('nav-links');
+
+        navbar.classList.remove('menu-open');
+        navLinks.classList.remove('open');
+
         targetElement.scrollIntoView({
           behavior: 'smooth'
         });

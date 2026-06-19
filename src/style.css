@@ -2245,11 +2245,81 @@ section {
 }
 
 .mission {
+  background-color: #e8274e !important;
+}
+
+.mission .mission-header h2 {
+  font-size: clamp(2.6rem, 6.5vw, 4.2rem) !important;
+  line-height: 1.15 !important;
+}
+
+.mission .reveal-title-text {
+  background: linear-gradient(to right, #05152a 0%, #05152a 100%) no-repeat;
+  background-size: 0% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-color: rgba(5, 21, 42, 0.15);
+}
+
+.mission .mission-lead {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: clamp(1.3rem, 2.5vw, 1.7rem) !important;
+  line-height: 1.65 !important;
+}
+
+.mission .mission-sublead {
+  color: #05152a !important;
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem) !important;
+}
+
+.mission .btn-primary {
+  background: var(--white) !important;
+  color: var(--primary-color) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25) !important;
+}
+
+.mission .btn-primary:hover {
+  background: var(--accent-color) !important;
+  color: var(--white) !important;
+  box-shadow: 0 8px 25px rgba(254, 149, 2, 0.4) !important;
+  transform: translateY(-3px) !important;
+}
+
+.mission-highlights {
+  background-color: var(--white) !important;
+  position: relative;
+  z-index: 10;
+}
+
+.mission-highlights .highlight-image::after {
   background-color: var(--white) !important;
 }
 
-.mission .highlight-image::after {
+.reviews-section {
+  background-color: #e8274e !important;
+  padding: 100px 0 !important;
+}
+
+.reviews-section .section-header h2 {
+  color: #05152a !important;
+}
+
+.reviews-section .section-header p {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.reviews-section .review-card {
   background-color: var(--white) !important;
+  border-color: rgba(35, 31, 32, 0.05) !important;
+}
+
+.reviews-section .reviews-dot {
+  background-color: rgba(5, 21, 42, 0.3) !important;
+}
+
+.reviews-section .reviews-dot.active {
+  background-color: #05152a !important;
 }
 
 .cta-banner {
