@@ -1,47 +1,135 @@
 ---
 layout: default
-title: "Home | Mops Inc. | Professional Cleaning & Janitorial Services"
-description: "Vibrant Cleanliness for home, business, and vacation rentals. Mops Inc. is a certified Living Wage Employer serving Belleville and the Quinte region."
+title: "Home | Mops Group Inc. | Professional Cleaning & Janitorial Services"
+description: "Vibrant Cleanliness for home, business, and vacation rentals. Mops Group Inc. is a certified Living Wage Employer serving Belleville and the Quinte region."
 permalink: /home/
 ---
 
-<!-- 1. Hero Section -->
-<section id="hero" class="hero">
-    <div class="hero-banners">
-        <div class="hero-banner-slice" style="--slice-idx: 0; --left: 0%; --right: calc(80% - 1px);"></div>
-        <div class="hero-banner-slice" style="--slice-idx: 1; --left: calc(20% - 1px); --right: calc(60% - 1px);"></div>
-        <div class="hero-banner-slice" style="--slice-idx: 2; --left: calc(40% - 1px); --right: calc(40% - 1px);"></div>
-        <div class="hero-banner-slice" style="--slice-idx: 3; --left: calc(60% - 1px); --right: calc(20% - 1px);"></div>
-        <div class="hero-banner-slice" style="--slice-idx: 4; --left: calc(80% - 1px); --right: 0%;"></div>
-    </div>
-    <div class="container">
-        <div class="hero-content-centered">
-            <h1 class="split-reveal">
-                <span class="line-1">
-                    <span class="word-mask"><span class="word-inner" style="--word-idx: 0;">We</span></span>
-                    <span class="word-mask"><span class="word-inner" style="--word-idx: 1;">Love</span></span>
-                    <span class="word-mask"><span class="word-inner" style="--word-idx: 2;">Cleaning</span></span>
-                </span>
-                <span class="line-2">
-                    <span class="word-mask"><span class="word-inner" style="--word-idx: 3;">So</span></span>
-                    <span class="word-mask"><span class="word-inner" style="--word-idx: 4;">you</span></span>
-                    <span class="word-mask"><span class="word-inner" style="--word-idx: 5;">don’t</span></span>
-                    <span class="word-mask"><span class="word-inner" style="--word-idx: 6;">have</span></span>
-                    <span class="word-mask"><span class="word-inner" style="--word-idx: 7;">to</span></span>
-                </span>
-            </h1>
+<!-- ════════════════════════════════════════
+     1. HERO
+ ════════════════════════════════════════ -->
+<section id="hero" class="hero-redesign">
+  <!-- Top Panel (White background) -->
+  <div class="hero-top-panel">
+    <div class="container hero-top-container">
+      <div class="hero-top-left">
+        <!-- Janitorial Headline — always active -->
+        <div class="hero-headline-wrapper active">
+          <h1 class="hero-headline">
+            <span class="reveal-up" style="--d:0ms; display: block;">Sanitation</span>
+            <span class="reveal-up" style="--d:200ms; display: inline-block;">when you <span
+                class="hero-headline-janitorial-accent">need</span></span>
+            <span class="reveal-up" style="--d:400ms; display: inline-block;">more.</span>
+          </h1>
         </div>
+      </div>
+      <div class="hero-top-right">
+        <!-- Janitorial Intro Description — always active -->
+        <div class="hero-intro-wrapper active">
+          <p class="hero-intro-text reveal-up" style="--d:450ms">
+            Vetted commercial cleaning staff delivering high performance janitorial solutions, office maintenance, and
+            secure facility sanitation.
+          </p>
+        </div>
+        <!-- Mobile Category Dropdown (Only visible on mobile/tablets) -->
+        <div class="hero-mobile-dropdown-container is-janitorial reveal-up" style="--d:500ms">
+          <button type="button" class="hero-mobile-dropdown-trigger" id="hero-mobile-dropdown-trigger">
+            <span class="dropdown-trigger-label" id="dropdown-trigger-label">Commercial Workspaces</span>
+            <span class="dropdown-trigger-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </span>
+          </button>
+          <div class="hero-mobile-dropdown-menu" id="hero-mobile-dropdown-menu">
+            <button type="button" class="hero-mobile-dropdown-item is-active" data-dmg="workspaces">Commercial Workspaces</button>
+            <button type="button" class="hero-mobile-dropdown-item" data-dmg="construction">Post-Construction Cleanup</button>
+            <button type="button" class="hero-mobile-dropdown-item" data-dmg="industrial">Industrial Facility Sanitizing</button>
+            <button type="button" class="hero-mobile-dropdown-item" data-dmg="government">Government &amp; Secure Facilities</button>
+            <button type="button" class="hero-mobile-dropdown-item" data-dmg="dealerships">Car Dealerships &amp; Showrooms</button>
+            <button type="button" class="hero-mobile-dropdown-item" data-dmg="campuses">Universities &amp; Campuses</button>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- Janitorial Services Bar just above the images -->
+    <div class="hero-damages-bar">
+      <div class="container">
+        <div class="hero-damages-row">
+
+          <button type="button" class="hero-damage-pill is-active" data-dmg="workspaces">
+            <span class="hdp-label">Commercial Workspaces</span>
+          </button>
+
+          <button type="button" class="hero-damage-pill" data-dmg="construction">
+            <span class="hdp-label">Post-Construction Cleanup</span>
+          </button>
+
+          <button type="button" class="hero-damage-pill" data-dmg="industrial">
+            <span class="hdp-label">Industrial Facility Sanitizing</span>
+          </button>
+
+          <button type="button" class="hero-damage-pill" data-dmg="government">
+            <span class="hdp-label">Government &amp; Secure Facilities</span>
+          </button>
+
+          <button type="button" class="hero-damage-pill" data-dmg="dealerships">
+            <span class="hdp-label">Car Dealerships &amp; Showrooms</span>
+          </button>
+
+          <button type="button" class="hero-damage-pill" data-dmg="campuses">
+            <span class="hdp-label">Universities &amp; Campuses</span>
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Panel (Dynamic Media Showcase with Banners) -->
+  <div class="hero-bottom-panel is-janitorial reveal" style="--d:900ms">
+    <div class="hero-banners is-active">
+      <div class="hero-banner-slice" style="--slice-idx: 0; --left: 0%; --right: calc(80% - 1px);">
+        <img class="hero-banner-img" src="/assets/commercial-spaces.png" alt="Professional Janitorial Services">
+      </div>
+      <div class="hero-banner-slice" style="--slice-idx: 1; --left: calc(20% - 1px); --right: calc(60% - 1px);">
+        <img class="hero-banner-img" src="/assets/commercial-spaces.png" alt="Professional Janitorial Services">
+      </div>
+      <div class="hero-banner-slice" style="--slice-idx: 2; --left: calc(40% - 1px); --right: calc(40% - 1px);">
+        <img class="hero-banner-img" src="/assets/commercial-spaces.png" alt="Professional Janitorial Services">
+      </div>
+      <div class="hero-banner-slice" style="--slice-idx: 3; --left: calc(60% - 1px); --right: calc(20% - 1px);">
+        <img class="hero-banner-img" src="/assets/commercial-spaces.png" alt="Professional Janitorial Services">
+      </div>
+      <div class="hero-banner-slice" style="--slice-idx: 4; --left: calc(80% - 1px); --right: 0%;">
+        <img class="hero-banner-img" src="/assets/commercial-spaces.png" alt="Professional Janitorial Services">
+      </div>
+    </div>
+    <img id="hero-main-img" class="hero-main-img" src="/assets/commercial-spaces.png" alt="Professional Janitorial Services"
+      style="opacity: 0; pointer-events: none;">
+
+    <div class="hero-bottom-overlay"></div>
+
+    <div class="hero-panel-overlay">
+      <h2 class="hero-panel-title hero-dynamic-title">Commercial Workspaces</h2>
+      <div class="hero-panel-content">
+        <span class="hero-dynamic-sub">Immaculate &amp; Safe <span class="sub-accent">Office</span> Environments</span>
+        <p class="hero-dynamic-desc">
+          Tailored janitorial plans to keep office spaces, meeting rooms, and common areas immaculate, safe, and hygienic.
+        </p>
+        <div class="hero-dynamic-actions">
+          <a href="#contact" class="hero-dynamic-cta" id="hero-dynamic-cta">Get a Quote &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
 
 <!-- 2. Intro Section -->
 <section id="intro" class="intro-section">
-    <div class="hero-overlap">
-        <div class="hero-smoke">
-            <img src="/assets/smoke.webp" alt="">
-        </div>
-        <div class="hero-smoke-overlay"></div>
-    </div>
     <div class="container">
         <div class="intro-grid">
             <div class="intro-left-visual">
@@ -55,7 +143,7 @@ permalink: /home/
                 </div>
             </div>
             <div class="intro-content">
-                <p class="reveal-text">At MOPS Inc., we deliver professional cleaning built on precision,
+                <p class="reveal-text">At MOPS Group Inc., we deliver professional cleaning built on precision,
                     accountability, and measurable quality. Our teams follow structured processes, clear standards, and
                     a modern QA program to ensure every facility is maintained to the highest level.</p>
             </div>
@@ -67,82 +155,116 @@ permalink: /home/
 <!-- 2. Our Mission Section -->
 <section id="mission" class="mission">
     <div class="container">
-        <div class="mission-header">
-            <h2 class="reveal-title"><span class="reveal-title-text">Professional Cleaning Services for Modern
-                    Facilities</span></h2>
-            <div class="reveal-fade-in">
-                <p class="mission-lead">
-                    We deliver structured, high-quality cleaning for commercial, industrial, and social-service
-                    environments. Our teams use measurable standards and transparent QA tools to ensure every space is
-                    safe, clean, and fully maintained.
-                </p>
-                <p class="mission-sublead">
-                    Contact us today to schedule a consultation and see how we can make your business shine!
-                </p>
-                <a href="#contact" class="btn btn-primary" style="margin-top: 25px;">Get in Touch</a>
+        <!-- Full-Width Media Viewport -->
+        <div class="janitorial-hero-media reveal-up">
+            <video class="janitorial-banner-video" autoplay loop muted playsinline preload="auto">
+                <source src="/assets/cleaning-two.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <!-- Image Text Overlay -->
+            <div class="janitorial-hero-overlay">
+                <h3 class="janitorial-hero-title">We Love Cleaning</h3>
+                <span class="janitorial-hero-subtitle">SO YOU DON'T HAVE TO</span>
             </div>
         </div>
+        <p class="mission-video-lead" style="text-align: center; max-width: 850px; margin: 32px auto 80px; font-family: var(--font-body); font-size: clamp(1.15rem, 2vw, 1.45rem); line-height: 1.6; color: var(--text-color); font-weight: 400;">
+            MOPS GROUP INC provides precision driven commercial cleaning, janitorial maintenance, and sanitation solutions built on accountability and measurable quality.
+        </p>
     </div>
 
-    <div class="mission-highlights">
-        <!-- 1. Large Commercial Spaces -->
-        <div class="highlight-item" id="commercial-spaces">
-            <div class="container highlight-item-inner">
-                <div class="highlight-text">
-                    <h3>Large Commercial Spaces</h3>
-                    <p>Meticulous office and facility cleaning tailored to large-scale operations. From daily janitorial
-                        tasks to deep floor care and high-touch disinfection, we keep your corporate environment
-                        pristine, healthy, and professional.</p>
+    <div class="container" style="margin-top: 64px;">
+        <div class="janitorial-bento-grid reveal-up">
+            <!-- Card 1 (60% width) -->
+            <div class="janitorial-bento-card bento-wide" id="commercial-workspaces">
+                <div class="feat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                        <line x1="9" y1="3" x2="9" y2="21" />
+                    </svg>
                 </div>
-                <div class="highlight-image">
-                    <img src="/assets/commercial-spaces.png" alt="Large Commercial Spaces">
+                <div class="feat-text">
+                    <h4>Commercial Workspaces</h4>
+                    <p>Tailored janitorial plans to keep office spaces, meeting rooms, and common areas immaculate, safe, and hygienic.</p>
+                </div>
+            </div>
+
+            <!-- Card 2 (40% width) -->
+            <div class="janitorial-bento-card bento-narrow" id="post-construction-cleanup">
+                <div class="feat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                        <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                </div>
+                <div class="feat-text">
+                    <h4>Post-Construction Cleanup</h4>
+                    <p>Comprehensive dust suppression, plaster residue scrubbing, and detail cleaning to prepare new builds for immediate occupancy.</p>
+                </div>
+            </div>
+
+            <!-- Card 3 (40% width) -->
+            <div class="janitorial-bento-card bento-narrow" id="industrial-sanitizing">
+                <div class="feat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                    </svg>
+                </div>
+                <div class="feat-text">
+                    <h4>Industrial Facility Sanitizing</h4>
+                    <p>Heavy-duty degreasing, warehouse floor scrubbing, and workspace decontamination compliant with industrial safety standards.</p>
+                </div>
+            </div>
+
+            <!-- Card 4 (60% width) -->
+            <div class="janitorial-bento-card bento-wide" id="secure-facilities">
+                <div class="feat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" />
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                        <path d="M6 11V7M18 11V7" />
+                    </svg>
+                </div>
+                <div class="feat-text">
+                    <h4>Government &amp; Secure Facilities</h4>
+                    <p>Vetted cleaning staff delivering high-security janitorial maintenance for administrative, municipal, and secure government properties.</p>
+                </div>
+            </div>
+
+            <!-- Card 5 (60% width) -->
+            <div class="janitorial-bento-card bento-wide" id="car-dealerships">
+                <div class="feat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9C2.1 11 2 11.3 2 11.6V16c0,.6.4 1 1 1h2" />
+                        <circle cx="7" cy="17" r="2" />
+                        <circle cx="17" cy="17" r="2" />
+                        <path d="M5 17h10" />
+                    </svg>
+                </div>
+                <div class="feat-text">
+                    <h4>Car Dealerships &amp; Showrooms</h4>
+                    <p>Spotless showroom floors, polished glass facades, and meticulous detail sanitizing to reflect the premium quality of your brand.</p>
+                </div>
+            </div>
+
+            <!-- Card 6 (40% width) -->
+            <div class="janitorial-bento-card bento-narrow" id="universities-campuses">
+                <div class="feat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                        <path d="M6 12v5c0 2 2.7 3 6 3s6-1 6-3v-5" />
+                    </svg>
+                </div>
+                <div class="feat-text">
+                    <h4>Universities &amp; Campuses</h4>
+                    <p>High-frequency disinfection of classrooms, labs, lecture halls, and student centers to promote a safe and healthy campus experience.</p>
                 </div>
             </div>
         </div>
 
-        <!-- 2. Hotel Takeover -->
-        <div class="highlight-item" id="hotel-takeover">
-            <div class="container highlight-item-inner">
-                <div class="highlight-text">
-                    <h3>Hotel Takeover</h3>
-                    <p>Seamless and efficient room turnover and public area maintenance for hotels, resorts, and
-                        boutiques. Our specialized hospitality team integrates into your workflow to ensure immaculate
-                        guest reviews.</p>
-                </div>
-                <div class="highlight-image">
-                    <img src="/assets/hotel-takeover.png" alt="Hotel Takeover">
-                </div>
-            </div>
-        </div>
-
-        <!-- 3. Multi-unit vacation rentals -->
-        <div class="highlight-item" id="vacation-rentals">
-            <div class="container highlight-item-inner">
-                <div class="highlight-text">
-                    <h3>Multi-unit vacation rentals</h3>
-                    <p>Fast, high-standard turnover cleaning for vacation rentals and Airbnbs. We handle everything from
-                        fresh linens to detailing, helping you maintain a consistent 5-star standard across all units.
-                    </p>
-                </div>
-                <div class="highlight-image">
-                    <img src="/assets/vacation-rentals.png" alt="Multi-unit vacation rentals">
-                </div>
-            </div>
-        </div>
-
-        <!-- 4. Municipal & Government -->
-        <div class="highlight-item" id="municipal-spaces">
-            <div class="container highlight-item-inner">
-                <div class="highlight-text">
-                    <h3>Municipal & Government</h3>
-                    <p>Reliable and secure cleaning services for municipal buildings, public libraries, and government
-                        facilities. Vetted, background-checked staff adhering to strict safety and sanitization
-                        standards.</p>
-                </div>
-                <div class="highlight-image">
-                    <img src="/assets/municipal-spaces.png" alt="Municipal & Government">
-                </div>
-            </div>
+        <!-- Call to Action button -->
+        <div class="janitorial-actions">
+            <a href="#contact" class="btn btn-primary">Schedule a Consultation</a>
         </div>
     </div>
 </section>
@@ -160,7 +282,7 @@ permalink: /home/
                 <!-- Review 1 -->
                 <div class="review-card">
                     <div class="review-rating">★★★★★</div>
-                    <p class="review-text">"Mops Inc. has transformed our office facility. Their attention to detail and structured QA program have ensured our workspace is consistently spotless."</p>
+                    <p class="review-text">"Mops Group Inc. has transformed our office facility. Their attention to detail and structured QA program have ensured our workspace is consistently spotless."</p>
                     <div class="review-author">
                         <h4>Sarah Jenkins</h4>
                         <p>Office Operations Manager, PEC Tech</p>
@@ -178,7 +300,7 @@ permalink: /home/
                 <!-- Review 3 -->
                 <div class="review-card">
                     <div class="review-rating">★★★★★</div>
-                    <p class="review-text">"We trust Mops Inc. with all our municipal properties. Their vetted staff and secure protocols give us absolute peace of mind."</p>
+                    <p class="review-text">"We trust Mops Group Inc. with all our municipal properties. Their vetted staff and secure protocols give us absolute peace of mind."</p>
                     <div class="review-author">
                         <h4>Marcus Vance</h4>
                         <p>Facility Coordinator, Quinte West Municipal</p>
@@ -196,7 +318,7 @@ permalink: /home/
                 <!-- Review 5 -->
                 <div class="review-card">
                     <div class="review-rating">★★★★★</div>
-                    <p class="review-text">"The team at Mops Inc. is consistent and thorough. Their digital QA reports give us clear visibility, and they respond to special requests immediately."</p>
+                    <p class="review-text">"The team at Mops Group Inc. is consistent and thorough. Their digital QA reports give us clear visibility, and they respond to special requests immediately."</p>
                     <div class="review-author">
                         <h4>Robert Cole</h4>
                         <p>Property Manager, Sidney Square</p>
@@ -205,7 +327,7 @@ permalink: /home/
                 <!-- Review 6 -->
                 <div class="review-card">
                     <div class="review-rating">★★★★★</div>
-                    <p class="review-text">"We've tried many janitorial services, but none compare to Mops Inc. Their structured cleaning process keeps our commercial facility compliant and clean."</p>
+                    <p class="review-text">"We've tried many janitorial services, but none compare to Mops Group Inc. Their structured cleaning process keeps our commercial facility compliant and clean."</p>
                     <div class="review-author">
                         <h4>Amanda Foster</h4>
                         <p>Operations Director, Loyalist Logistics</p>
@@ -267,9 +389,9 @@ permalink: /home/
             <div class="faq-right">
                 <div class="faq-accordion">
                     <details name="faq" open>
-                        <summary>What cleaning services does Mops Inc. offer?</summary>
+                        <summary>What cleaning services does Mops Group Inc. offer?</summary>
                         <div class="faq-content-wrapper">
-                            <p>Mops Inc. provides specialized commercial cleaning services tailored to different properties and
+                            <p>Mops Group Inc. provides specialized commercial cleaning services tailored to different properties and
                                 needs: comprehensive <strong>Commercial</strong> office and janitorial services; secure
                                 sanitization for <strong>Municipal and Gov</strong> facilities; and fast, high-standard
                                 turnovers for <strong>Hotel Takeovers</strong> and <strong>Vacation Rentals</strong>.</p>
@@ -298,7 +420,7 @@ permalink: /home/
                         <summary>What are your safety and sanitization standards?</summary>
                         <div class="faq-content-wrapper">
                             <p>Safety and hygiene are our top priorities. We follow strict disinfection protocols and use
-                                professional-grade, eco-friendly sanitizers. Additionally, all Mops Inc. staff members are fully
+                                professional-grade, eco-friendly sanitizers. Additionally, all Mops Group Inc. staff members are fully
                                 vetted, bonded, insured, and trained to meet strict standards.</p>
                         </div>
                     </details>
@@ -380,44 +502,52 @@ permalink: /home/
             </div>
 
             <div class="contact-form-container">
-                <form class="contact-form" action="/api/submit" method="POST">
+                <form class="contact-form" action="/api/submit" method="POST" id="contact-form">
                     <!-- Honeypot spam protection -->
                     <input type="text" name="website" style="display:none !important" tabindex="-1" autocomplete="off">
                     <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" required placeholder="Jane Doe" autocomplete="name">
+                        <label for="contact-name">Your Name</label>
+                        <input type="text" id="contact-name" name="name" required placeholder="Jane Doe" autocomplete="name">
                     </div>
                     <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" required placeholder="jane@example.com"
+                        <label for="contact-email">Email Address</label>
+                        <input type="email" id="contact-email" name="email" required placeholder="jane@example.com"
                             autocomplete="email" inputmode="email"
                             pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+                        <div class="form-error-text" id="email-error-msg" style="display: none; color: #ea2a4e; font-size: 0.85rem; margin-top: 4px;"></div>
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" placeholder="(123) 456-7890" autocomplete="tel"
+                        <label for="contact-phone">Phone Number</label>
+                        <input type="tel" id="contact-phone" name="phone" placeholder="(123) 456-7890" autocomplete="tel"
                             inputmode="tel">
                     </div>
                     <div class="form-group">
-                        <label for="service">Preferred Service</label>
-                        <select id="service" name="service" required>
-                            <option value="" disabled selected>Select a service...</option>
-                            <option value="commercial">Commercial</option>
-                            <option value="hotel-takeover">Hotel Takeover</option>
-                            <option value="vacation-rentals">Vacation Rentals</option>
-                            <option value="municipal-gov">Municipal and Gov</option>
-                            <option value="general">General Inquiry</option>
+                        <label for="contact-service">Preferred Service / Damage Type</label>
+                        <select id="contact-service" name="service" required>
+                            <option value="" disabled selected>Select service or damage...</option>
+                            <option value="water">Water Damage</option>
+                            <option value="fire">Fire & Smoke</option>
+                            <option value="mold">Mold Remediation</option>
+                            <option value="storm">Storm Damage</option>
+                            <option value="hazmat">Hazmat & Asbestos</option>
+                            <option value="trauma">Trauma & Crime Scene</option>
+                            <option value="rebuild">Full Rebuild</option>
+                            <option value="janitorial">Janitorial Services</option>
+                            <option value="other">Other / Not Sure</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="message">How can we help you?</label>
-                        <textarea id="message" name="message" rows="4" required
+                        <label for="contact-message">How can we help you?</label>
+                        <textarea id="contact-message" name="message" rows="4" required
                             placeholder="Please describe the size of your space and any specific requirements..."></textarea>
                     </div>
                     <!-- Cloudflare Turnstile spam protection -->
                     <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="dark"
                         style="margin-top: 10px; margin-bottom: 5px;"></div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
+                    <!-- Form Status / General Error Container -->
+                    <div class="form-status-msg" id="form-status-msg"
+                        style="display: none; font-size: 0.9rem; padding: 12px; border-radius: 8px; margin-bottom: 20px; color: #ffffff; background-color: #ea2a4e;"></div >
+                    <button type="submit" class="btn btn-primary" id="form-submit">Send Message</button>
                 </form>
             </div>
         </div>
