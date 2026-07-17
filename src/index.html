@@ -12,7 +12,7 @@ Quinte region."
         <a href="/home/" class="split-panel split-panel--left" id="panel-cleaning"
             aria-label="Explore Mops Group Inc. Janitorial Services">
             <div class="split-panel__bg">
-                <video class="split-panel__video" autoplay loop muted playsinline preload="auto">
+                <video class="split-panel__video" loop muted playsinline preload="auto">
                     <source src="/assets/cleaning-two.mp4" type="video/mp4">
                 </video>
             </div>
@@ -32,7 +32,7 @@ Quinte region."
         <a href="https://web-mops-group.pages.dev/" class="split-panel split-panel--right" id="panel-resto"
             aria-label="Explore Mops Inc. Restaurant Cleaning">
             <div class="split-panel__bg">
-                <video class="split-panel__video" autoplay loop muted playsinline preload="auto">
+                <video class="split-panel__video" loop muted playsinline preload="auto">
                     <source src="/assets/hero-video.mp4" type="video/mp4">
                 </video>
             </div>
@@ -46,6 +46,9 @@ Quinte region."
             <div class="split-panel__diagonal-edge split-panel__diagonal-edge--right"></div>
         </a>
     </div>
+
+    <!-- DIVIDER LINE -->
+    <div class="split-divider"></div>
 
 
 <style>
@@ -161,7 +164,7 @@ Quinte region."
         position: absolute;
         inset: -5%;
         /* slight bleed so zoom has room */
-        opacity: 0;
+        opacity: 0.85;
         transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1),
             opacity 0.6s ease;
         will-change: transform, opacity;
@@ -201,15 +204,15 @@ Quinte region."
     .split-panel__overlay {
         position: absolute;
         inset: 0;
-        background: rgba(255, 255, 255, 0.72) !important;
-        opacity: 0;
-        transition: opacity 0.6s ease;
+        background-color: rgba(255, 255, 255, 0.88) !important;
+        opacity: 1;
+        transition: background-color 0.6s ease, opacity 0.6s ease;
         z-index: 1; /* sits on top of bg, below content */
     }
 
     .split-panel:hover .split-panel__overlay,
     .split-panel.active .split-panel__overlay {
-        opacity: 1;
+        background-color: rgba(255, 255, 255, 0.72) !important;
     }
 
     /* ---- Content — pinned to the visual centre of each half ---- */
@@ -390,6 +393,27 @@ Quinte region."
         transform: translateX(4px);
     }
 
+    /* ---- Diagonal divider line ---- */
+    .split-divider {
+        position: absolute;
+        inset: 0;
+        background-color: #d1d1d6;
+        z-index: 10;
+        pointer-events: none;
+        transition: clip-path 0.65s cubic-bezier(0.77, 0, 0.175, 1);
+        clip-path: polygon(57% 0, calc(57% + 2px) 0, calc(43% + 2px) 100%, 43% 100%);
+    }
+
+    .split-portal:has(.split-panel--left:hover) .split-divider,
+    .split-portal:has(.split-panel--left.active) .split-divider {
+        clip-path: polygon(67% 0, calc(67% + 2px) 0, calc(53% + 2px) 100%, 53% 100%);
+    }
+
+    .split-portal:has(.split-panel--right:hover) .split-divider,
+    .split-portal:has(.split-panel--right.active) .split-divider {
+        clip-path: polygon(47% 0, calc(47% + 2px) 0, calc(33% + 2px) 100%, 33% 100%);
+    }
+
 
     /* ============================================================
     MOBILE — horizontal split (top / bottom)
@@ -526,6 +550,21 @@ Quinte region."
             left: 50%;
         }
 
+        /* Mobile divider line horizontal split */
+        .split-divider {
+            clip-path: polygon(0 43%, 100% 57%, 100% calc(57% + 2px), 0 calc(43% + 2px));
+        }
+
+        .split-portal:has(.split-panel--left:hover) .split-divider,
+        .split-portal:has(.split-panel--left.active) .split-divider {
+            clip-path: polygon(0 53%, 100% 67%, 100% calc(67% + 2px), 0 calc(53% + 2px));
+        }
+
+        .split-portal:has(.split-panel--right:hover) .split-divider,
+        .split-portal:has(.split-panel--right.active) .split-divider {
+            clip-path: polygon(0 33%, 100% 47%, 100% calc(47% + 2px), 0 calc(33% + 2px));
+        }
+
     }
 </style>
 
@@ -607,12 +646,20 @@ Quinte region."
             panel.addEventListener('mouseenter', () => {
                 if (window.innerWidth > 768) {
                     startCycling(panel);
+                    const video = panel.querySelector('.split-panel__video');
+                    if (video) {
+                        video.play().catch(err => console.log('Video play failed:', err));
+                    }
                 }
             });
 
             panel.addEventListener('mouseleave', () => {
                 if (window.innerWidth > 768) {
                     stopCycling(panel);
+                    const video = panel.querySelector('.split-panel__video');
+                    if (video) {
+                        video.pause();
+                    }
                 }
             });
 
@@ -625,9 +672,15 @@ Quinte region."
                         panels.forEach(p => {
                             p.classList.remove('active');
                             stopCycling(p);
+                            const vid = p.querySelector('.split-panel__video');
+                            if (vid) vid.pause();
                         });
                         panel.classList.add('active');
                         startCycling(panel);
+                        const video = panel.querySelector('.split-panel__video');
+                        if (video) {
+                            video.play().catch(err => console.log('Video play failed:', err));
+                        }
                     }
                     // Second press: active class exists, navigates normally
                 }
@@ -641,6 +694,8 @@ Quinte region."
                     panels.forEach(p => {
                         p.classList.remove('active');
                         stopCycling(p);
+                        const vid = p.querySelector('.split-panel__video');
+                        if (vid) vid.pause();
                     });
                 }
             }
