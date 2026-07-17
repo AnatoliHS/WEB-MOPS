@@ -268,13 +268,14 @@ Quinte region."
         height: auto;
         margin-bottom: clamp(24px, 4.5vw, 40px);
         filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.5));
-        transition: transform 0.4s ease, filter 0.4s ease;
+        transition: transform 0.4s ease, filter 0.4s ease, margin-bottom 0.4s ease;
     }
 
     .split-panel:hover .split-logo,
     .split-panel.active .split-logo {
         transform: scale(1.15);
         filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.65));
+        margin-bottom: clamp(12px, 2vw, 20px);
     }
 
     /* ---- Label ---- */
@@ -310,6 +311,7 @@ Quinte region."
         opacity: 0;
         transform: translateY(-8px);
         pointer-events: none;
+        margin-bottom: -40px;
     }
 
     /* ---- Sub-services Cycler ---- */
@@ -421,6 +423,11 @@ Quinte region."
         .split-logo {
             width: clamp(270px, 58vw, 380px) !important;
             margin-bottom: clamp(16px, 4vw, 24px) !important;
+        }
+
+        .split-panel:hover .split-logo,
+        .split-panel.active .split-logo {
+            margin-bottom: clamp(8px, 2vw, 12px) !important;
         }
 
         .split-panel__sub-services {
