@@ -572,6 +572,18 @@ Quinte region."
     document.addEventListener('DOMContentLoaded', () => {
         const panels = document.querySelectorAll('.split-panel');
 
+        // Force mobile browsers to render the first frame of the paused videos on load
+        const vids = document.querySelectorAll('.split-panel__video');
+        vids.forEach(video => {
+            if (video.readyState >= 1) {
+                video.currentTime = 0.1;
+            } else {
+                video.addEventListener('loadedmetadata', () => {
+                    video.currentTime = 0.1;
+                }, { once: true });
+            }
+        });
+
         // Service lists to cycle
         const serviceLists = {
             'panel-cleaning': [
