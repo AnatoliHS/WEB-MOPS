@@ -523,14 +523,14 @@ description: "Vibrant Cleanliness for home, business, and vacation rentals. Mops
             left: 0;
             width: 100%;
             height: 100%;
-            clip-path: polygon(0 0, 100% 0, 100% 48%, 0 54%);
+            clip-path: polygon(0 0, 100% 0, 100% 43%, 0 49%);
             background-color: #ffffff;
             z-index: 2;
         }
 
         .portal-left-content {
             position: absolute;
-            top: 25%;
+            top: 22%;
             left: 50%;
             transform: translate(-50%, -50%);
             display: flex;
@@ -594,7 +594,7 @@ description: "Vibrant Cleanliness for home, business, and vacation rentals. Mops
             left: 0;
             width: 100%;
             height: 100%;
-            clip-path: polygon(0 54%, 100% 48%, 100% 100%, 0 100%);
+            clip-path: polygon(0 49%, 100% 43%, 100% 100%, 0 100%);
             background-color: #f4f4f6;
             z-index: 1;
             padding: 0;
@@ -603,7 +603,7 @@ description: "Vibrant Cleanliness for home, business, and vacation rentals. Mops
 
         .portal-right-content {
             position: absolute;
-            top: 76%;
+            top: 70%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 100%;
@@ -663,7 +663,7 @@ description: "Vibrant Cleanliness for home, business, and vacation rentals. Mops
             background-color: #d1d1d6;
             z-index: 11;
             pointer-events: none;
-            clip-path: polygon(0 54%, 100% 48%, 100% calc(48% + 2px), 0 calc(54% + 2px));
+            clip-path: polygon(0 49%, 100% 43%, 100% calc(43% + 2px), 0 calc(49% + 2px));
         }
     }
 </style>
@@ -679,16 +679,24 @@ description: "Vibrant Cleanliness for home, business, and vacation rentals. Mops
         // Force browsers to render the first frame of the paused videos on load
         const initialVids = document.querySelectorAll('.display-video');
         initialVids.forEach(video => {
-            const playPromise = video.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    setTimeout(() => {
-                        video.pause();
-                    }, 10);
-                }).catch(err => {
-                    console.log('Video play on load failed, seek fallback:', err);
-                    video.currentTime = 0.1;
-                });
+            const tryPlayAndPause = () => {
+                const playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        setTimeout(() => {
+                            video.pause();
+                        }, 10);
+                    }).catch(err => {
+                        console.log('Video play on load failed, seek fallback:', err);
+                        video.currentTime = 0.1;
+                    });
+                }
+            };
+
+            if (video.readyState >= 3) {
+                tryPlayAndPause();
+            } else {
+                video.addEventListener('canplay', tryPlayAndPause, { once: true });
             }
         });
 
