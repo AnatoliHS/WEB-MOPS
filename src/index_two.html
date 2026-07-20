@@ -1,0 +1,806 @@
+---
+layout: landing
+title: "Welcome | Mops Inc. | Professional Cleaning & Janitorial Services"
+description: "Vibrant Cleanliness for home, business, and vacation rentals. Mops Inc. is serving Belleville and the Quinte region."
+---
+
+<div class="portal-container" id="portal-container">
+
+    <!-- LEFT PANEL: Brand & Navigation -->
+    <div class="portal-left-panel">
+        <div class="portal-left-content">
+            <div class="portal-logo-container">
+                <div class="portal-logo-inner">
+                    <img src="/assets/mops-group-general.png" alt="Mops Group Inc. Logo" class="portal-logo portal-logo--general">
+                    <img src="/assets/mops-group-janitorial.png" alt="Mops Group Janitorial Logo" class="portal-logo portal-logo--janitorial">
+                    <img src="/assets/mops-group-resoration.png" alt="Mops Group Restoration Logo" class="portal-logo portal-logo--restoration">
+                </div>
+            </div>
+
+            <!-- Default Info Box -->
+            <div class="portal-info-box" id="info-box">
+                <p class="portal-info-desc portal-info-desc--general">
+                    Your premier partner for professional commercial cleaning and expert disaster recovery. 
+                    We deliver high-standard janitorial maintenance and certified emergency restoration solutions 
+                    tailored to protect and maintain your facility.
+                </p>
+                <p class="portal-info-desc portal-info-desc--janitorial">
+                    Vetted commercial cleaning staff delivering high performance janitorial solutions, office maintenance, and secure facility sanitation.
+                </p>
+                <p class="portal-info-desc portal-info-desc--restoration">
+                    Professional emergency response, insurance claim support, and full rebuild services for homes and commercial properties.
+                </p>
+            </div>
+            
+            <div class="portal-navigation">
+                <button class="portal-nav-btn portal-nav-btn--janitorial" id="btn-janitorial">
+                    <span>Janitorial</span>
+                </button>
+                <button class="portal-nav-btn portal-nav-btn--restoration" id="btn-restoration">
+                    <span>Restoration</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT PANEL: Dynamic Display Panel -->
+    <div class="portal-right-panel">
+        <!-- Background Videos -->
+        <video class="display-video display-video--janitorial active-vid" loop muted playsinline preload="auto">
+            <source src="/assets/cleaning-two.mp4" type="video/mp4">
+        </video>
+        <video class="display-video display-video--restoration" loop muted playsinline preload="auto">
+            <source src="/assets/hero-video.mp4" type="video/mp4">
+        </video>
+        
+        <div class="display-overlay"></div>
+
+        <div class="portal-right-content">
+
+            <!-- Display Overlay Content -->
+            <div class="display-content">
+                <!-- Janitorial Overlay Content -->
+                <div class="display-group display-group--janitorial">
+                    <div class="display-subtitle">
+                        Janitorial<br>when you <span class="accent-gradient accent-gradient--janitorial">need</span> more.
+                    </div>
+                    <div class="display-ticker" id="janitorial-ticker">Commercial Workspaces</div>
+                    <a href="/home/" class="display-cta display-cta--janitorial">Janitorial Services →</a>
+                </div>
+                <!-- Restoration Overlay Content -->
+                <div class="display-group display-group--restoration">
+                    <div class="display-subtitle">
+                        Restoration<br>when you <span class="accent-gradient accent-gradient--restoration">need</span> it most.
+                    </div>
+                    <div class="display-ticker" id="restoration-ticker">Water Damage</div>
+                    <a href="https://web-mops-group.pages.dev/" class="display-cta display-cta--restoration">Restoration Services →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Diagonal divider line -->
+    <div class="split-divider"></div>
+
+</div>
+
+<style>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        font-family: 'Outfit', sans-serif;
+    }
+
+    main {
+        height: 100vh !important;
+        flex-grow: 0 !important;
+    }
+
+    /* ---- Split Container ---- */
+    .portal-container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        background-color: #f8fafc;
+    }
+
+    /* ---- Left Column (Branding & Controls) ---- */
+    .portal-left-panel {
+        position: absolute;
+        inset: 0;
+        background-color: #ffffff;
+        clip-path: polygon(0 0, 57% 0, 43% 100%, 0 100%);
+        z-index: 1;
+    }
+
+    .portal-left-content {
+        position: absolute;
+        top: 50%;
+        left: 24%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: clamp(40px, 6vh, 80px);
+        width: 100%;
+        max-width: 520px;
+        z-index: 3;
+    }
+
+    .portal-logo-container {
+        width: 100%;
+        position: relative;
+    }
+
+    .portal-logo-inner {
+        position: relative;
+        left: 0;
+        transform: none;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        width: 100%;
+        transition: left 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .portal-logo {
+        grid-column: 1;
+        grid-row: 1;
+        width: 100%;
+        height: auto;
+        filter: drop-shadow(0 8px 24px rgba(5, 21, 42, 0.06));
+        transition: opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        will-change: opacity;
+    }
+
+    .portal-logo--janitorial,
+    .portal-logo--restoration {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* State Swaps */
+    .state-janitorial .portal-logo--general {
+        opacity: 0;
+    }
+    .state-janitorial .portal-logo--janitorial {
+        opacity: 1;
+    }
+
+    .state-restoration .portal-logo--general {
+        opacity: 0;
+    }
+    .state-restoration .portal-logo--restoration {
+        opacity: 1;
+    }
+
+    .portal-navigation {
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+        width: auto;
+        align-items: center;
+    }
+
+    /* ---- Button Triggers ---- */
+    .portal-nav-btn {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 12px 32px !important;
+        margin: 0 !important;
+        cursor: pointer;
+        outline: none;
+        box-shadow: 0 4px 12px rgba(5, 21, 42, 0.02) !important;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        border: 2px solid transparent !important;
+        background-origin: border-box !important;
+    }
+
+    .portal-nav-btn span {
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        display: inline-block;
+        background-clip: text !important;
+        -webkit-background-clip: text !important;
+    }
+
+    /* Lift slightly on hover */
+    .portal-nav-btn:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(5, 21, 42, 0.08) !important;
+    }
+
+    /* ---- Janitorial Color Settings ---- */
+    .portal-nav-btn--janitorial {
+        background-image: linear-gradient(#ffffff, #ffffff), linear-gradient(135deg, #ea2a4e, #f78625) !important;
+        background-clip: padding-box, border-box !important;
+    }
+
+    .portal-nav-btn--janitorial span {
+        background: linear-gradient(135deg, #ea2a4e, #f78625);
+        -webkit-text-fill-color: transparent;
+        color: #ea2a4e;
+    }
+
+    /* Hover & Active Janitorial Fills */
+    .portal-nav-btn--janitorial:hover,
+    .state-janitorial .portal-nav-btn--janitorial {
+        background-image: linear-gradient(135deg, #ea2a4e, #f78625) !important;
+        background-clip: border-box !important;
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(233, 40, 79, 0.28) !important;
+    }
+
+    .portal-nav-btn--janitorial:hover span,
+    .state-janitorial .portal-nav-btn--janitorial span {
+        -webkit-text-fill-color: #ffffff !important;
+        color: #ffffff !important;
+    }
+
+    /* ---- Restoration Color Settings ---- */
+    .portal-nav-btn--restoration {
+        background-image: linear-gradient(#ffffff, #ffffff), linear-gradient(135deg, #652dff, #a25cff) !important;
+        background-clip: padding-box, border-box !important;
+    }
+
+    .portal-nav-btn--restoration span {
+        background: linear-gradient(135deg, #652dff, #a25cff);
+        -webkit-text-fill-color: transparent;
+        color: #652dff;
+    }
+
+    /* Hover & Active Restoration Fills */
+    .portal-nav-btn--restoration:hover,
+    .state-restoration .portal-nav-btn--restoration {
+        background-image: linear-gradient(135deg, #652dff, #a25cff) !important;
+        background-clip: border-box !important;
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(101, 45, 255, 0.28) !important;
+    }
+
+    .portal-nav-btn--restoration:hover span,
+    .state-restoration .portal-nav-btn--restoration span {
+        -webkit-text-fill-color: #ffffff !important;
+        color: #ffffff !important;
+    }
+
+    /* ---- Right Column (Dynamic Display) ---- */
+    .portal-right-panel {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 43%;
+        width: 57%;
+        background-color: #f4f4f6;
+        clip-path: polygon(24.56% 0, 100% 0, 100% 100%, 0 100%);
+        z-index: 1;
+    }
+
+    .portal-right-content {
+        position: absolute;
+        top: 50%;
+        left: 55%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        max-width: 580px;
+        text-align: center;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* ---- Initial Mops Info Box ---- */
+    .portal-info-box {
+        position: relative;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+    }
+
+    .portal-info-desc {
+        grid-column: 1;
+        grid-row: 1;
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(0.95rem, 1.15vw, 1.15rem);
+        color: rgba(5, 21, 42, 0.65);
+        line-height: 1.6;
+        margin: 0;
+        font-weight: 400;
+        text-align: left;
+        transition: opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        will-change: opacity;
+    }
+
+    /* Sub-states opacity control */
+    .portal-info-desc--janitorial,
+    .portal-info-desc--restoration {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* State swaps */
+    .state-janitorial .portal-info-desc--general {
+        opacity: 0;
+        pointer-events: none;
+    }
+    .state-janitorial .portal-info-desc--janitorial {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .state-restoration .portal-info-desc--general {
+        opacity: 0;
+        pointer-events: none;
+    }
+    .state-restoration .portal-info-desc--restoration {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* ---- Video Display elements inside clipped area ---- */
+    .display-video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.6s ease;
+        z-index: 1;
+    }
+
+    .display-video.active-vid {
+        opacity: 1;
+    }
+
+    /* Soft overlay to ensure ticker/button legibility */
+    .display-overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(255, 255, 255, 0.82);
+        z-index: 2;
+        opacity: 1;
+        transition: background-color 0.6s ease;
+    }
+
+    .state-janitorial .display-overlay,
+    .state-restoration .display-overlay {
+        background-color: rgba(255, 255, 255, 0.70);
+    }
+
+    .display-content {
+        width: 100%;
+    }
+
+    /* Display Groups (Janitorial / Restoration content blocks) */
+    .display-group {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        animation: fadeIn 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    }
+
+    .state-janitorial .display-group--janitorial {
+        display: flex;
+    }
+
+    .state-restoration .display-group--restoration {
+        display: flex;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(12px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Hover subtitle headers */
+    .display-subtitle {
+        font-family: 'Switzer', 'Inter', system-ui, sans-serif;
+        font-size: clamp(2.1rem, 3.6vw, 3.4rem);
+        font-weight: 400;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        color: #141414;
+        margin-bottom: 40px;
+        text-align: center;
+        width: 100%;
+        display: block;
+    }
+
+    .accent-gradient {
+        font-weight: 600;
+        background-clip: text !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        display: inline-block;
+    }
+
+    .accent-gradient--janitorial {
+        background: linear-gradient(135deg, #ea2a4e, #f78625);
+        color: #ea2a4e;
+    }
+
+    .accent-gradient--restoration {
+        background: linear-gradient(135deg, #652dff, #a25cff);
+        color: #652dff;
+    }
+
+    /* Ticker Text */
+    .display-ticker {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(1.2rem, 2vw, 1.5rem);
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(5, 21, 42, 0.88);
+        margin-bottom: 28px;
+        text-align: center;
+        width: 100%;
+        white-space: nowrap;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        will-change: opacity, transform;
+    }
+
+    /* Services CTA Button */
+    .display-cta {
+        display: inline-block;
+        text-decoration: none;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #fff;
+        padding: 14px 36px;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .display-cta--janitorial {
+        background: linear-gradient(90deg, #e9284f, #f68722);
+        box-shadow: 0 4px 20px rgba(233, 40, 79, 0.3);
+    }
+
+    .display-cta--restoration {
+        background: linear-gradient(90deg, #652dff, #a25cff);
+        box-shadow: 0 4px 20px rgba(101, 45, 255, 0.3);
+    }
+
+    .display-cta:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 24px rgba(5, 21, 42, 0.15);
+    }
+
+    /* ---- Diagonal divider line ---- */
+    .split-divider {
+        position: absolute;
+        inset: 0;
+        background-color: #d1d1d6;
+        z-index: 10;
+        pointer-events: none;
+        clip-path: polygon(57% 0, calc(57% + 2px) 0, calc(43% + 2px) 100%, 43% 100%);
+    }
+
+    /* ============================================================
+    RESPONSIVE — MOBILE
+    ============================================================ */
+    @media (max-width: 768px) {
+        .portal-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: block;
+        }
+
+        .portal-left-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(0 0, 100% 0, 100% 48%, 0 54%);
+            background-color: #ffffff;
+            z-index: 2;
+        }
+
+        .portal-left-content {
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            padding: 0 20px;
+            z-index: 3;
+        }
+
+        .portal-logo-container {
+            width: 100%;
+            display: block;
+        }
+
+        .portal-logo-inner {
+            left: auto;
+            transform: none;
+            width: 280px;
+            margin: 0 auto;
+        }
+
+        .portal-logo {
+            width: 100%;
+        }
+
+        .portal-navigation {
+            flex-direction: row;
+            gap: 28px;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .portal-nav-btn {
+            font-size: 1.0rem;
+            padding: 10px 24px !important;
+            text-align: center;
+        }
+
+        .portal-nav-btn:hover {
+            transform: none;
+        }
+
+        .portal-nav-btn--janitorial:hover,
+        .state-janitorial .portal-nav-btn--janitorial {
+            transform: none;
+        }
+
+        .portal-nav-btn--restoration:hover,
+        .state-restoration .portal-nav-btn--restoration {
+            transform: none;
+        }
+
+        .portal-right-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(0 54%, 100% 48%, 100% 100%, 0 100%);
+            background-color: #f4f4f6;
+            z-index: 1;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .portal-right-content {
+            position: absolute;
+            top: 76%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+            align-items: center;
+            padding: 0 20px;
+            box-sizing: border-box;
+            z-index: 10;
+        }
+
+        .portal-info-box {
+            text-align: center;
+        }
+
+        .portal-info-desc {
+            font-size: 0.98rem;
+            line-height: 1.5;
+            text-align: center;
+            color: rgba(5, 21, 42, 0.72);
+        }
+
+        .display-video {
+            position: absolute;
+            top: 310px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 310px);
+            object-fit: cover;
+        }
+
+        .display-subtitle {
+            font-size: clamp(2.2rem, 5.0vw, 3.0rem);
+            text-align: center;
+            margin-bottom: 14px;
+        }
+
+        .display-ticker {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .display-cta {
+            font-size: 0.95rem;
+            padding: 12px 32px;
+        }
+
+        .display-group {
+            align-items: center;
+        }
+
+        .split-divider {
+            display: block;
+            position: absolute;
+            inset: 0;
+            background-color: #d1d1d6;
+            z-index: 11;
+            pointer-events: none;
+            clip-path: polygon(0 54%, 100% 48%, 100% calc(48% + 2px), 0 calc(54% + 2px));
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const container = document.getElementById('portal-container');
+        const btnJan = document.getElementById('btn-janitorial');
+        const btnResto = document.getElementById('btn-restoration');
+        const videoJan = document.querySelector('.display-video--janitorial');
+        const videoResto = document.querySelector('.display-video--restoration');
+
+        // Force browsers to render the first frame of the paused videos on load
+        const initialVids = document.querySelectorAll('.display-video');
+        initialVids.forEach(video => {
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    setTimeout(() => {
+                        video.pause();
+                    }, 10);
+                }).catch(err => {
+                    console.log('Video play on load failed, seek fallback:', err);
+                    video.currentTime = 0.1;
+                });
+            }
+        });
+
+        // Service lists to cycle
+        const serviceLists = {
+            'janitorial': [
+                "Commercial Workspaces",
+                "Post-Construction Cleanup",
+                "Industrial Facility Sanitizing",
+                "Government & Secure Facilities",
+                "Car Dealerships & Showrooms",
+                "Universities & Campuses"
+            ],
+            'restoration': [
+                "Water Damage",
+                "Fire & Smoke",
+                "Mold & Spores",
+                "Storm Damage",
+                "Hazmat & Asbestos",
+                "Trauma & Crime Scene",
+                "Full Rebuild",
+                "Janitorial Services"
+            ]
+        };
+
+        const intervals = {};
+
+        function startCycling(division) {
+            const services = serviceLists[division];
+            const cycler = document.getElementById(`${division}-ticker`);
+            if (!services || !cycler) return;
+
+            let index = 0;
+            
+            // Clear any existing interval
+            if (intervals[division]) {
+                clearInterval(intervals[division]);
+            }
+
+            intervals[division] = setInterval(() => {
+                index = (index + 1) % services.length;
+                const nextText = services[index];
+
+                cycler.style.opacity = '0';
+                cycler.style.transform = 'translateY(-4px)';
+                
+                setTimeout(() => {
+                    cycler.textContent = nextText;
+                    cycler.style.opacity = '1';
+                    cycler.style.transform = 'translateY(0)';
+                }, 150);
+            }, 1800);
+        }
+
+        function stopCycling(division) {
+            if (intervals[division]) {
+                clearInterval(intervals[division]);
+                intervals[division] = null;
+            }
+            const cycler = document.getElementById(`${division}-ticker`);
+            const services = serviceLists[division];
+            if (cycler && services) {
+                cycler.textContent = services[0];
+            }
+        }
+
+        function activateDivision(division) {
+            if (division === 'janitorial') {
+                container.classList.remove('state-restoration');
+                container.classList.add('state-janitorial');
+                
+                // Play active, pause inactive
+                videoJan.classList.add('active-vid');
+                videoResto.classList.remove('active-vid');
+                
+                videoJan.play().catch(e => console.log(e));
+                videoResto.pause();
+                
+                startCycling('janitorial');
+                stopCycling('restoration');
+            } else if (division === 'restoration') {
+                container.classList.remove('state-janitorial');
+                container.classList.add('state-restoration');
+                
+                // Play active, pause inactive
+                videoResto.classList.add('active-vid');
+                videoJan.classList.remove('active-vid');
+                
+                videoResto.play().catch(e => console.log(e));
+                videoJan.pause();
+                
+                startCycling('restoration');
+                stopCycling('janitorial');
+            }
+        }
+
+        // Mouse events for desktop hover triggers
+        btnJan.addEventListener('mouseenter', () => {
+            activateDivision('janitorial');
+        });
+
+        btnResto.addEventListener('mouseenter', () => {
+            activateDivision('restoration');
+        });
+
+        // Click events for mobile/tablet tap activation
+        btnJan.addEventListener('click', () => {
+            activateDivision('janitorial');
+        });
+
+        btnResto.addEventListener('click', () => {
+            activateDivision('restoration');
+        });
+    });
+</script>
