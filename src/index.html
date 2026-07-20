@@ -178,7 +178,7 @@ Quinte region."
         object-fit: cover;
     }
 
-    @media (min-width: 769px) {
+    @media (min-width: 1025px) {
         .split-panel-wrapper--left .split-panel__bg {
             left: -5%;
             width: 75%;
@@ -418,7 +418,7 @@ Quinte region."
     /* ============================================================
     MOBILE — horizontal split (top / bottom)
     ============================================================ */
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
         /* Mobile horizontal split overlapping shadows */
         .split-panel-wrapper--left:has(.split-panel:hover),
         .split-panel-wrapper--left:has(.split-panel.active) {
@@ -662,7 +662,7 @@ Quinte region."
         // Setup desktop mouseenter/mouseleave hover cycling listeners
         panels.forEach(panel => {
             panel.addEventListener('mouseenter', () => {
-                if (window.innerWidth > 768) {
+                if (window.innerWidth > 1024) {
                     startCycling(panel);
                     const video = panel.querySelector('.split-panel__video');
                     if (video) {
@@ -672,7 +672,7 @@ Quinte region."
             });
 
             panel.addEventListener('mouseleave', () => {
-                if (window.innerWidth > 768) {
+                if (window.innerWidth > 1024) {
                     stopCycling(panel);
                     const video = panel.querySelector('.split-panel__video');
                     if (video) {
@@ -683,7 +683,7 @@ Quinte region."
 
             // Mobile click handler
             panel.addEventListener('click', (e) => {
-                if (window.innerWidth <= 768) {
+                if (window.innerWidth <= 1024) {
                     if (!panel.classList.contains('active')) {
                         // First press: prevent navigation, make panel active
                         e.preventDefault();
@@ -707,7 +707,7 @@ Quinte region."
 
         // Reset when tapping outside panels on mobile
         document.addEventListener('touchstart', (e) => {
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= 1024) {
                 if (!e.target.closest('.split-panel')) {
                     panels.forEach(p => {
                         p.classList.remove('active');
