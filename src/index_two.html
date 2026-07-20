@@ -52,7 +52,10 @@ Quinte region."
     <!-- RIGHT PANEL: Dynamic Display Panel -->
     <div class="portal-right-panel">
         <!-- Background Videos -->
-        <video class="display-video display-video--janitorial active-vid" loop muted playsinline preload="auto">
+        <video class="display-video display-video--initial active-vid" loop muted playsinline autoplay preload="auto">
+            <source src="/assets/mops-initial-two.mp4" type="video/mp4">
+        </video>
+        <video class="display-video display-video--janitorial" loop muted playsinline preload="auto">
             <source src="/assets/cleaning-two.mp4" type="video/mp4">
         </video>
         <video class="display-video display-video--restoration" loop muted playsinline preload="auto">
@@ -385,7 +388,7 @@ Quinte region."
     .display-overlay {
         position: absolute;
         inset: 0;
-        background-color: rgba(255, 255, 255, 0.82);
+        background-color: rgba(255, 255, 255, 0.45);
         z-index: 2;
         opacity: 1;
         transition: background-color 0.6s ease;
@@ -689,9 +692,10 @@ Quinte region."
         const btnResto = document.getElementById('btn-restoration');
         const videoJan = document.querySelector('.display-video--janitorial');
         const videoResto = document.querySelector('.display-video--restoration');
+        const videoInitial = document.querySelector('.display-video--initial');
 
         // Force mobile browsers to render the first frame of the paused videos on load
-        const vids = document.querySelectorAll('.display-video');
+        const vids = document.querySelectorAll('.display-video:not(.display-video--initial)');
         vids.forEach(video => {
             // Muted, inline videos can play programmatically on load without user interaction
             const playPromise = video.play();
@@ -779,9 +783,11 @@ Quinte region."
                 // Play active, pause inactive
                 videoJan.classList.add('active-vid');
                 videoResto.classList.remove('active-vid');
+                videoInitial.classList.remove('active-vid');
                 
                 videoJan.play().catch(e => console.log(e));
                 videoResto.pause();
+                videoInitial.pause();
                 
                 startCycling('janitorial');
                 stopCycling('restoration');
@@ -792,9 +798,11 @@ Quinte region."
                 // Play active, pause inactive
                 videoResto.classList.add('active-vid');
                 videoJan.classList.remove('active-vid');
+                videoInitial.classList.remove('active-vid');
                 
                 videoResto.play().catch(e => console.log(e));
                 videoJan.pause();
+                videoInitial.pause();
                 
                 startCycling('restoration');
                 stopCycling('janitorial');
