@@ -676,27 +676,21 @@ description: "Vibrant Cleanliness for home, business, and vacation rentals. Mops
         const videoJan = document.querySelector('.display-video--janitorial');
         const videoResto = document.querySelector('.display-video--restoration');
 
-        // Force browsers to render the first frame of the paused videos on load
-        const initialVids = document.querySelectorAll('.display-video');
-        initialVids.forEach(video => {
-            const tryPlayAndPause = () => {
-                const playPromise = video.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        setTimeout(() => {
-                            video.pause();
-                        }, 10);
-                    }).catch(err => {
-                        console.log('Video play on load failed, seek fallback:', err);
-                        video.currentTime = 0.1;
-                    });
-                }
-            };
-
-            if (video.readyState >= 3) {
-                tryPlayAndPause();
-            } else {
-                video.addEventListener('canplay', tryPlayAndPause, { once: true });
+        // Force mobile browsers to render the first frame of the paused videos on load
+        const vids = document.querySelectorAll('.display-video');
+        vids.forEach(video => {
+            // Muted, inline videos can play programmatically on load without user interaction
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // Pause briefly after 10ms to hold the rendered frame
+                    setTimeout(() => {
+                        video.pause();
+                    }, 10);
+                }).catch(err => {
+                    console.log('Video play on load failed, using seek fallback:', err);
+                    video.currentTime = 0.1;
+                });
             }
         });
 
