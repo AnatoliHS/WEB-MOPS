@@ -51,12 +51,6 @@ Quinte region."
 
     <!-- RIGHT PANEL: Dynamic Display Panel -->
     <div class="portal-right-panel">
-        <!-- Mobile Static Background Images (shown on mobile before button tap) -->
-        <img src="/assets/mops-jan-mobile.jpg" alt="Janitorial background"
-            class="display-mobile-bg display-mobile-bg--janitorial active-mobile-bg">
-        <img src="/assets/mops-resto.png" alt="Restoration background"
-            class="display-mobile-bg display-mobile-bg--restoration">
-
         <!-- Background Videos -->
         <video class="display-video display-video--janitorial active-vid" loop muted playsinline preload="auto">
             <source src="/assets/cleaning-two.mp4" type="video/mp4">
@@ -387,11 +381,6 @@ Quinte region."
         opacity: 1;
     }
 
-    /* Mobile static bg images — hidden on desktop */
-    .display-mobile-bg {
-        display: none;
-    }
-
     /* Soft overlay to ensure ticker/button legibility */
     .display-overlay {
         position: absolute;
@@ -651,7 +640,6 @@ Quinte region."
             color: rgba(5, 21, 42, 0.72);
         }
 
-        /* On mobile: hide videos by default, show static images */
         .display-video {
             position: absolute;
             top: 310px;
@@ -659,38 +647,6 @@ Quinte region."
             width: 100%;
             height: calc(100% - 310px);
             object-fit: cover;
-            display: none;
-        }
-
-        /* When a division is active on mobile, show the video */
-        .state-janitorial .display-video--janitorial,
-        .state-restoration .display-video--restoration {
-            display: block;
-        }
-
-        /* Mobile static background images */
-        .display-mobile-bg {
-            display: none;
-            position: absolute;
-            top: 310px;
-            left: 0;
-            width: 100%;
-            height: calc(100% - 310px);
-            object-fit: cover;
-            z-index: 1;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .display-mobile-bg.active-mobile-bg {
-            display: block;
-            opacity: 1;
-        }
-
-        /* Hide static image when corresponding division is active */
-        .state-janitorial .display-mobile-bg--janitorial,
-        .state-restoration .display-mobile-bg--restoration {
-            display: none;
         }
 
         .display-subtitle {
@@ -734,25 +690,23 @@ Quinte region."
         const videoJan = document.querySelector('.display-video--janitorial');
         const videoResto = document.querySelector('.display-video--restoration');
 
-        // Force browsers to render the first frame of the paused videos on load (desktop only)
-        if (window.innerWidth > 1024) {
-            const vids = document.querySelectorAll('.display-video');
-            vids.forEach(video => {
-                // Muted, inline videos can play programmatically on load without user interaction
-                const playPromise = video.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        // Pause briefly after 10ms to hold the rendered frame
-                        setTimeout(() => {
-                            video.pause();
-                        }, 10);
-                    }).catch(err => {
-                        console.log('Video play on load failed, using seek fallback:', err);
-                        video.currentTime = 0.1;
-                    });
-                }
-            });
-        }
+        // Force mobile browsers to render the first frame of the paused videos on load
+        const vids = document.querySelectorAll('.display-video');
+        vids.forEach(video => {
+            // Muted, inline videos can play programmatically on load without user interaction
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // Pause briefly after 10ms to hold the rendered frame
+                    setTimeout(() => {
+                        video.pause();
+                    }, 10);
+                }).catch(err => {
+                    console.log('Video play on load failed, using seek fallback:', err);
+                    video.currentTime = 0.1;
+                });
+            }
+        });
 
         // Service lists to cycle
         const serviceLists = {
@@ -779,7 +733,7 @@ Quinte region."
         const intervals = {};
 
         function startCycling(division) {
-            const services = servicion];
+            const services = serviceLists[division];
             const cycler = document.getElementById(`${division}-ticker`);
             if (!services || !cycler) return;
 
@@ -791,7 +745,8 @@ Quinte region."
             }
 
             intervals[division] = setInterval(() => {
-                index = (index + 1) % service          const nextText = services[index];
+                index = (index + 1) % services.length;
+                const nextText = services[index];
 
                 cycler.style.opacity = '0';
                 cycler.style.transform = 'translateY(-4px)';
@@ -817,8 +772,6 @@ Quinte region."
         }
 
         function activateDivision(division) {
-            const isMobile = window.innerWidth <= 1024;
-
             if (division === 'janitorial') {
                 container.classList.remove('state-restoration');
                 container.classList.add('state-janitorial');
@@ -827,10 +780,6 @@ Quinte region."
                 videoJan.classList.add('active-vid');
                 videoResto.classList.remove('active-vid');
                 
-                if (isMobile) {
-                    videoJan.style.display = 'block';
-                    videoResto.style.display = 'none';
-                }
                 videoJan.play().catch(e => console.log(e));
                 videoResto.pause();
                 
@@ -844,10 +793,6 @@ Quinte region."
                 videoResto.classList.add('active-vid');
                 videoJan.classList.remove('active-vid');
                 
-                if (isMobile) {
-                    videoResto.style.display = 'block';
-                    videoJan.style.display = 'none';
-                }
                 videoResto.play().catch(e => console.log(e));
                 videoJan.pause();
                 
@@ -856,7 +801,7 @@ Quinte region."
             }
         }
 
-        // Mou for desktop hover triggers
+        // Mouse events for desktop hover triggers
         btnJan.addEventListener('mouseenter', () => {
             if (window.innerWidth > 1024) activateDivision('janitorial');
         });
