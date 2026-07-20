@@ -817,26 +817,27 @@ Quinte region."
         }
 
         function activateDivision(division) {
-     obile = window.innerWidth <= 1024;
+            const isMobile = window.innerWidth <= 1024;
 
             if (division === 'janitorial') {
                 container.classList.remove('state-restoration');
-               List.add('state-janitorial');
+                container.classList.add('state-janitorial');
                 
                 // Play active, pause inactive
-   eoJan.classList.add('active-vid');
+                videoJan.classList.add('active-vid');
                 videoResto.classList.remove('active-vid');
                 
                 if (isMobile) {
                     videoJan.style.display = 'block';
                     videoResto.style.display = 'none';
-                  videoJan.play().catch(e => console.log(e));
+                }
+                videoJan.play().catch(e => console.log(e));
                 videoResto.pause();
                 
                 startCycling('janitorial');
-                stration');
+                stopCycling('restoration');
             } else if (division === 'restoration') {
-                container.classLisjanitorial');
+                container.classList.remove('state-janitorial');
                 container.classList.add('state-restoration');
                 
                 // Play active, pause inactive
