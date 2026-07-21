@@ -349,10 +349,10 @@ Quinte region."
         transition: opacity 0.15s ease, transform 0.15s ease !important;
     }
 
-    /* ---- CTA button — fades in on hover ---- */
     .split-panel__cta {
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         gap: 12px;
         font-family: 'Outfit', 'Montserrat', sans-serif;
         font-size: clamp(1.0rem, 1.5vw, 1.3rem);
@@ -370,6 +370,7 @@ Quinte region."
             box-shadow 0.3s ease;
         box-shadow: 0 4px 20px rgba(233, 40, 79, 0.35);
         white-space: nowrap;
+        min-width: 360px;
     }
 
     .split-panel--right .split-panel__cta {
@@ -565,6 +566,11 @@ Quinte region."
             clip-path: polygon(0 33%, 100% 47%, 100% calc(47% + 2px), 0 calc(33% + 2px));
         }
 
+        .split-panel__cta {
+            min-width: unset;
+            width: auto;
+            padding: 12px 28px;
+        }
     }
 </style>
 
