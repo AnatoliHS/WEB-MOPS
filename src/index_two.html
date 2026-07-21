@@ -71,18 +71,22 @@ Quinte region."
                 <!-- Janitorial Overlay Content -->
                 <div class="display-group display-group--janitorial">
                     <div class="display-subtitle">
-                        Janitorial<br>when you <span class="accent-gradient accent-gradient--janitorial">need</span>
-                        more.
+                        Ready for a <span class="accent-gradient accent-gradient--janitorial">Spotless</span> Space?
                     </div>
+                    <a href="tel:613-329-8439" class="display-phone">
+                        613-329-8439
+                    </a>
                     <div class="display-ticker" id="janitorial-ticker">Commercial Workspaces</div>
                     <a href="/home/" class="display-cta display-cta--janitorial">Janitorial Services →</a>
                 </div>
                 <!-- Restoration Overlay Content -->
                 <div class="display-group display-group--restoration">
                     <div class="display-subtitle">
-                        Restoration<br>when you <span class="accent-gradient accent-gradient--restoration">need</span>
-                        it most.
+                        Don't Wait.<br><span class="accent-gradient accent-gradient--restoration">Damage</span> Gets Worse.
                     </div>
+                    <a href="tel:613-329-8439" class="display-phone">
+                        613-329-8439
+                    </a>
                     <div class="display-ticker" id="restoration-ticker">Water Damage</div>
                     <a href="https://web-mops-group.pages.dev/" class="display-cta display-cta--restoration">Restoration
                         Services →</a>
@@ -442,10 +446,34 @@ Quinte region."
         line-height: 1.15;
         letter-spacing: -0.02em;
         color: #141414;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
         text-align: center;
         width: 100%;
         display: block;
+    }
+
+    /* Phone CTA Link */
+    .display-phone {
+        display: inline-block;
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+        font-weight: 300;
+        color: #05152a;
+        text-decoration: none;
+        margin-bottom: 24px;
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .display-phone:hover {
+        transform: translateY(-2px);
+    }
+
+    .display-group--janitorial .display-phone:hover {
+        color: #ea2a4e;
+    }
+
+    .display-group--restoration .display-phone:hover {
+        color: #652dff;
     }
 
     .accent-gradient {
@@ -658,7 +686,13 @@ Quinte region."
         .display-subtitle {
             font-size: clamp(2.2rem, 5.0vw, 3.0rem);
             text-align: center;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
+        }
+
+        .display-phone {
+            font-size: clamp(1.4rem, 5.5vw, 1.8rem);
+            font-weight: 300;
+            margin-bottom: 12px;
         }
 
         .display-ticker {
