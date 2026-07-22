@@ -7,27 +7,82 @@ Quinte region."
 
 <div class="portal-container" id="portal-container">
 
+    <!-- FLOATING NAVBAR (INDEX_THREE ONLY) -->
+    <header class="floating-navbar">
+        <div class="floating-nav-container">
+            <!-- Left Logo -->
+            <a href="/index_three/" class="floating-nav-logo">
+                <img src="/assets/mops-group-general.png" alt="Mops Group Inc. Logo">
+            </a>
+
+            <!-- Right Controls: Phone CTA & Hamburger Menu -->
+            <div class="floating-nav-right">
+                <a href="tel:613-329-8439" class="floating-nav-phone">
+                    613-329-8439
+                </a>
+                <button class="floating-nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation menu">
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                </button>
+            </div>
+
+            <!-- Dropdown Menu with Two Separate Division Cards -->
+            <div class="floating-dropdown" id="nav-dropdown">
+                <div class="floating-dropdown-grid">
+
+                    <!-- Janitorial Division Dropdown Card -->
+                    <div class="dropdown-division dropdown-division--janitorial">
+                        <div class="dropdown-header">
+                            <img src="/assets/mops-group-janitorial.png" alt="Mops Group Janitorial Logo" class="dropdown-logo">
+                        </div>
+                        <ul class="dropdown-services">
+                            <li><a href="/home/">Commercial Workspaces</a></li>
+                            <li><a href="/home/">Post-Construction Cleanup</a></li>
+                            <li><a href="/home/">Industrial Sanitizing</a></li>
+                            <li><a href="/home/">Office Maintenance</a></li>
+                        </ul>
+                        <a href="/home/" class="dropdown-action dropdown-action--janitorial">
+                            Janitorial Services
+                        </a>
+                    </div>
+
+                    <!-- Restoration Division Dropdown Card -->
+                    <div class="dropdown-division dropdown-division--restoration">
+                        <div class="dropdown-header">
+                            <img src="/assets/mops-group-resoration.png" alt="Mops Group Restoration Logo" class="dropdown-logo">
+                        </div>
+                        <ul class="dropdown-services">
+                            <li><a href="https://web-mops-group.pages.dev/">Water Damage Repair</a></li>
+                            <li><a href="https://web-mops-group.pages.dev/">Fire & Smoke Cleanup</a></li>
+                            <li><a href="https://web-mops-group.pages.dev/">Mold & Spore Remediation</a></li>
+                            <li><a href="https://web-mops-group.pages.dev/">Storm & Hazmat Abatement</a></li>
+                        </ul>
+                        <a href="https://web-mops-group.pages.dev/" class="dropdown-action dropdown-action--restoration">
+                            Restoration Services
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="dropdown-footer">
+                    <a href="tel:613-329-8439" class="dropdown-footer-phone">
+                        <span class="phone-label">24/7 Emergency Support</span>
+                        <span class="phone-num">613-329-8439</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <!-- LEFT PANEL: Brand & Navigation -->
     <div class="portal-left-panel">
         <div class="portal-left-content">
-            <div class="portal-logo-container">
-                <div class="portal-logo-inner">
-                    <img src="/assets/mops-group-general.png" alt="Mops Group Inc. Logo"
-                        class="portal-logo portal-logo--general">
-                    <img src="/assets/mops-group-janitorial.png" alt="Mops Group Janitorial Logo"
-                        class="portal-logo portal-logo--janitorial">
-                    <img src="/assets/mops-group-resoration.png" alt="Mops Group Restoration Logo"
-                        class="portal-logo portal-logo--restoration">
-                </div>
-            </div>
-
             <!-- Default Info Box -->
             <div class="portal-info-box" id="info-box">
-                <p class="portal-info-desc portal-info-desc--general">
-                    Your premier partner for professional commercial cleaning and expert disaster recovery.
-                    We deliver high-standard janitorial maintenance and certified emergency restoration solutions
-                    tailored to protect and maintain your facility.
-                </p>
+                <h1 class="portal-info-desc portal-info-desc--general">
+                    Your <span class="accent-gradient accent-gradient--restoration">premier</span> partner for professional commercial cleaning and <span class="accent-gradient accent-gradient--janitorial">expert</span> disaster recovery.
+                </h1>
                 <p class="portal-info-desc portal-info-desc--janitorial">
                     Vetted commercial cleaning staff delivering high performance janitorial solutions, office
                     maintenance, and secure facility sanitation.
@@ -39,12 +94,12 @@ Quinte region."
             </div>
 
             <div class="portal-navigation">
-                <button class="portal-nav-btn portal-nav-btn--janitorial" id="btn-janitorial">
+                <a href="/home/" class="portal-nav-btn portal-nav-btn--janitorial" id="btn-janitorial">
                     <span>Janitorial</span>
-                </button>
-                <button class="portal-nav-btn portal-nav-btn--restoration" id="btn-restoration">
+                </a>
+                <a href="https://web-mops-group.pages.dev/" class="portal-nav-btn portal-nav-btn--restoration" id="btn-restoration">
                     <span>Restoration</span>
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -125,6 +180,296 @@ Quinte region."
         background-color: #f8fafc;
     }
 
+    /* ---- Floating Navbar Styles ---- */
+    .floating-navbar {
+        position: absolute;
+        top: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 48px);
+        max-width: 1240px;
+        z-index: 100;
+        pointer-events: none;
+    }
+
+    .floating-nav-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 24px;
+        background: #ffffff;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(0, 0, 0, 0.45);
+        border-radius: 100px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        pointer-events: auto;
+    }
+
+    .floating-nav-logo {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .floating-nav-logo img {
+        height: 38px;
+        width: auto;
+        display: block;
+    }
+
+    .floating-nav-right {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .floating-nav-phone {
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #000000;
+        text-decoration: none;
+        padding: 8px 18px;
+        border-radius: 50px;
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.45);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+        transition: all 0.3s ease;
+    }
+
+    .floating-nav-phone:hover {
+        background: #000000;
+        border-color: #000000;
+        color: #ffffff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Hamburger Button */
+    .floating-nav-hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        width: 42px;
+        height: 42px;
+        border: 1px solid rgba(0, 0, 0, 0.45);
+        background: #ffffff;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        padding: 0;
+        outline: none;
+    }
+
+    .floating-nav-hamburger:hover {
+        background: #000000;
+        border-color: #000000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .floating-nav-hamburger:hover .hamburger-bar {
+        background-color: #ffffff;
+    }
+
+    .hamburger-bar {
+        width: 18px;
+        height: 2px;
+        background-color: #000000;
+        border-radius: 2px;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* Hamburger active state animation (X icon) */
+    .floating-nav-hamburger.active .hamburger-bar:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .floating-nav-hamburger.active .hamburger-bar:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    .floating-nav-hamburger.active .hamburger-bar:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Dropdown Menu */
+    .floating-dropdown {
+        position: absolute;
+        top: calc(100% + 14px);
+        right: 0;
+        width: 580px;
+        background: #ffffff;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(0, 0, 0, 0.45);
+        border-radius: 28px;
+        box-shadow: 0 20px 48px rgba(0, 0, 0, 0.14);
+        padding: 18px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-12px) scale(0.96);
+        transform-origin: top right;
+        transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+        pointer-events: none;
+    }
+
+    .floating-dropdown.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+    }
+
+    .floating-dropdown-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+
+    /* Individual Division Cards inside Dropdown */
+    .dropdown-division {
+        background: #f8fafc;
+        border: 1px solid rgba(5, 21, 42, 0.08);
+        border-radius: 20px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 16px;
+        transition: all 0.3s ease;
+    }
+
+    .dropdown-division:hover {
+        border-color: rgba(5, 21, 42, 0.16);
+        box-shadow: 0 8px 24px rgba(5, 21, 42, 0.06);
+    }
+
+    .dropdown-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2px;
+    }
+
+    .dropdown-logo {
+        height: 38px;
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+        display: block;
+        filter: drop-shadow(0 4px 12px rgba(5, 21, 42, 0.06));
+    }
+
+    .dropdown-services {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .dropdown-services li a {
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.88rem;
+        color: rgba(5, 21, 42, 0.75);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .dropdown-services li a:hover {
+        color: #05152a;
+        transform: translateX(4px);
+    }
+
+    .dropdown-division--janitorial .dropdown-services li a:hover {
+        color: #ea2a4e;
+    }
+
+    .dropdown-division--restoration .dropdown-services li a:hover {
+        color: #652dff;
+    }
+
+    .dropdown-action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 18px;
+        border-radius: 50px;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.84rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #ffffff;
+        transition: all 0.3s ease;
+    }
+
+    .dropdown-action--janitorial {
+        background: linear-gradient(90deg, #ea2a4e, #f78625);
+        box-shadow: 0 4px 14px rgba(234, 42, 78, 0.25);
+    }
+
+    .dropdown-action--restoration {
+        background: linear-gradient(90deg, #652dff, #a25cff);
+        box-shadow: 0 4px 14px rgba(101, 45, 255, 0.25);
+    }
+
+    .dropdown-action:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(5, 21, 42, 0.18);
+    }
+
+    .dropdown-footer {
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 1px solid rgba(5, 21, 42, 0.08);
+    }
+
+    .dropdown-footer-phone {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 16px;
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.45);
+        border-radius: 50px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .dropdown-footer-phone:hover {
+        background: #000000;
+    }
+
+    .phone-label {
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.82rem;
+        font-weight: 500;
+        color: rgba(5, 21, 42, 0.7);
+        transition: color 0.3s ease;
+    }
+
+    .phone-num {
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #05152a;
+        transition: color 0.3s ease;
+    }
+
+    .dropdown-footer-phone:hover .phone-label,
+    .dropdown-footer-phone:hover .phone-num {
+        color: #ffffff;
+    }
+
     /* ---- Left Column (Branding & Controls) ---- */
     .portal-left-panel {
         position: absolute;
@@ -142,7 +487,7 @@ Quinte region."
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: clamp(40px, 6vh, 80px);
+        gap: clamp(54px, 8vh, 96px);
         width: 100%;
         max-width: 520px;
         z-index: 3;
@@ -207,6 +552,7 @@ Quinte region."
 
     /* ---- Button Triggers ---- */
     .portal-nav-btn {
+        text-decoration: none;
         font-family: 'Outfit', sans-serif;
         font-size: clamp(1.05rem, 1.4vw, 1.25rem);
         font-weight: 500;
@@ -335,7 +681,7 @@ Quinte region."
         grid-column: 1;
         grid-row: 1;
         font-family: 'Outfit', sans-serif;
-        font-size: clamp(0.95rem, 1.15vw, 1.15rem);
+        font-size: clamp(1.15rem, 1.45vw, 1.45rem);
         color: rgba(5, 21, 42, 0.65);
         line-height: 1.6;
         margin: 0;
@@ -343,6 +689,57 @@ Quinte region."
         text-align: left;
         transition: opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
         will-change: opacity;
+    }
+
+    .portal-info-desc--general {
+        font-family: 'Switzer', 'Outfit', sans-serif;
+        font-size: clamp(2.0rem, 3.2vw, 3.0rem);
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        color: #05152a;
+    }
+
+    /* Letter-by-letter reveal animation for gradient words only */
+    .accent-gradient .char {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(6px);
+        animation: charReveal 0.55s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+        will-change: opacity, transform;
+    }
+
+    .accent-gradient--janitorial .char {
+        background: linear-gradient(135deg, #ea2a4e, #f78625);
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+    }
+
+    .accent-gradient--restoration .char {
+        background: linear-gradient(135deg, #652dff, #a25cff);
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+    }
+
+    @keyframes charReveal {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Fade-in for surrounding heading text */
+    .portal-info-desc--general .fade-text {
+        display: inline;
+        opacity: 0;
+        animation: textFadeIn 2.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+        will-change: opacity;
+    }
+
+    @keyframes textFadeIn {
+        to {
+            opacity: 1;
+        }
     }
 
     /* Sub-states opacity control */
@@ -558,6 +955,40 @@ Quinte region."
     RESPONSIVE — MOBILE
     ============================================================ */
     @media (max-width: 1024px) {
+        .floating-navbar {
+            top: 14px;
+            width: calc(100% - 28px);
+        }
+
+        .floating-nav-container {
+            padding: 8px 16px;
+        }
+
+        .floating-nav-logo img {
+            height: 32px;
+        }
+
+        .floating-nav-phone {
+            display: none;
+        }
+
+        .floating-dropdown {
+            width: calc(100vw - 32px);
+            max-width: 440px;
+            right: 0;
+            padding: 14px;
+        }
+
+        .floating-dropdown-grid {
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .dropdown-division {
+            padding: 14px;
+            gap: 12px;
+        }
+
         .portal-container {
             position: relative;
             width: 100vw;
@@ -579,13 +1010,13 @@ Quinte region."
 
         .portal-left-content {
             position: absolute;
-            top: 22%;
+            top: 27%;
             left: 50%;
             transform: translate(-50%, -50%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 32px;
+            gap: 44px;
             width: 100%;
             max-width: 100%;
             box-sizing: border-box;
@@ -605,9 +1036,7 @@ Quinte region."
             margin: 0 auto;
         }
 
-        .portal-logo {
-            width: 100%;
-        }
+
 
         .portal-navigation {
             flex-direction: row;
@@ -671,10 +1100,16 @@ Quinte region."
         }
 
         .portal-info-desc {
-            font-size: 0.98rem;
+            font-size: clamp(1.05rem, 4.0vw, 1.2rem);
             line-height: 1.5;
             text-align: center;
             color: rgba(5, 21, 42, 0.72);
+        }
+
+        .portal-info-desc--general {
+            font-size: clamp(1.95rem, 6.5vw, 2.6rem);
+            line-height: 1.25;
+            text-align: center;
         }
 
         .display-video {
@@ -734,137 +1169,88 @@ Quinte region."
         const videoResto = document.querySelector('.display-video--restoration');
         const videoInitial = document.querySelector('.display-video--initial');
 
-        // Force mobile browsers to render the first frame of the paused videos on load
-        const vids = document.querySelectorAll('.display-video:not(.display-video--initial)');
-        vids.forEach(video => {
-            // Muted, inline videos can play programmatically on load without user interaction
-            const playPromise = video.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    // Pause briefly after 10ms to hold the rendered frame
-                    setTimeout(() => {
-                        video.pause();
-                    }, 10);
-                }).catch(err => {
-                    console.log('Video play on load failed, using seek fallback:', err);
-                    video.currentTime = 0.1;
-                });
+        // Animate H1 Heading: non-gradient text fades in, gradient words reveal letter-by-letter
+        const headingElement = document.querySelector('.portal-info-desc--general');
+        if (headingElement) {
+            const gradientWords = headingElement.querySelectorAll('.accent-gradient');
+            gradientWords.forEach(wordElement => {
+                const text = wordElement.textContent.trim();
+                wordElement.innerHTML = '';
+                for (let i = 0; i < text.length; i++) {
+                    const span = document.createElement('span');
+                    span.className = 'char';
+                    span.textContent = text[i];
+                    span.style.animationDelay = `${i * 110}ms`;
+                    wordElement.appendChild(span);
+                }
+            });
+
+            Array.from(headingElement.childNodes).forEach(node => {
+                if (node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 0) {
+                    const span = document.createElement('span');
+                    span.className = 'fade-text';
+                    span.textContent = node.textContent;
+                    headingElement.replaceChild(span, node);
+                }
+            });
+        }
+
+        // Video Playlist Loop (5 Seconds Each)
+        const playlist = [videoInitial, videoJan, videoResto];
+        let currentPlaylistIndex = 0;
+
+        playlist.forEach(vid => {
+            if (vid) {
+                vid.muted = true;
+                vid.playsInline = true;
+                vid.loop = true;
             }
         });
 
-        // Service lists to cycle
-        const serviceLists = {
-            'janitorial': [
-                "Commercial Workspaces",
-                "Post-Construction Cleanup",
-                "Industrial Facility Sanitizing",
-                "Government & Secure Facilities",
-                "Car Dealerships & Showrooms",
-                "Universities & Campuses"
-            ],
-            'restoration': [
-                "Water Damage",
-                "Fire & Smoke",
-                "Mold & Spores",
-                "Storm Damage",
-                "Hazmat & Asbestos",
-                "Trauma & Crime Scene",
-                "Full Rebuild",
-                "Janitorial Services"
-            ]
-        };
+        // Start initial video on load
+        if (playlist[0]) {
+            playlist[0].play().catch(err => console.log('Video load play:', err));
+        }
 
-        const intervals = {};
+        // Loop through all three videos every 5 seconds (5000ms)
+        setInterval(() => {
+            const nextPlaylistIndex = (currentPlaylistIndex + 1) % playlist.length;
+            const currentVid = playlist[currentPlaylistIndex];
+            const nextVid = playlist[nextPlaylistIndex];
 
-        function startCycling(division) {
-            const services = serviceLists[division];
-            const cycler = document.getElementById(`${division}-ticker`);
-            if (!services || !cycler) return;
-
-            let index = 0;
-            
-            // Clear any existing interval
-            if (intervals[division]) {
-                clearInterval(intervals[division]);
+            if (nextVid) {
+                nextVid.currentTime = 0;
+                nextVid.play().catch(err => console.log('Playlist play:', err));
+                nextVid.classList.add('active-vid');
             }
 
-            intervals[division] = setInterval(() => {
-                index = (index + 1) % services.length;
-                const nextText = services[index];
-
-                cycler.style.opacity = '0';
-                cycler.style.transform = 'translateY(-4px)';
-                
+            if (currentVid) {
+                currentVid.classList.remove('active-vid');
                 setTimeout(() => {
-                    cycler.textContent = nextText;
-                    cycler.style.opacity = '1';
-                    cycler.style.transform = 'translateY(0)';
-                }, 150);
-            }, 1800);
-        }
-
-        function stopCycling(division) {
-            if (intervals[division]) {
-                clearInterval(intervals[division]);
-                intervals[division] = null;
+                    currentVid.pause();
+                }, 600);
             }
-            const cycler = document.getElementById(`${division}-ticker`);
-            const services = serviceLists[division];
-            if (cycler && services) {
-                cycler.textContent = services[0];
-            }
+
+            currentPlaylistIndex = nextPlaylistIndex;
+        }, 5000);
+
+        // Floating Navbar Hamburger Toggle
+        const hamburger = document.getElementById('nav-hamburger');
+        const dropdown = document.getElementById('nav-dropdown');
+
+        if (hamburger && dropdown) {
+            hamburger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                hamburger.classList.toggle('active');
+                dropdown.classList.toggle('open');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!dropdown.contains(e.target) && !hamburger.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    dropdown.classList.remove('open');
+                }
+            });
         }
-
-        function activateDivision(division) {
-            if (division === 'janitorial') {
-                container.classList.remove('state-restoration');
-                container.classList.add('state-janitorial');
-                
-                // Play active, pause inactive
-                videoJan.classList.add('active-vid');
-                videoResto.classList.remove('active-vid');
-                videoInitial.classList.remove('active-vid');
-                
-                videoJan.play().catch(e => console.log(e));
-                videoResto.pause();
-                videoInitial.pause();
-                
-                startCycling('janitorial');
-                stopCycling('restoration');
-            } else if (division === 'restoration') {
-                container.classList.remove('state-janitorial');
-                container.classList.add('state-restoration');
-                
-                // Play active, pause inactive
-                videoResto.classList.add('active-vid');
-                videoJan.classList.remove('active-vid');
-                videoInitial.classList.remove('active-vid');
-                
-                videoResto.play().catch(e => console.log(e));
-                videoJan.pause();
-                videoInitial.pause();
-                
-                startCycling('restoration');
-                stopCycling('janitorial');
-            }
-        }
-
-        // Mouse events for desktop hover triggers
-        btnJan.addEventListener('mouseenter', () => {
-            if (window.innerWidth > 1024) activateDivision('janitorial');
-        });
-
-        btnResto.addEventListener('mouseenter', () => {
-            if (window.innerWidth > 1024) activateDivision('restoration');
-        });
-
-        // Click events for mobile/tablet tap activation
-        btnJan.addEventListener('click', () => {
-            activateDivision('janitorial');
-        });
-
-        btnResto.addEventListener('click', () => {
-            activateDivision('restoration');
-        });
     });
 </script>
