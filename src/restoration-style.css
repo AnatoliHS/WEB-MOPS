@@ -5527,7 +5527,10 @@ main {
   }
 
   .floating-nav-phone {
-    display: none;
+    display: inline-flex;
+    font-size: 0.84rem;
+    padding: 6px 14px;
+    margin-right: 4px;
   }
 
   .floating-dropdown {
