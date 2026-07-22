@@ -1,0 +1,123 @@
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary SEO Tags -->
+  <title>{{ site.name }} – {{ site.title }}</title>
+  <meta name="description" content="{{ site.name }} provides professional restoration services for homes and businesses, including water damage, fire and smoke recovery, mold remediation, and full rebuilds. From emergency response to final repair, we restore properties with care and clarity." />
+  <meta name="keywords" content="Restoration Services, Water Damage Restoration, Fire Damage Repair, Mold Remediation, Property Restoration, Emergency Restoration, Belleville, Quinte West, Prince Edward County, MOPS GROUP INC" />
+  <meta name="author" content="{{ site.name }}" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ site.url }}" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{{ site.url }}" />
+  <meta property="og:title" content="{{ site.name }} – {{ site.title }}" />
+  <meta property="og:description" content="Professional restoration services for homes and businesses. Water damage, fire & smoke recovery, mold remediation, and full rebuilds." />
+  <meta property="og:image" content="{{ site.url }}assets/mops-group-logo-link.jpg" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="{{ site.url }}" />
+  <meta property="twitter:title" content="{{ site.name }} – {{ site.title }}" />
+  <meta property="twitter:description" content="From emergency response to final repair — we restore properties with care and clarity." />
+  <meta property="twitter:image" content="{{ site.url }}assets/mops-group-logo-link.jpg" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Fontshare: Switzer -->
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,700&display=swap" rel="stylesheet">
+
+  <!-- Core Restoration Stylesheet -->
+  <link rel="stylesheet" href="/restoration-style.css" />
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+  <link rel="manifest" href="/assets/site.webmanifest" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "name": "{{ site.name }}",
+    "description": "Professional restoration services for homes and businesses, including water damage, fire and smoke recovery, mold remediation, and full rebuilds.",
+    "url": "{{ site.url }}",
+    "telephone": "{{ site.phone }}",
+    "email": "{{ site.email }}",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "41 Dussek St",
+      "addressLocality": "Belleville",
+      "addressRegion": "ON",
+      "postalCode": "K8N 5R9",
+      "addressCountry": "CA"
+    },
+    "areaServed": [
+      { "@type": "AdministrativeArea", "name": "Belleville, ON" },
+      { "@type": "AdministrativeArea", "name": "Quinte West, ON" },
+      { "@type": "AdministrativeArea", "name": "Prince Edward County, ON" }
+    ]
+  }
+  </script>
+
+  <!-- FAQ Page Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What types of restoration do you offer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We offer water damage restoration, fire and smoke recovery, mold remediation, and full property rebuilds. We handle residential and commercial properties of all sizes throughout the Quinte region."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you work directly with insurance companies?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. We provide direct insurance billing and will coordinate with your adjuster from assessment through final sign-off. Our detailed documentation helps ensure your claim is processed smoothly and fairly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How quickly can you respond to an emergency?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our emergency line is staffed 24 hours a day, 7 days a week. In most cases we can have a crew on-site within 1–2 hours of your call. Rapid response is critical to preventing secondary damage and reducing overall restoration costs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are your technicians certified?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "All MOPS GROUP INC technicians hold IICRC (Institute of Inspection Cleaning and Restoration Certification) credentials. We are fully licensed, bonded, and insured, and our team undergoes ongoing training to stay current with industry best practices."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What areas do you serve?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We serve Belleville, Quinte West, Prince Edward County, and surrounding communities in Eastern Ontario. If you're unsure whether we cover your area, call us and we'll confirm within minutes."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Cloudflare Turnstile API -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>

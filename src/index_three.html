@@ -7,73 +7,8 @@ Quinte region."
 
 <div class="portal-container" id="portal-container">
 
-    <!-- FLOATING NAVBAR (INDEX_THREE ONLY) -->
-    <header class="floating-navbar">
-        <div class="floating-nav-container">
-            <!-- Left Logo -->
-            <a href="/index_three/" class="floating-nav-logo">
-                <img src="/assets/mops-group-general.png" alt="Mops Group Inc. Logo">
-            </a>
-
-            <!-- Right Controls: Phone CTA & Hamburger Menu -->
-            <div class="floating-nav-right">
-                <a href="tel:613-329-8439" class="floating-nav-phone">
-                    613-329-8439
-                </a>
-                <button class="floating-nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation menu">
-                    <span class="hamburger-bar"></span>
-                    <span class="hamburger-bar"></span>
-                    <span class="hamburger-bar"></span>
-                </button>
-            </div>
-
-            <!-- Dropdown Menu with Two Separate Division Cards -->
-            <div class="floating-dropdown" id="nav-dropdown">
-                <div class="floating-dropdown-grid">
-
-                    <!-- Janitorial Division Dropdown Card -->
-                    <div class="dropdown-division dropdown-division--janitorial">
-                        <div class="dropdown-header">
-                            <img src="/assets/mops-group-janitorial.png" alt="Mops Group Janitorial Logo" class="dropdown-logo">
-                        </div>
-                        <ul class="dropdown-services">
-                            <li><a href="/home/">Commercial Workspaces</a></li>
-                            <li><a href="/home/">Post-Construction Cleanup</a></li>
-                            <li><a href="/home/">Industrial Sanitizing</a></li>
-                            <li><a href="/home/">Office Maintenance</a></li>
-                        </ul>
-                        <a href="/home/" class="dropdown-action dropdown-action--janitorial">
-                            Janitorial Services
-                        </a>
-                    </div>
-
-                    <!-- Restoration Division Dropdown Card -->
-                    <div class="dropdown-division dropdown-division--restoration">
-                        <div class="dropdown-header">
-                            <img src="/assets/mops-group-resoration.png" alt="Mops Group Restoration Logo" class="dropdown-logo">
-                        </div>
-                        <ul class="dropdown-services">
-                            <li><a href="https://web-mops-group.pages.dev/">Water Damage Repair</a></li>
-                            <li><a href="https://web-mops-group.pages.dev/">Fire & Smoke Cleanup</a></li>
-                            <li><a href="https://web-mops-group.pages.dev/">Mold & Spore Remediation</a></li>
-                            <li><a href="https://web-mops-group.pages.dev/">Storm & Hazmat Abatement</a></li>
-                        </ul>
-                        <a href="https://web-mops-group.pages.dev/" class="dropdown-action dropdown-action--restoration">
-                            Restoration Services
-                        </a>
-                    </div>
-
-                </div>
-
-                <div class="dropdown-footer">
-                    <a href="tel:613-329-8439" class="dropdown-footer-phone">
-                        <span class="phone-label">24/7 Emergency Support</span>
-                        <span class="phone-num">613-329-8439</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
+    <!-- FLOATING NAVBAR -->
+    {% include "component/navbar.njk" %}
 
     <!-- LEFT PANEL: Brand & Navigation -->
     <div class="portal-left-panel">
@@ -81,7 +16,9 @@ Quinte region."
             <!-- Default Info Box -->
             <div class="portal-info-box" id="info-box">
                 <h1 class="portal-info-desc portal-info-desc--general">
-                    Your <span class="accent-gradient accent-gradient--janitorial">premier</span> partner for professional commercial cleaning and <span class="accent-gradient accent-gradient--restoration">expert</span> disaster recovery.
+                    Your <span class="accent-gradient accent-gradient--janitorial">premier</span> partner for
+                    professional commercial cleaning and <span
+                        class="accent-gradient accent-gradient--restoration">expert</span> disaster recovery.
                 </h1>
                 <p class="portal-info-desc portal-info-desc--janitorial">
                     Vetted commercial cleaning staff delivering high performance janitorial solutions, office
@@ -94,10 +31,10 @@ Quinte region."
             </div>
 
             <div class="portal-navigation">
-                <a href="/home/" class="portal-nav-btn portal-nav-btn--janitorial" id="btn-janitorial">
+                <a href="/janitorial/" class="portal-nav-btn portal-nav-btn--janitorial" id="btn-janitorial">
                     <span>Janitorial</span>
                 </a>
-                <a href="https://web-mops-group.pages.dev/" class="portal-nav-btn portal-nav-btn--restoration" id="btn-restoration">
+                <a href="/restoration/" class="portal-nav-btn portal-nav-btn--restoration" id="btn-restoration">
                     <span>Restoration</span>
                 </a>
             </div>
@@ -132,18 +69,19 @@ Quinte region."
                         613-329-8439
                     </a>
                     <div class="display-ticker" id="janitorial-ticker">Commercial Workspaces</div>
-                    <a href="/home/" class="display-cta display-cta--janitorial">Janitorial Services →</a>
+                    <a href="/janitorial/" class="display-cta display-cta--janitorial">Janitorial Services →</a>
                 </div>
                 <!-- Restoration Overlay Content -->
                 <div class="display-group display-group--restoration">
                     <div class="display-subtitle">
-                        Don't Wait.<br><span class="accent-gradient accent-gradient--restoration">Damage</span> Gets Worse.
+                        Don't Wait.<br><span class="accent-gradient accent-gradient--restoration">Damage</span> Gets
+                        Worse.
                     </div>
                     <a href="tel:613-329-8439" class="display-phone">
                         613-329-8439
                     </a>
                     <div class="display-ticker" id="restoration-ticker">Water Damage</div>
-                    <a href="https://web-mops-group.pages.dev/" class="display-cta display-cta--restoration">Restoration
+                    <a href="/restoration/" class="display-cta display-cta--restoration">Restoration
                         Services →</a>
                 </div>
             </div>
@@ -188,7 +126,7 @@ Quinte region."
         transform: translateX(-50%);
         width: calc(100% - 48px);
         max-width: 1240px;
-        z-index: 100;
+        z-index: 10000;
         pointer-events: none;
     }
 
@@ -303,6 +241,8 @@ Quinte region."
         top: calc(100% + 14px);
         right: 0;
         width: 580px;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
         background: #ffffff;
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
@@ -989,6 +929,14 @@ Quinte region."
             gap: 12px;
         }
 
+        .dropdown-division--restoration .dropdown-services {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-auto-flow: column;
+            grid-template-rows: repeat(4, auto);
+            gap: 8px 12px;
+        }
+
         .portal-container {
             position: relative;
             width: 100vw;
@@ -1233,24 +1181,5 @@ Quinte region."
 
             currentPlaylistIndex = nextPlaylistIndex;
         }, 5000);
-
-        // Floating Navbar Hamburger Toggle
-        const hamburger = document.getElementById('nav-hamburger');
-        const dropdown = document.getElementById('nav-dropdown');
-
-        if (hamburger && dropdown) {
-            hamburger.addEventListener('click', (e) => {
-                e.stopPropagation();
-                hamburger.classList.toggle('active');
-                dropdown.classList.toggle('open');
-            });
-
-            document.addEventListener('click', (e) => {
-                if (!dropdown.contains(e.target) && !hamburger.contains(e.target)) {
-                    hamburger.classList.remove('active');
-                    dropdown.classList.remove('open');
-                }
-            });
-        }
     });
 </script>

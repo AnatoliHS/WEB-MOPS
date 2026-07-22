@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% include "component/restoration_head.njk" %}
+  <body>
+    {% include "component/restoration_navbar.njk" %}
+    <main style="flex-grow: 1;">
+    {{ content | safe }}
+    </main>
+    {% include "component/restoration_footer.njk" %}
+    {% include "component/scripts.njk" %}
+  </body>
+</html>
