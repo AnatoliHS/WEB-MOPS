@@ -5,7 +5,10 @@ description: "Vibrant Cleanliness for home, business, and vacation rentals. Mops
 Quinte region."
 ---
 
-<div class="portal-container" id="portal-container">
+<div class="portal-container page-index-two" id="portal-container">
+
+    <!-- FLOATING NAVBAR -->
+    {% include "component/navbar.njk" %}
 
     <!-- LEFT PANEL: Brand & Navigation -->
     <div class="portal-left-panel">
@@ -23,11 +26,6 @@ Quinte region."
 
             <!-- Default Info Box -->
             <div class="portal-info-box" id="info-box">
-                <p class="portal-info-desc portal-info-desc--general">
-                    Your premier partner for professional commercial cleaning and expert disaster recovery.
-                    We deliver high-standard janitorial maintenance and certified emergency restoration solutions
-                    tailored to protect and maintain your facility.
-                </p>
                 <p class="portal-info-desc portal-info-desc--janitorial">
                     Vetted commercial cleaning staff delivering high performance janitorial solutions, office
                     maintenance, and secure facility sanitation.
@@ -64,7 +62,19 @@ Quinte region."
 
         <div class="display-overlay"></div>
 
-        <div class="portal-right-content">
+        <div class="portal-right-content" style="text-align: center;">
+            <h1 class="portal-info-desc portal-info-desc--general" style="color: #000000; text-align: center; max-width: 680px; margin: 0 auto 16px; font-size: clamp(1.8rem, 4.4vw, 2.7rem); font-weight: 400; line-height: 1.25;">
+                Your <span class="accent-gradient accent-gradient--janitorial">premier</span> partner for
+                professional commercial cleaning and <span class="accent-gradient accent-gradient--restoration">expert</span> disaster recovery.
+            </h1>
+
+            <a href="tel:613-329-8439" class="display-phone" style="display: inline-block; color: #000000; font-size: clamp(1.7rem, 4.2vw, 2.4rem); font-weight: 400; text-decoration: none; margin-bottom: 22px; letter-spacing: 0.02em;">
+                613-329-8439
+            </a>
+
+            <a href="/restoration/#contact" class="btn btn-primary" style="display: inline-flex; margin-bottom: 24px; padding: 14px 32px; border-radius: 50px; font-weight: 700; font-size: 1.05rem; letter-spacing: 0.02em;">
+                Emergency Services Enquiry →
+            </a>
 
             <!-- Display Overlay Content -->
             <div class="display-content">
@@ -142,7 +152,7 @@ Quinte region."
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: clamp(40px, 6vh, 80px);
+        gap: clamp(16px, 2.5vh, 28px);
         width: 100%;
         max-width: 520px;
         z-index: 3;
@@ -579,13 +589,13 @@ Quinte region."
 
         .portal-left-content {
             position: absolute;
-            top: 22%;
+            top: 28%;
             left: 50%;
             transform: translate(-50%, -50%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 32px;
+            gap: 4px;
             width: 100%;
             max-width: 100%;
             box-sizing: border-box;
@@ -601,7 +611,8 @@ Quinte region."
         .portal-logo-inner {
             left: auto;
             transform: none;
-            width: 280px;
+            width: 325px;
+            max-width: 90vw;
             margin: 0 auto;
         }
 
@@ -727,144 +738,140 @@ Quinte region."
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const container = document.getElementById('portal-container');
-        const btnJan = document.getElementById('btn-janitorial');
-        const btnResto = document.getElementById('btn-restoration');
         const videoJan = document.querySelector('.display-video--janitorial');
         const videoResto = document.querySelector('.display-video--restoration');
         const videoInitial = document.querySelector('.display-video--initial');
 
-        // Force mobile browsers to render the first frame of the paused videos on load
-        const vids = document.querySelectorAll('.display-video:not(.display-video--initial)');
-        vids.forEach(video => {
-            // Muted, inline videos can play programmatically on load without user interaction
-            const playPromise = video.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    // Pause briefly after 10ms to hold the rendered frame
-                    setTimeout(() => {
-                        video.pause();
-                    }, 10);
-                }).catch(err => {
-                    console.log('Video play on load failed, using seek fallback:', err);
-                    video.currentTime = 0.1;
-                });
+        // Video Playlist Loop (7 Seconds Each)
+        const playlist = [videoInitial, videoJan];
+        let currentPlaylistIndex = 0;
+
+        playlist.forEach(vid => {
+            if (vid) {
+                vid.muted = true;
+                vid.playsInline = true;
+                vid.loop = true;
             }
         });
 
-        // Service lists to cycle
-        const serviceLists = {
-            'janitorial': [
-                "Commercial Workspaces",
-                "Post-Construction Cleanup",
-                "Industrial Facility Sanitizing",
-                "Government & Secure Facilities",
-                "Car Dealerships & Showrooms",
-                "Universities & Campuses"
-            ],
-            'restoration': [
-                "Water Damage",
-                "Fire & Smoke",
-                "Mold & Spores",
-                "Storm Damage",
-                "Hazmat & Asbestos",
-                "Trauma & Crime Scene",
-                "Full Rebuild",
-                "Janitorial Services"
-            ]
+        // Start initial video on load
+        if (playlist[0]) {
+            playlist[0].play().catch(err => console.log('Video load play:', err));
+            playlist[0].classList.add('active-vid');
+        }
+
+        // Cycle through videos every 7 seconds
+        setInterval(() => {
+            const nextPlaylistIndex = (currentPlaylistIndex + 1) % playlist.length;
+            const currentVid = playlist[currentPlaylistIndex];
+            const nextVid = playlist[nextPlaylistIndex];
+
+            if (nextVid) {
+                nextVid.currentTime = 0;
+                nextVid.play().catch(err => console.log('Playlist play:', err));
+                nextVid.classList.add('active-vid');
+            }
+
+            if (currentVid) {
+                currentVid.classList.remove('active-vid');
+                setTimeout(() => {
+                    currentVid.pause();
+                }, 600);
+            }
+
+            currentPlaylistIndex = nextPlaylistIndex;
+        }, 7000);
+
+        // Floating Navbar Dropdown Triggered by Janitorial & Restoration Buttons
+        const btnJan = document.getElementById('btn-janitorial');
+        const btnResto = document.getElementById('btn-restoration');
+        const dropdown = document.getElementById('nav-dropdown');
+        const overlay = document.getElementById('nav-overlay');
+
+        const openNavbarDropdown = (mode, triggerBtn) => {
+            if (!dropdown) return;
+            dropdown.classList.remove('show-janitorial-only', 'show-restoration-only');
+            if (mode === 'janitorial') dropdown.classList.add('show-janitorial-only');
+            if (mode === 'restoration') dropdown.classList.add('show-restoration-only');
+
+            // On mobile: position dropdown fixed below the clicked portal button
+            if (window.innerWidth <= 1024 && triggerBtn) {
+                const rect = triggerBtn.getBoundingClientRect();
+                dropdown.style.position = 'fixed';
+                dropdown.style.top = (rect.bottom + 10) + 'px';
+                dropdown.style.left = '50%';
+                dropdown.style.right = 'auto';
+                dropdown.style.transform = 'translateX(-50%)';
+            } else {
+                dropdown.style.position = '';
+                dropdown.style.top = '';
+                dropdown.style.left = '';
+                dropdown.style.right = '';
+                dropdown.style.transform = '';
+            }
+
+            dropdown.classList.add('open');
         };
 
-        const intervals = {};
-
-        function startCycling(division) {
-            const services = serviceLists[division];
-            const cycler = document.getElementById(`${division}-ticker`);
-            if (!services || !cycler) return;
-
-            let index = 0;
-            
-            // Clear any existing interval
-            if (intervals[division]) {
-                clearInterval(intervals[division]);
-            }
-
-            intervals[division] = setInterval(() => {
-                index = (index + 1) % services.length;
-                const nextText = services[index];
-
-                cycler.style.opacity = '0';
-                cycler.style.transform = 'translateY(-4px)';
-                
+        const closeNavbarDropdown = () => {
+            if (dropdown) {
+                dropdown.classList.remove('open');
                 setTimeout(() => {
-                    cycler.textContent = nextText;
-                    cycler.style.opacity = '1';
-                    cycler.style.transform = 'translateY(0)';
-                }, 150);
-            }, 1800);
+                    if (!dropdown.classList.contains('open')) {
+                        dropdown.classList.remove('show-janitorial-only', 'show-restoration-only');
+                        dropdown.style.position = '';
+                        dropdown.style.top = '';
+                        dropdown.style.left = '';
+                        dropdown.style.right = '';
+                        dropdown.style.transform = '';
+                    }
+                }, 300);
+            }
+        };
+
+        if (btnJan) {
+            btnJan.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (dropdown && dropdown.classList.contains('open') && dropdown.classList.contains('show-janitorial-only')) {
+                    closeNavbarDropdown();
+                } else {
+                    openNavbarDropdown('janitorial', btnJan);
+                }
+            });
         }
 
-        function stopCycling(division) {
-            if (intervals[division]) {
-                clearInterval(intervals[division]);
-                intervals[division] = null;
-            }
-            const cycler = document.getElementById(`${division}-ticker`);
-            const services = serviceLists[division];
-            if (cycler && services) {
-                cycler.textContent = services[0];
-            }
+        if (btnResto) {
+            btnResto.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (dropdown && dropdown.classList.contains('open') && dropdown.classList.contains('show-restoration-only')) {
+                    closeNavbarDropdown();
+                } else {
+                    openNavbarDropdown('restoration', btnResto);
+                }
+            });
         }
 
-        function activateDivision(division) {
-            if (division === 'janitorial') {
-                container.classList.remove('state-restoration');
-                container.classList.add('state-janitorial');
-                
-                // Play active, pause inactive
-                videoJan.classList.add('active-vid');
-                videoResto.classList.remove('active-vid');
-                videoInitial.classList.remove('active-vid');
-                
-                videoJan.play().catch(e => console.log(e));
-                videoResto.pause();
-                videoInitial.pause();
-                
-                startCycling('janitorial');
-                stopCycling('restoration');
-            } else if (division === 'restoration') {
-                container.classList.remove('state-janitorial');
-                container.classList.add('state-restoration');
-                
-                // Play active, pause inactive
-                videoResto.classList.add('active-vid');
-                videoJan.classList.remove('active-vid');
-                videoInitial.classList.remove('active-vid');
-                
-                videoResto.play().catch(e => console.log(e));
-                videoJan.pause();
-                videoInitial.pause();
-                
-                startCycling('restoration');
-                stopCycling('janitorial');
+        // Close when clicking off to the side (outside dropdown & buttons)
+        document.addEventListener('click', (e) => {
+            if (dropdown && dropdown.classList.contains('open')) {
+                const isInsideDropdown = dropdown.contains(e.target);
+                const isJanBtn = btnJan && btnJan.contains(e.target);
+                const isRestoBtn = btnResto && btnResto.contains(e.target);
+                if (!isInsideDropdown && !isJanBtn && !isRestoBtn) {
+                    closeNavbarDropdown();
+                }
             }
+        });
+
+        // Close when selecting an option in the menu
+        if (dropdown) {
+            dropdown.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    closeNavbarDropdown();
+                });
+            });
         }
-
-        // Mouse events for desktop hover triggers
-        btnJan.addEventListener('mouseenter', () => {
-            if (window.innerWidth > 1024) activateDivision('janitorial');
-        });
-
-        btnResto.addEventListener('mouseenter', () => {
-            if (window.innerWidth > 1024) activateDivision('restoration');
-        });
-
-        // Click events for mobile/tablet tap activation
-        btnJan.addEventListener('click', () => {
-            activateDivision('janitorial');
-        });
-
-        btnResto.addEventListener('click', () => {
-            activateDivision('restoration');
-        });
     });
 </script>

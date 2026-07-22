@@ -5585,3 +5585,49 @@ main {
         pointer-events: auto;
     }
 }
+
+/* Floating Navbar Contact Info (Address & Email) */
+.floating-nav-info {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: #1e293b;
+}
+
+.floating-nav-address {
+    color: #475569;
+}
+
+.floating-nav-divider {
+    color: #cbd5e1;
+}
+
+.floating-nav-email {
+    color: #0284c7;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.floating-nav-email:hover {
+    color: #0369a1;
+    text-decoration: underline;
+}
+
+@media (max-width: 520px) {
+    .floating-nav-address,
+    .floating-nav-divider {
+        display: none;
+    }
+    .floating-nav-info {
+        font-size: 0.8rem;
+    }
+}
+
+.floating-nav-left {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+}

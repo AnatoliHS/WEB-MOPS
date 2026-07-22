@@ -31,12 +31,12 @@ Quinte region."
             </div>
 
             <div class="portal-navigation">
-                <a href="/janitorial/" class="portal-nav-btn portal-nav-btn--janitorial" id="btn-janitorial">
+                <button class="portal-nav-btn portal-nav-btn--janitorial" id="btn-janitorial">
                     <span>Janitorial</span>
-                </a>
-                <a href="/restoration/" class="portal-nav-btn portal-nav-btn--restoration" id="btn-restoration">
+                </button>
+                <button class="portal-nav-btn portal-nav-btn--restoration" id="btn-restoration">
                     <span>Restoration</span>
-                </a>
+                </button>
             </div>
         </div>
     </div>
@@ -120,7 +120,7 @@ Quinte region."
 
     /* ---- Floating Navbar Styles ---- */
     .floating-navbar {
-        position: absolute;
+        position: fixed;
         top: 24px;
         left: 50%;
         transform: translateX(-50%);
@@ -128,6 +128,19 @@ Quinte region."
         max-width: 1240px;
         z-index: 10000;
         pointer-events: none;
+    }
+
+    @media (min-width: 1025px) {
+        .portal-container .floating-navbar {
+            left: 24px;
+            transform: none;
+            width: calc(56.5vw - 48px);
+            max-width: 760px;
+        }
+    }
+
+    .portal-container .floating-nav-hamburger {
+        display: none !important;
     }
 
     .floating-nav-container {
@@ -427,7 +440,7 @@ Quinte region."
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: clamp(54px, 8vh, 96px);
+        gap: clamp(16px, 2.5vh, 28px);
         width: 100%;
         max-width: 520px;
         z-index: 3;
@@ -958,13 +971,13 @@ Quinte region."
 
         .portal-left-content {
             position: absolute;
-            top: 27%;
+            top: 28%;
             left: 50%;
             transform: translate(-50%, -50%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 44px;
+            gap: 4px;
             width: 100%;
             max-width: 100%;
             box-sizing: border-box;
@@ -980,7 +993,8 @@ Quinte region."
         .portal-logo-inner {
             left: auto;
             transform: none;
-            width: 280px;
+            width: 325px;
+            max-width: 90vw;
             margin: 0 auto;
         }
 
@@ -1111,8 +1125,6 @@ Quinte region."
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById('portal-container');
-        const btnJan = document.getElementById('btn-janitorial');
-        const btnResto = document.getElementById('btn-restoration');
         const videoJan = document.querySelector('.display-video--janitorial');
         const videoResto = document.querySelector('.display-video--restoration');
         const videoInitial = document.querySelector('.display-video--initial');
@@ -1143,8 +1155,8 @@ Quinte region."
             });
         }
 
-        // Video Playlist Loop (5 Seconds Each)
-        const playlist = [videoInitial, videoJan, videoResto];
+        // Video Playlist Loop (7 Seconds Each)
+        const playlist = [videoInitial, videoJan];
         let currentPlaylistIndex = 0;
 
         playlist.forEach(vid => {
@@ -1160,7 +1172,7 @@ Quinte region."
             playlist[0].play().catch(err => console.log('Video load play:', err));
         }
 
-        // Loop through all three videos every 5 seconds (5000ms)
+        // Loop through videos every 7 seconds (7000ms)
         setInterval(() => {
             const nextPlaylistIndex = (currentPlaylistIndex + 1) % playlist.length;
             const currentVid = playlist[currentPlaylistIndex];
@@ -1180,6 +1192,98 @@ Quinte region."
             }
 
             currentPlaylistIndex = nextPlaylistIndex;
-        }, 5000);
+        }, 7000);
+
+        // Floating Navbar Dropdown Triggered by Janitorial & Restoration Buttons
+        const btnJan = document.getElementById('btn-janitorial');
+        const btnResto = document.getElementById('btn-restoration');
+        const dropdown = document.getElementById('nav-dropdown');
+        const overlay = document.getElementById('nav-overlay');
+
+        const openNavbarDropdown = (mode, triggerBtn) => {
+            if (!dropdown) return;
+            dropdown.classList.remove('show-janitorial-only', 'show-restoration-only');
+            if (mode === 'janitorial') dropdown.classList.add('show-janitorial-only');
+            if (mode === 'restoration') dropdown.classList.add('show-restoration-only');
+
+            // On mobile: position dropdown fixed below the clicked portal button
+            if (window.innerWidth <= 1024 && triggerBtn) {
+                const rect = triggerBtn.getBoundingClientRect();
+                dropdown.style.position = 'fixed';
+                dropdown.style.top = (rect.bottom + 10) + 'px';
+                dropdown.style.left = '50%';
+                dropdown.style.right = 'auto';
+                dropdown.style.transform = 'translateX(-50%)';
+            } else {
+                dropdown.style.position = '';
+                dropdown.style.top = '';
+                dropdown.style.left = '';
+                dropdown.style.right = '';
+                dropdown.style.transform = '';
+            }
+
+            dropdown.classList.add('open');
+        };
+
+        const closeNavbarDropdown = () => {
+            if (dropdown) {
+                dropdown.classList.remove('open');
+                setTimeout(() => {
+                    if (!dropdown.classList.contains('open')) {
+                        dropdown.classList.remove('show-janitorial-only', 'show-restoration-only');
+                        dropdown.style.position = '';
+                        dropdown.style.top = '';
+                        dropdown.style.left = '';
+                        dropdown.style.right = '';
+                        dropdown.style.transform = '';
+                    }
+                }, 300);
+            }
+        };
+
+        if (btnJan) {
+            btnJan.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (dropdown && dropdown.classList.contains('open') && dropdown.classList.contains('show-janitorial-only')) {
+                    closeNavbarDropdown();
+                } else {
+                    openNavbarDropdown('janitorial', btnJan);
+                }
+            });
+        }
+
+        if (btnResto) {
+            btnResto.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (dropdown && dropdown.classList.contains('open') && dropdown.classList.contains('show-restoration-only')) {
+                    closeNavbarDropdown();
+                } else {
+                    openNavbarDropdown('restoration', btnResto);
+                }
+            });
+        }
+
+        // Close when clicking off to the side (outside dropdown & buttons)
+        document.addEventListener('click', (e) => {
+            if (dropdown && dropdown.classList.contains('open')) {
+                const isInsideDropdown = dropdown.contains(e.target);
+                const isJanBtn = btnJan && btnJan.contains(e.target);
+                const isRestoBtn = btnResto && btnResto.contains(e.target);
+                if (!isInsideDropdown && !isJanBtn && !isRestoBtn) {
+                    closeNavbarDropdown();
+                }
+            }
+        });
+
+        // Close when selecting an option in the menu
+        if (dropdown) {
+            dropdown.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    closeNavbarDropdown();
+                });
+            });
+        }
     });
 </script>
