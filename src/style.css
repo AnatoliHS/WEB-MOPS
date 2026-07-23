@@ -3615,6 +3615,30 @@ section {
   text-decoration: underline;
 }
 
+@media (min-width: 1025px) {
+  .floating-nav-right {
+    width: 100%;
+  }
+
+  .floating-nav-info {
+    width: 100%;
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.98rem;
+    gap: 12px;
+  }
+
+  .floating-nav-divider {
+    display: none !important;
+  }
+
+  .floating-nav-email {
+    margin-left: auto;
+    text-align: right;
+  }
+}
+
 @media (max-width: 520px) {
 
   .floating-nav-address,
@@ -3627,7 +3651,10 @@ section {
   }
 }
 
-/* On index_two only: remove logo from navbar on mobile, stretch address left & email right */
+/* On page-index-two: remove logo from navbar */
+.page-index-two .floating-nav-logo {
+  display: none !important;
+}
 @media (max-width: 1024px) {
   .page-index-two .floating-nav-logo {
     display: none !important;
@@ -3684,6 +3711,19 @@ section {
 .portal-nav-wrapper {
   position: relative;
   display: inline-block;
+}
+
+/* Restoration Services 2 Columns (4 and 4) */
+.dropdown-division--restoration .dropdown-services {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  grid-auto-flow: column !important;
+  grid-template-rows: repeat(4, auto) !important;
+  gap: 8px 24px !important;
+}
+
+.dropdown-division--restoration .dropdown-services li a {
+  white-space: nowrap;
 }
 
 /* Single-Division Modes for Floating Navbar Dropdown (No Square-in-a-Square) */

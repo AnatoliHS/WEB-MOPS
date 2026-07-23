@@ -63,16 +63,20 @@ Quinte region."
         <div class="display-overlay"></div>
 
         <div class="portal-right-content" style="text-align: center;">
-            <h1 class="portal-info-desc portal-info-desc--general" style="color: #000000; text-align: center; max-width: 680px; margin: 0 auto 16px; font-size: clamp(1.8rem, 4.4vw, 2.7rem); font-weight: 400; line-height: 1.25;">
+            <h1 class="portal-info-desc portal-info-desc--general"
+                style="color: #000000; text-align: center; max-width: 680px; margin: 0 auto 16px; font-size: clamp(1.8rem, 4.4vw, 2.7rem); font-weight: 400; line-height: 1.25;">
                 Your <span class="accent-gradient accent-gradient--janitorial">premier</span> partner for
-                professional commercial cleaning and <span class="accent-gradient accent-gradient--restoration">expert</span> disaster recovery.
+                professional commercial cleaning and <span
+                    class="accent-gradient accent-gradient--restoration">expert</span> disaster recovery.
             </h1>
 
-            <a href="tel:613-329-8439" class="display-phone" style="display: inline-block; color: #000000; font-size: clamp(1.7rem, 4.2vw, 2.4rem); font-weight: 400; text-decoration: none; margin-bottom: 22px; letter-spacing: 0.02em;">
+            <a href="tel:613-329-8439" class="display-phone"
+                style="display: inline-block; color: #000000; font-size: clamp(1.7rem, 4.2vw, 2.4rem); font-weight: 400; text-decoration: none; margin-bottom: 22px; letter-spacing: 0.02em;">
                 613-329-8439
             </a>
 
-            <a href="/restoration/#contact" class="btn btn-primary" style="display: inline-flex; margin-bottom: 24px; padding: 14px 32px; border-radius: 50px; font-weight: 700; font-size: 1.05rem; letter-spacing: 0.02em;">
+            <a href="/restoration/#contact" class="btn btn-primary btn-purple"
+                style="display: inline-flex; margin-bottom: 24px; padding: 14px 32px; border-radius: 50px; font-weight: 700; font-size: 1.05rem; letter-spacing: 0.02em;">
                 Emergency Services Enquiry →
             </a>
 
@@ -92,7 +96,8 @@ Quinte region."
                 <!-- Restoration Overlay Content -->
                 <div class="display-group display-group--restoration">
                     <div class="display-subtitle">
-                        Don't Wait.<br><span class="accent-gradient accent-gradient--restoration">Damage</span> Gets Worse.
+                        Don't Wait.<br><span class="accent-gradient accent-gradient--restoration">Damage</span> Gets
+                        Worse.
                     </div>
                     <a href="tel:613-329-8439" class="display-phone">
                         613-329-8439
@@ -552,9 +557,45 @@ Quinte region."
         box-shadow: 0 4px 20px rgba(101, 45, 255, 0.3);
     }
 
+    .btn-purple {
+        background: linear-gradient(90deg, #652dff, #a25cff) !important;
+        border: none !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 20px rgba(101, 45, 255, 0.35) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .btn-purple:hover {
+        background: linear-gradient(90deg, #5320e0, #9148f5) !important;
+        border: none !important;
+        color: #ffffff !important;
+        transform: translateY(-2px) scale(1.02) !important;
+        box-shadow: 0 6px 24px rgba(101, 45, 255, 0.5) !important;
+    }
+
     .display-cta:hover {
         transform: scale(1.05);
         box-shadow: 0 6px 24px rgba(5, 21, 42, 0.15);
+    }
+
+    @media (min-width: 1025px) {
+        .portal-container .floating-dropdown {
+            left: 0 !important;
+            right: auto !important;
+            top: calc(100% + 14px) !important;
+            bottom: auto !important;
+            transform-origin: top left !important;
+        }
+
+        .portal-container .floating-dropdown.show-janitorial-only {
+            width: 320px !important;
+            max-width: calc(100vw - 40px) !important;
+        }
+
+        .portal-container .floating-dropdown.show-restoration-only {
+            width: 490px !important;
+            max-width: calc(100vw - 40px) !important;
+        }
     }
 
     /* ---- Diagonal divider line ---- */
@@ -797,17 +838,21 @@ Quinte region."
             if (mode === 'janitorial') dropdown.classList.add('show-janitorial-only');
             if (mode === 'restoration') dropdown.classList.add('show-restoration-only');
 
-            // On mobile: position dropdown fixed below the clicked portal button
-            if (window.innerWidth <= 1024 && triggerBtn) {
+            const isMobile = window.innerWidth <= 1024;
+
+            if (isMobile && triggerBtn) {
                 const rect = triggerBtn.getBoundingClientRect();
                 dropdown.style.position = 'fixed';
                 dropdown.style.top = (rect.bottom + 10) + 'px';
+                dropdown.style.bottom = 'auto';
                 dropdown.style.left = '50%';
                 dropdown.style.right = 'auto';
                 dropdown.style.transform = 'translateX(-50%)';
             } else {
+                // Desktop view: position below navbar, left-aligned to navbar
                 dropdown.style.position = '';
                 dropdown.style.top = '';
+                dropdown.style.bottom = '';
                 dropdown.style.left = '';
                 dropdown.style.right = '';
                 dropdown.style.transform = '';
@@ -824,6 +869,7 @@ Quinte region."
                         dropdown.classList.remove('show-janitorial-only', 'show-restoration-only');
                         dropdown.style.position = '';
                         dropdown.style.top = '';
+                        dropdown.style.bottom = '';
                         dropdown.style.left = '';
                         dropdown.style.right = '';
                         dropdown.style.transform = '';
@@ -831,6 +877,14 @@ Quinte region."
                 }, 300);
             }
         };
+
+        window.addEventListener('resize', () => {
+            if (dropdown && dropdown.classList.contains('open')) {
+                const activeMode = dropdown.classList.contains('show-janitorial-only') ? 'janitorial' : 'restoration';
+                const activeBtn = activeMode === 'janitorial' ? btnJan : btnResto;
+                if (activeBtn) openNavbarDropdown(activeMode, activeBtn);
+            }
+        });
 
         if (btnJan) {
             btnJan.addEventListener('mouseenter', () => {
