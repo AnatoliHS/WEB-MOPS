@@ -5245,6 +5245,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
   padding: 10px 24px;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.45);

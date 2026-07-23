@@ -3200,6 +3200,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
   padding: 10px 24px;
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.45);
@@ -3224,6 +3225,7 @@ section {
   display: flex;
   align-items: center;
   gap: 16px;
+  margin-left: auto;
 }
 
 .desktop-nav-btn {
@@ -3616,11 +3618,11 @@ section {
 }
 
 @media (min-width: 1025px) {
-  .floating-nav-right {
+  .page-index-two .floating-nav-right {
     width: 100%;
   }
 
-  .floating-nav-info {
+  .page-index-two .floating-nav-info {
     width: 100%;
     display: flex !important;
     justify-content: space-between;
@@ -3629,11 +3631,11 @@ section {
     gap: 12px;
   }
 
-  .floating-nav-divider {
+  .page-index-two .floating-nav-divider {
     display: none !important;
   }
 
-  .floating-nav-email {
+  .page-index-two .floating-nav-email {
     margin-left: auto;
     text-align: right;
   }
