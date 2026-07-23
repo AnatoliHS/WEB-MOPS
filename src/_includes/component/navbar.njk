@@ -11,8 +11,12 @@
 
         <!-- Right Controls: Contact Info & Hamburger Menu -->
         <div class="floating-nav-right">
-            {% if page.url == '/janitorial/' or page.url == '/restoration/' %}
-                <a href="tel:613-329-8439" class="floating-nav-phone">613-329-8439</a>
+            {% if page.url == '/janitorial/' %}
+                <a href="#contact" class="floating-nav-cta floating-nav-cta--janitorial desktop-nav-btn">Contact</a>
+                <a href="tel:613-329-8439" class="floating-nav-phone mobile-nav-btn">613-329-8439</a>
+            {% elif page.url == '/restoration/' %}
+                <a href="#contact" class="floating-nav-cta floating-nav-cta--restoration desktop-nav-btn">Contact</a>
+                <a href="tel:613-329-8439" class="floating-nav-phone mobile-nav-btn">613-329-8439</a>
             {% else %}
                 <div class="floating-nav-info">
                     <span class="floating-nav-address">41 Dussek St, Belleville, ON</span>

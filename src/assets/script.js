@@ -1,12 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Set up mobile image sources on initial load if screen is narrow
   if (window.innerWidth <= 1024) {
+    const isRestoPage = document.querySelector('.hero-damage-pill[data-dmg="water"]') !== null;
+    const initialMobileImg = isRestoPage ? '/assets/water_damage_panorama.png' : '/assets/commercial-spaces.png';
     document.querySelectorAll('.hero-banner-img').forEach(img => {
-      img.src = '/assets/mops-maid.jpg';
+      img.src = initialMobileImg;
     });
     const mainImg = document.getElementById('hero-main-img');
     if (mainImg) {
-      mainImg.src = '/assets/mops-maid.jpg';
+      mainImg.src = initialMobileImg;
     }
   }
 
@@ -22,53 +24,120 @@ document.addEventListener('DOMContentLoaded', () => {
     damagesRow.classList.add('is-carousel');
   }
 
-  // --- Janitorial Services Showcase & Info Swapper ---
-  const damageInfo = {
+  // --- Services Showcase & Info Swapper (Janitorial & Restoration) ---
+  const janitorialDamageInfo = {
     workspaces: {
       title: "Commercial Workspaces",
       subtitle: 'Immaculate & Safe <span class="sub-accent">Office</span> Environments',
       img: "/assets/commercial-spaces.png",
       imgMobile: "/assets/commercial-spaces.png",
-      desc: "Tailored janitorial plans to keep office spaces, meeting rooms, and common areas immaculate, safe, and hygienic."
+      desc: "Tailored janitorial plans to keep office spaces, meeting rooms, and common areas immaculate, safe, and hygienic.",
+      cta: "Get a Quote \u2192"
     },
     construction: {
       title: "Post-Construction Cleanup",
       subtitle: 'Complete <span class="sub-accent">Dust</span> Suppression & Scrubbing',
       img: "/assets/construction-cleanup.png",
       imgMobile: "/assets/construction-cleanup.png",
-      desc: "Comprehensive dust suppression, plaster residue scrubbing, and detail cleaning to prepare new builds for immediate occupancy."
+      desc: "Comprehensive dust suppression, plaster residue scrubbing, and detail cleaning to prepare new builds for immediate occupancy.",
+      cta: "Get a Quote \u2192"
     },
     industrial: {
       title: "Industrial Facility Sanitizing",
       subtitle: 'Heavy-Duty <span class="sub-accent">Warehouse</span> Floor Scrubbing',
       img: "/assets/industrial-sanitizing.png",
       imgMobile: "/assets/industrial-sanitizing.png",
-      desc: "Heavy-duty degreasing, warehouse floor scrubbing, and workspace decontamination compliant with industrial safety standards."
+      desc: "Heavy-duty degreasing, warehouse floor scrubbing, and workspace decontamination compliant with industrial safety standards.",
+      cta: "Get a Quote \u2192"
     },
     government: {
       title: "Government & Secure Facilities",
       subtitle: 'High-Security <span class="sub-accent">Administrative</span> Cleaning',
       img: "/assets/municipal-spaces.png",
       imgMobile: "/assets/municipal-spaces.png",
-      desc: "Vetted cleaning staff delivering high-security janitorial maintenance for administrative, municipal, and secure government properties."
+      desc: "Vetted cleaning staff delivering high-security janitorial maintenance for administrative, municipal, and secure government properties.",
+      cta: "Get a Quote \u2192"
     },
     dealerships: {
       title: "Car Dealerships & Showrooms",
       subtitle: 'Spotless Showrooms & <span class="sub-accent">Polished</span> Glass Facades',
       img: "/assets/dealership-showroom.png",
       imgMobile: "/assets/dealership-showroom.png",
-      desc: "Spotless showroom floors, polished glass facades, and meticulous detail sanitizing to reflect the premium quality of your brand."
+      desc: "Spotless showroom floors, polished glass facades, and meticulous detail sanitizing to reflect the premium quality of your brand.",
+      cta: "Get a Quote \u2192"
     },
     campuses: {
       title: "Universities & Campuses",
       subtitle: 'High-Frequency <span class="sub-accent">Disinfection</span> of Lecture Halls',
       img: "/assets/campus-disinfection.png",
       imgMobile: "/assets/campus-disinfection.png",
-      desc: "High-frequency disinfection of classrooms, labs, lecture halls, and student centers to promote a safe and healthy campus experience."
+      desc: "High-frequency disinfection of classrooms, labs, lecture halls, and student centers to promote a safe and healthy campus experience.",
+      cta: "Get a Quote \u2192"
     }
   };
 
-  let activeDmgKey = "workspaces";
+  const restorationDamageInfo = {
+    water: {
+      title: "Water Damage",
+      subtitle: 'Rapid <span class="sub-accent">Extraction</span> &amp; Structural Drying',
+      img: "/assets/water_damage_panorama.png",
+      imgMobile: "/assets/water_damage_panorama.png",
+      desc: "Professional mitigation, extraction, and drying services for floods, pipe bursts, and sewage backups.",
+      cta: "Request Help for Water Damage \u2192"
+    },
+    fire: {
+      title: "Fire & Smoke",
+      subtitle: 'Thermal <span class="sub-accent">Deodorization</span> &amp; Soot Removal',
+      img: "/assets/fire_damage_panorama.png",
+      imgMobile: "/assets/fire_damage_panorama.png",
+      desc: "Comprehensive soot cleanup, smoke odor elimination, and structural restoration after fire disasters.",
+      cta: "Request Help for Fire & Smoke \u2192"
+    },
+    mold: {
+      title: "Mold & Spores",
+      subtitle: 'HEPA <span class="sub-accent">Containment</span> &amp; Spore Remediation',
+      img: "/assets/mold_remediation_panorama.png",
+      imgMobile: "/assets/mold_remediation_panorama.png",
+      desc: "Certified containment, air filtration, and safe mold spore elimination to protect building occupants.",
+      cta: "Request Help for Mold Remediation \u2192"
+    },
+    storm: {
+      title: "Storm Damage",
+      subtitle: 'Emergency <span class="sub-accent">Tarping</span> &amp; Wind Repairs',
+      img: "/assets/storm_damage_panorama.png",
+      imgMobile: "/assets/storm_damage_panorama.png",
+      desc: "Immediate emergency tarping, board-up, and structural stabilization following severe storm events.",
+      cta: "Request Help for Storm Damage \u2192"
+    },
+    hazmat: {
+      title: "Hazmat & Asbestos",
+      subtitle: 'Certified <span class="sub-accent">Abatement</span> &amp; Chemical Decon',
+      img: "/assets/hazmat_abatement_panorama.png",
+      imgMobile: "/assets/hazmat_abatement_panorama.png",
+      desc: "Licensed containment and removal of biohazards, chemical spills, and hazardous asbestos materials.",
+      cta: "Request Help for Hazmat Abatement \u2192"
+    },
+    trauma: {
+      title: "Trauma & Crime Scene",
+      subtitle: 'Compassionate <span class="sub-accent">Sanitization</span> &amp; Decontamination',
+      img: "/assets/trauma_cleanup_panorama.png",
+      imgMobile: "/assets/trauma_cleanup_panorama.png",
+      desc: "Discreet, compassionate, and certified decontamination of biohazardous trauma and crime scenes.",
+      cta: "Request Help for Trauma Cleanup \u2192"
+    },
+    rebuild: {
+      title: "Full Rebuild",
+      subtitle: 'Turnkey <span class="sub-accent">Reconstruction</span> &amp; Remodeling',
+      img: "/assets/full_rebuild_panorama.png",
+      imgMobile: "/assets/full_rebuild_panorama.png",
+      desc: "Full-service general contracting and property reconstruction to restore structures to pre-loss condition.",
+      cta: "Request Help for Full Rebuild \u2192"
+    }
+  };
+
+  const isRestoration = document.querySelector('.hero-damage-pill[data-dmg="water"]') !== null;
+  const damageInfo = isRestoration ? restorationDamageInfo : janitorialDamageInfo;
+  let activeDmgKey = isRestoration ? "water" : "workspaces";
   let bannersDismissed = false; // Flag to track if we've crossfaded from banners to single image
 
   let pageInitialized = false;
@@ -168,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update dynamic CTA actions
     const ctaEls = document.querySelectorAll('.hero-dynamic-cta');
     ctaEls.forEach(el => {
-      el.textContent = `Get a Quote \u2192`;
+      el.textContent = info.cta || `Get a Quote \u2192`;
     });
 
     // Transition from banners to single image on first interaction, otherwise do normal image fade
@@ -317,7 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize showcase and bind actions
   setupSlider();
-  setActiveService("workspaces");
+  setActiveService(activeDmgKey);
   setupPillInteractions();
   setupDropdownInteractions();
 

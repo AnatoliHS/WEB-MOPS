@@ -5,59 +5,112 @@ description: "Vibrant Cleanliness for home, business, and vacation rentals. Mops
 Quinte region."
 ---
 
-<div class="split-portal" id="split-portal">
+<div class="portal-container page-index-two" id="portal-container">
 
-    <!-- LEFT PANEL -->
-    <div class="split-panel-wrapper split-panel-wrapper--left">
-        <a href="/janitorial/" class="split-panel split-panel--left" id="panel-cleaning"
-            aria-label="Explore Mops Group Inc. Janitorial Services">
-            <div class="split-panel__bg">
-                <video class="split-panel__video" loop muted playsinline preload="auto">
-                    <source src="/assets/cleaning-two.mp4" type="video/mp4">
-                </video>
+    <!-- FLOATING NAVBAR -->
+    {% include "component/navbar.njk" %}
+
+    <!-- LEFT PANEL: Brand & Navigation -->
+    <div class="portal-left-panel">
+        <div class="portal-left-content">
+            <div class="portal-logo-container">
+                <div class="portal-logo-inner">
+                    <img src="/assets/mops-group-general.png" alt="Mops Group Inc. Logo"
+                        class="portal-logo portal-logo--general">
+                    <img src="/assets/mops-group-janitorial.png" alt="Mops Group Janitorial Logo"
+                        class="portal-logo portal-logo--janitorial">
+                    <img src="/assets/mops-group-resoration.png" alt="Mops Group Restoration Logo"
+                        class="portal-logo portal-logo--restoration">
+                </div>
             </div>
-            <div class="split-panel__overlay"></div>
-            <div class="split-panel__content">
-                <img src="/assets/mops-group-janitorial.png" alt="Janitorial Logo" class="split-logo split-logo--janitorial">
-                <p class="split-panel__label">JANITORIAL</p>
-                <div class="split-panel__sub-services" id="janitorial-services-list">Commercial Workspaces</div>
-                <span class="split-panel__cta">Janitorial Services <span class="split-arrow">→</span></span>
+
+            <!-- Default Info Box -->
+            <div class="portal-info-box" id="info-box">
+                <p class="portal-info-desc portal-info-desc--janitorial">
+                    Vetted commercial cleaning staff delivering high performance janitorial solutions, office
+                    maintenance, and secure facility sanitation.
+                </p>
+                <p class="portal-info-desc portal-info-desc--restoration">
+                    Professional emergency response, insurance claim support, and full rebuild services for homes and
+                    commercial properties.
+                </p>
             </div>
-            <div class="split-panel__diagonal-edge split-panel__diagonal-edge--left"></div>
-        </a>
+
+            <div class="portal-navigation">
+                <button class="portal-nav-btn portal-nav-btn--janitorial" id="btn-janitorial">
+                    <span>Janitorial</span>
+                </button>
+                <button class="portal-nav-btn portal-nav-btn--restoration" id="btn-restoration">
+                    <span>Restoration</span>
+                </button>
+            </div>
+        </div>
     </div>
 
-    <!-- RIGHT PANEL -->
-    <div class="split-panel-wrapper split-panel-wrapper--right">
-        <a href="/restoration/" class="split-panel split-panel--right" id="panel-resto"
-            aria-label="Explore Mops Inc. Restaurant Cleaning">
-            <div class="split-panel__bg">
-                <video class="split-panel__video" loop muted playsinline preload="auto">
-                    <source src="/assets/hero-video.mp4" type="video/mp4">
-                </video>
+    <!-- RIGHT PANEL: Dynamic Display Panel -->
+    <div class="portal-right-panel">
+        <!-- Background Videos -->
+        <video class="display-video display-video--initial active-vid" loop muted playsinline autoplay preload="auto">
+            <source src="/assets/mops-initial-two.mp4" type="video/mp4">
+        </video>
+        <video class="display-video display-video--janitorial" loop muted playsinline preload="auto">
+            <source src="/assets/cleaning-two.mp4" type="video/mp4">
+        </video>
+        <video class="display-video display-video--restoration" loop muted playsinline preload="auto">
+            <source src="/assets/mops-resto.mp4" type="video/mp4">
+        </video>
+
+        <div class="display-overlay"></div>
+
+        <div class="portal-right-content" style="text-align: center;">
+            <h1 class="portal-info-desc portal-info-desc--general" style="color: #000000; text-align: center; max-width: 680px; margin: 0 auto 16px; font-size: clamp(1.8rem, 4.4vw, 2.7rem); font-weight: 400; line-height: 1.25;">
+                Your <span class="accent-gradient accent-gradient--janitorial">premier</span> partner for
+                professional commercial cleaning and <span class="accent-gradient accent-gradient--restoration">expert</span> disaster recovery.
+            </h1>
+
+            <a href="tel:613-329-8439" class="display-phone" style="display: inline-block; color: #000000; font-size: clamp(1.7rem, 4.2vw, 2.4rem); font-weight: 400; text-decoration: none; margin-bottom: 22px; letter-spacing: 0.02em;">
+                613-329-8439
+            </a>
+
+            <a href="/restoration/#contact" class="btn btn-primary" style="display: inline-flex; margin-bottom: 24px; padding: 14px 32px; border-radius: 50px; font-weight: 700; font-size: 1.05rem; letter-spacing: 0.02em;">
+                Emergency Services Enquiry →
+            </a>
+
+            <!-- Display Overlay Content -->
+            <div class="display-content">
+                <!-- Janitorial Overlay Content -->
+                <div class="display-group display-group--janitorial">
+                    <div class="display-subtitle">
+                        Ready for a <span class="accent-gradient accent-gradient--janitorial">Spotless</span> Space?
+                    </div>
+                    <a href="tel:613-329-8439" class="display-phone">
+                        613-329-8439
+                    </a>
+                    <div class="display-ticker" id="janitorial-ticker">Commercial Workspaces</div>
+                    <a href="/janitorial/" class="display-cta display-cta--janitorial">Janitorial Services →</a>
+                </div>
+                <!-- Restoration Overlay Content -->
+                <div class="display-group display-group--restoration">
+                    <div class="display-subtitle">
+                        Don't Wait.<br><span class="accent-gradient accent-gradient--restoration">Damage</span> Gets Worse.
+                    </div>
+                    <a href="tel:613-329-8439" class="display-phone">
+                        613-329-8439
+                    </a>
+                    <div class="display-ticker" id="restoration-ticker">Water Damage</div>
+                    <a href="/restoration/" class="display-cta display-cta--restoration">Restoration
+                        Services →</a>
+                </div>
             </div>
-            <div class="split-panel__overlay"></div>
-            <div class="split-panel__content">
-                <img src="/assets/mops-group-resoration.png" alt="Restoration Logo" class="split-logo split-logo--restoration">
-                <p class="split-panel__label">RESTORATION</p>
-                <div class="split-panel__sub-services" id="restoration-services-list">Water Damage</div>
-                <span class="split-panel__cta">Restoration Services <span class="split-arrow">→</span></span>
-            </div>
-            <div class="split-panel__diagonal-edge split-panel__diagonal-edge--right"></div>
-        </a>
+        </div>
     </div>
 
-    <!-- DIVIDER LINE -->
+    <!-- Diagonal divider line -->
     <div class="split-divider"></div>
 
+</div>
 
 <style>
-    /* ============================================================
-   SPLIT PORTAL — TRUE DIAGONAL CLIP-PATH LANDING
-   The diagonal is defined by:  top-edge X = 57vw,  bottom-edge X = 43vw
-   Both panels sit absolute/full-size; clip-path is the only boundary.
-   ============================================================ */
-
     html,
     body {
         margin: 0;
@@ -65,6 +118,7 @@ Quinte region."
         width: 100%;
         height: 100%;
         overflow: hidden;
+        font-family: 'Outfit', sans-serif;
     }
 
     main {
@@ -72,326 +126,435 @@ Quinte region."
         flex-grow: 0 !important;
     }
 
-    /* Container */
-    .split-portal {
+    /* ---- Split Container ---- */
+    .portal-container {
         position: relative;
         width: 100vw;
         height: 100vh;
         overflow: hidden;
+        background-color: #f8fafc;
     }
 
-    /* ---- Both panels span the full viewport ---- */
-    .split-panel {
+    /* ---- Left Column (Branding & Controls) ---- */
+    .portal-left-panel {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: block;
-        text-decoration: none;
-        cursor: pointer;
-        /* clip-path transition handles the diagonal expansion */
-        transition: clip-path 0.65s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-
-    /* Default clip — left takes the left-of-diagonal area */
-    .split-panel--left {
+        inset: 0;
+        background-color: #ffffff;
         clip-path: polygon(0 0, 57% 0, 43% 100%, 0 100%);
         z-index: 1;
-        background-color: #ffffff;
     }
 
-    /* Default clip — right takes the right-of-diagonal area */
-    .split-panel--right {
-        clip-path: polygon(57% 0, 100% 0, 100% 100%, 43% 100%);
-        z-index: 1;
-        background-color: #f4f4f6;
-    }
-
-    .split-portal:has(.split-panel--left:hover) .split-panel--left,
-    .split-portal:has(.split-panel--left.active) .split-panel--left {
-        clip-path: polygon(0 0, 67% 0, 53% 100%, 0 100%);
-    }
-
-    .split-portal:has(.split-panel--left:hover) .split-panel--right,
-    .split-portal:has(.split-panel--left.active) .split-panel--right {
-        clip-path: polygon(67% 0, 100% 0, 100% 100%, 53% 100%);
-    }
-
-    .split-portal:has(.split-panel--right:hover) .split-panel--left,
-    .split-portal:has(.split-panel--right.active) .split-panel--left {
-        clip-path: polygon(0 0, 47% 0, 33% 100%, 0 100%);
-    }
-
-    .split-portal:has(.split-panel--right:hover) .split-panel--right,
-    .split-portal:has(.split-panel--right.active) .split-panel--right {
-        clip-path: polygon(47% 0, 100% 0, 100% 100%, 33% 100%);
-    }
-
-    /* ---- Overlapping Drop Shadows (Tactile Depth Split via Wrappers & :has()) ---- */
-    .split-panel-wrapper {
+    .portal-left-content {
         position: absolute;
-        inset: 0;
-        z-index: 1;
-        pointer-events: none; /* Let pointer events pass through to child elements */
-        transition: filter 0.65s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-
-    .split-panel {
-        pointer-events: auto; /* Re-enable pointer events for the actual panel links */
-    }
-
-    /* Bring hovered wrapper to front */
-    .split-panel-wrapper:has(.split-panel:hover),
-    .split-panel-wrapper:has(.split-panel.active) {
-        z-index: 5 !important;
-    }
-
-    /* Left panel hovered casts shadow to the right */
-    .split-panel-wrapper--left:has(.split-panel:hover),
-    .split-panel-wrapper--left:has(.split-panel.active) {
-        filter: drop-shadow(10px 0 16px rgba(5, 21, 42, 0.16));
-    }
-
-    /* Right panel hovered casts shadow to the left */
-    .split-panel-wrapper--right:has(.split-panel:hover),
-    .split-panel-wrapper--right:has(.split-panel.active) {
-        filter: drop-shadow(-10px 0 16px rgba(5, 21, 42, 0.16));
-    }
-
-    /* ---- Background videos ---- */
-    .split-panel__bg {
-        position: absolute;
-        inset: -5%;
-        /* slight bleed so zoom has room */
-        opacity: 0.85;
-        transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1),
-            opacity 0.6s ease;
-        will-change: transform, opacity;
-        z-index: 0;
-        overflow: hidden;
-    }
-
-    .split-panel__video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    @media (min-width: 1025px) {
-        .split-panel-wrapper--left .split-panel__bg {
-            left: -5%;
-            width: 75%;
-            right: auto;
-        }
-
-        .split-panel-wrapper--right .split-panel__bg {
-            left: 30%;
-            width: 75%;
-            right: auto;
-        }
-    }
-
-
-    /* Hovered panel: zoom in background image and fade in */
-    .split-panel:hover .split-panel__bg,
-    .split-panel.active .split-panel__bg {
-        opacity: 1;
-        transform: scale(1.06);
-    }
-
-    /* ---- Soft white overlay to defuse colors ---- */
-    .split-panel__overlay {
-        position: absolute;
-        inset: 0;
-        background-color: rgba(255, 255, 255, 0.88) !important;
-        opacity: 1;
-        transition: background-color 0.6s ease, opacity 0.6s ease;
-        z-index: 1; /* sits on top of bg, below content */
-    }
-
-    .split-panel:hover .split-panel__overlay,
-    .split-panel.active .split-panel__overlay {
-        background-color: rgba(255, 255, 255, 0.72) !important;
-    }
-
-    /* ---- Content — pinned to the visual centre of each half ---- */
-    .split-panel__content {
-        position: absolute;
-        top: 56%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 18px;
-        z-index: 3;
-        /* default: centred in the panel element; overridden per side below */
-    }
-
-    /* Left content sits at ~24vw from the left edge (middle of the ~48% visible slice) */
-    .split-panel--left .split-panel__content {
+        top: 50%;
         left: 24%;
         transform: translate(-50%, -50%);
-        transition: left 0.65s cubic-bezier(0.77, 0, 0.175, 1), top 0.65s cubic-bezier(0.77, 0, 0.175, 1), transform 0.4s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: clamp(16px, 2.5vh, 28px);
+        width: 100%;
+        max-width: 520px;
+        z-index: 3;
     }
 
-    /* Right content sits at ~76vw from left edge */
-    .split-panel--right .split-panel__content {
-        left: 76%;
-        transform: translate(-50%, -50%);
-        transition: left 0.65s cubic-bezier(0.77, 0, 0.175, 1), top 0.65s cubic-bezier(0.77, 0, 0.175, 1), transform 0.4s ease;
+    .portal-logo-container {
+        width: 100%;
+        position: relative;
     }
 
-    /* Shift content when hovering */
-    .split-portal:has(.split-panel--left:hover) .split-panel--left .split-panel__content,
-    .split-portal:has(.split-panel--left.active) .split-panel--left .split-panel__content {
-        left: 28%;
-        top: 50%;
+    .portal-logo-inner {
+        position: relative;
+        left: 0;
+        transform: none;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        width: 100%;
+        transition: left 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
-    .split-portal:has(.split-panel--left:hover) .split-panel--right .split-panel__content,
-    .split-portal:has(.split-panel--left.active) .split-panel--right .split-panel__content {
-        left: 78%;
-    }
-
-    .split-portal:has(.split-panel--right:hover) .split-panel--right .split-panel__content,
-    .split-portal:has(.split-panel--right.active) .split-panel--right .split-panel__content {
-        left: 72%;
-        top: 50%;
-    }
-
-    .split-portal:has(.split-panel--right:hover) .split-panel--left .split-panel__content,
-    .split-portal:has(.split-panel--right.active) .split-panel--left .split-panel__content {
-        left: 20%;
-    }
-
-    /* ---- Logo ---- */
-    .split-logo {
-        width: clamp(240px, 32vw, 420px);
+    .portal-logo {
+        grid-column: 1;
+        grid-row: 1;
+        width: 100%;
         height: auto;
-        margin-bottom: clamp(24px, 4.5vw, 40px);
-        filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.5));
-        transition: transform 0.4s ease, filter 0.4s ease, margin-bottom 0.4s ease;
+        filter: drop-shadow(0 8px 24px rgba(5, 21, 42, 0.06));
+        transition: none;
     }
 
-    .split-panel:hover .split-logo,
-    .split-panel.active .split-logo {
-        transform: scale(1.15);
-        filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.65));
-        margin-bottom: clamp(12px, 2vw, 20px);
-    }
-
-    /* ---- Label ---- */
-    .split-panel__label {
-        font-family: 'Outfit', 'Montserrat', sans-serif;
-        font-size: clamp(1.4rem, 2.4vw, 2.1rem);
-        font-weight: 500;
-        letter-spacing: 0.24em;
-        text-transform: uppercase;
-        margin: 0;
-        opacity: 1;
-        transition: opacity 0.4s ease, transform 0.4s ease, margin 0.4s ease;
-    }
-
-    .split-panel--left .split-panel__label {
-        background: linear-gradient(135deg, #ea2a4e, #f78625) !important;
-        -webkit-background-clip: text !important;
-        -webkit-text-fill-color: transparent !important;
-        background-clip: text !important;
-        color: #ea2a4e !important;
-    }
-
-    .split-panel--right .split-panel__label {
-        background: linear-gradient(135deg, #652dff, #a25cff) !important;
-        -webkit-background-clip: text !important;
-        -webkit-text-fill-color: transparent !important;
-        background-clip: text !important;
-        color: #652dff !important;
-    }
-
-    .split-panel:hover .split-panel__label,
-    .split-panel.active .split-panel__label {
+    .portal-logo--janitorial,
+    .portal-logo--restoration {
         opacity: 0;
-        transform: translateY(-8px);
         pointer-events: none;
-        margin-bottom: -40px;
     }
 
-    /* ---- Sub-services Cycler ---- */
-    .split-panel__sub-services {
-        font-family: 'Outfit', 'Montserrat', sans-serif;
-        font-size: clamp(1.0rem, 1.4vw, 1.25rem);
+    /* State & Hover Logo Swaps */
+    .portal-container:has(.portal-nav-btn--janitorial:hover) .portal-logo--general,
+    .portal-container.state-janitorial .portal-logo--general {
+        opacity: 0 !important;
+    }
+
+    .portal-container:has(.portal-nav-btn--janitorial:hover) .portal-logo--janitorial,
+    .portal-container.state-janitorial .portal-logo--janitorial {
+        opacity: 1 !important;
+    }
+
+    .portal-container:has(.portal-nav-btn--restoration:hover) .portal-logo--general,
+    .portal-container.state-restoration .portal-logo--general {
+        opacity: 0 !important;
+    }
+
+    .portal-container:has(.portal-nav-btn--restoration:hover) .portal-logo--restoration,
+    .portal-container.state-restoration .portal-logo--restoration {
+        opacity: 1 !important;
+    }
+
+    .portal-navigation {
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+        width: auto;
+        align-items: center;
+    }
+
+    /* ---- Button Triggers ---- */
+    .portal-nav-btn {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(1.05rem, 1.4vw, 1.25rem);
         font-weight: 500;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: rgba(5, 21, 42, 0.72);
-        margin: -8px 0 8px 0;
-        opacity: 0;
-        transform: translateY(6px);
-        transition: opacity 0.5s cubic-bezier(0.77, 0, 0.175, 1),
-            transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-        pointer-events: none;
-        white-space: nowrap;
-    }
-
-    .split-panel:hover .split-panel__sub-services,
-    .split-panel.active .split-panel__sub-services {
-        opacity: 1;
-        transform: translateY(0);
-        /* slight delay to animate after label fades */
-        transition-delay: 0.15s;
-    }
-
-    /* Crossfade animation state */
-    .split-panel__sub-services.crossfade {
-        opacity: 0 !important;
-        transform: translateY(-4px) !important;
-        transition: opacity 0.15s ease, transform 0.15s ease !important;
-    }
-
-    .split-panel__cta {
+        padding: 12px 32px !important;
+        margin: 0 !important;
+        cursor: pointer;
+        outline: none;
+        box-shadow: 0 4px 12px rgba(5, 21, 42, 0.02) !important;
+        position: relative;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 12px;
-        font-family: 'Outfit', 'Montserrat', sans-serif;
-        font-size: clamp(1.0rem, 1.5vw, 1.3rem);
+        border-radius: 50px;
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        border: 2px solid transparent !important;
+        background-origin: border-box !important;
+        min-width: 240px;
+    }
+
+    .portal-nav-btn span {
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        display: inline-block;
+        background-clip: text !important;
+        -webkit-background-clip: text !important;
+    }
+
+    /* Lift slightly on hover */
+    .portal-nav-btn:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(5, 21, 42, 0.08) !important;
+    }
+
+    /* ---- Janitorial Color Settings ---- */
+    .portal-nav-btn--janitorial {
+        background-image: linear-gradient(#ffffff, #ffffff), linear-gradient(135deg, #ea2a4e, #f78625) !important;
+        background-clip: padding-box, border-box !important;
+    }
+
+    .portal-nav-btn--janitorial span {
+        background: linear-gradient(135deg, #ea2a4e, #f78625);
+        -webkit-text-fill-color: transparent;
+        color: #ea2a4e;
+    }
+
+    /* Hover & Active Janitorial Fills */
+    .portal-nav-btn--janitorial:hover,
+    .state-janitorial .portal-nav-btn--janitorial {
+        background-image: linear-gradient(135deg, #ea2a4e, #f78625) !important;
+        background-clip: border-box !important;
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(233, 40, 79, 0.28) !important;
+    }
+
+    .portal-nav-btn--janitorial:hover span,
+    .state-janitorial .portal-nav-btn--janitorial span {
+        -webkit-text-fill-color: #ffffff !important;
+        color: #ffffff !important;
+    }
+
+    /* ---- Restoration Color Settings ---- */
+    .portal-nav-btn--restoration {
+        background-image: linear-gradient(#ffffff, #ffffff), linear-gradient(135deg, #652dff, #a25cff) !important;
+        background-clip: padding-box, border-box !important;
+    }
+
+    .portal-nav-btn--restoration span {
+        background: linear-gradient(135deg, #652dff, #a25cff);
+        -webkit-text-fill-color: transparent;
+        color: #652dff;
+    }
+
+    /* Hover & Active Restoration Fills */
+    .portal-nav-btn--restoration:hover,
+    .state-restoration .portal-nav-btn--restoration {
+        background-image: linear-gradient(135deg, #652dff, #a25cff) !important;
+        background-clip: border-box !important;
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(101, 45, 255, 0.28) !important;
+    }
+
+    .portal-nav-btn--restoration:hover span,
+    .state-restoration .portal-nav-btn--restoration span {
+        -webkit-text-fill-color: #ffffff !important;
+        color: #ffffff !important;
+    }
+
+    /* ---- Right Column (Dynamic Display) ---- */
+    .portal-right-panel {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 43%;
+        width: 57%;
+        background-color: #f4f4f6;
+        clip-path: polygon(24.56% 0, 100% 0, 100% 100%, 0 100%);
+        z-index: 1;
+    }
+
+    .portal-right-content {
+        position: absolute;
+        top: 50%;
+        left: 55%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        max-width: 580px;
+        text-align: center;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* ---- Initial Mops Info Box ---- */
+    .portal-info-box {
+        position: relative;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+    }
+
+    .portal-info-desc {
+        grid-column: 1;
+        grid-row: 1;
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(0.95rem, 1.15vw, 1.15rem);
+        color: rgba(5, 21, 42, 0.65);
+        line-height: 1.6;
+        margin: 0;
+        font-weight: 400;
+        text-align: left;
+        transition: opacity 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        will-change: opacity;
+    }
+
+    /* Sub-states opacity control */
+    .portal-info-desc--janitorial,
+    .portal-info-desc--restoration {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* State swaps */
+    .state-janitorial .portal-info-desc--general {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .state-janitorial .portal-info-desc--janitorial {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .state-restoration .portal-info-desc--general {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .state-restoration .portal-info-desc--restoration {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    /* ---- Video Display elements inside clipped area ---- */
+    .display-video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.6s ease;
+        z-index: 1;
+    }
+
+    .display-video.active-vid {
+        opacity: 1;
+    }
+
+    /* Soft overlay to ensure ticker/button legibility */
+    .display-overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(255, 255, 255, 0.45);
+        z-index: 2;
+        opacity: 1;
+        transition: background-color 0.6s ease;
+    }
+
+    .state-janitorial .display-overlay,
+    .state-restoration .display-overlay {
+        background-color: rgba(255, 255, 255, 0.70);
+    }
+
+    .display-content {
+        width: 100%;
+    }
+
+    /* Display Groups (Janitorial / Restoration content blocks) */
+    .display-group {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        animation: fadeIn 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    }
+
+    .state-janitorial .display-group--janitorial {
+        display: flex;
+    }
+
+    .state-restoration .display-group--restoration {
+        display: flex;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(12px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Hover subtitle headers */
+    .display-subtitle {
+        font-family: 'Switzer', 'Inter', system-ui, sans-serif;
+        font-size: clamp(2.1rem, 3.6vw, 3.4rem);
+        font-weight: 400;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+        color: #141414;
+        margin-bottom: 20px;
+        text-align: center;
+        width: 100%;
+        display: block;
+    }
+
+    /* Phone CTA Link */
+    .display-phone {
+        display: inline-block;
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+        font-weight: 300;
+        color: #05152a;
+        text-decoration: none;
+        margin-bottom: 24px;
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .display-phone:hover {
+        transform: translateY(-2px);
+    }
+
+    .display-group--janitorial .display-phone:hover {
+        color: #ea2a4e;
+    }
+
+    .display-group--restoration .display-phone:hover {
+        color: #652dff;
+    }
+
+    .accent-gradient {
         font-weight: 600;
-        letter-spacing: 0.1em;
+        background-clip: text !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        display: inline-block;
+    }
+
+    .accent-gradient--janitorial {
+        background: linear-gradient(135deg, #ea2a4e, #f78625);
+        color: #ea2a4e;
+    }
+
+    .accent-gradient--restoration {
+        background: linear-gradient(135deg, #652dff, #a25cff);
+        color: #652dff;
+    }
+
+    /* Ticker Text */
+    .display-ticker {
+        font-family: 'Outfit', sans-serif;
+        font-size: clamp(1.2rem, 2vw, 1.5rem);
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(5, 21, 42, 0.88);
+        margin-bottom: 28px;
+        text-align: center;
+        width: 100%;
+        white-space: nowrap;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        will-change: opacity, transform;
+    }
+
+    /* Services CTA Button */
+    .display-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
         color: #fff;
-        background: linear-gradient(90deg, #e9284f, #f68722);
         padding: 14px 36px;
         border-radius: 50px;
-        opacity: 0;
-        transform: translateY(10px);
-        transition: opacity 0.4s ease 0.05s,
-            transform 0.4s ease 0.05s,
-            box-shadow 0.3s ease;
-        box-shadow: 0 4px 20px rgba(233, 40, 79, 0.35);
+        transition: all 0.3s ease;
         white-space: nowrap;
-        min-width: 360px;
+        min-width: 280px;
     }
 
-    .split-panel--right .split-panel__cta {
+    .display-cta--janitorial {
+        background: linear-gradient(90deg, #e9284f, #f68722);
+        box-shadow: 0 4px 20px rgba(233, 40, 79, 0.3);
+    }
+
+    .display-cta--restoration {
         background: linear-gradient(90deg, #652dff, #a25cff);
-        box-shadow: 0 4px 20px rgba(101, 45, 255, 0.35);
+        box-shadow: 0 4px 20px rgba(101, 45, 255, 0.3);
     }
 
-    .split-panel:hover .split-panel__cta,
-    .split-panel.active .split-panel__cta {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    .split-arrow {
-        display: inline-block;
-        transition: transform 0.3s ease;
-    }
-
-    .split-panel:hover .split-arrow,
-    .split-panel.active .split-arrow {
-        transform: translateX(4px);
+    .display-cta:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 24px rgba(5, 21, 42, 0.15);
     }
 
     /* ---- Diagonal divider line ---- */
@@ -401,328 +564,329 @@ Quinte region."
         background-color: #d1d1d6;
         z-index: 10;
         pointer-events: none;
-        transition: clip-path 0.65s cubic-bezier(0.77, 0, 0.175, 1);
         clip-path: polygon(57% 0, calc(57% + 2px) 0, calc(43% + 2px) 100%, 43% 100%);
     }
 
-    .split-portal:has(.split-panel--left:hover) .split-divider,
-    .split-portal:has(.split-panel--left.active) .split-divider {
-        clip-path: polygon(67% 0, calc(67% + 2px) 0, calc(53% + 2px) 100%, 53% 100%);
-    }
-
-    .split-portal:has(.split-panel--right:hover) .split-divider,
-    .split-portal:has(.split-panel--right.active) .split-divider {
-        clip-path: polygon(47% 0, calc(47% + 2px) 0, calc(33% + 2px) 100%, 33% 100%);
-    }
-
-
     /* ============================================================
-    MOBILE — horizontal split (top / bottom)
+    RESPONSIVE — MOBILE
     ============================================================ */
     @media (max-width: 1024px) {
-        /* Mobile horizontal split overlapping shadows */
-        .split-panel-wrapper--left:has(.split-panel:hover),
-        .split-panel-wrapper--left:has(.split-panel.active) {
-            filter: drop-shadow(0 10px 16px rgba(5, 21, 42, 0.16));
+        .portal-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: block;
         }
 
-        .split-panel-wrapper--right:has(.split-panel:hover),
-        .split-panel-wrapper--right:has(.split-panel.active) {
-            filter: drop-shadow(0 -10px 16px rgba(5, 21, 42, 0.16));
+        .portal-left-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(0 0, 100% 0, 100% 43%, 0 49%);
+            background-color: #ffffff;
+            z-index: 2;
         }
 
-        .split-panel__bg {
-            inset: 0;
-            background-color: #f9f9fb;
+        .portal-left-content {
+            position: absolute;
+            top: 28%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            padding: 0 20px;
+            z-index: 3;
         }
 
-        .split-panel:hover .split-panel__bg {
+        .portal-logo-container {
+            width: 100%;
+            display: block;
+        }
+
+        .portal-logo-inner {
+            left: auto;
+            transform: none;
+            width: 325px;
+            max-width: 90vw;
+            margin: 0 auto;
+        }
+
+        .portal-logo {
+            width: 100%;
+        }
+
+        .portal-navigation {
+            flex-direction: row;
+            gap: 12px;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .portal-nav-btn {
+            font-size: 0.92rem;
+            padding: 10px 16px !important;
+            text-align: center;
+            width: 150px;
+            min-width: 150px;
+        }
+
+        .portal-nav-btn:hover {
             transform: none;
         }
 
-        .split-panel.active .split-panel__bg {
-            background-color: #f3f3f6;
+        .portal-nav-btn--janitorial:hover,
+        .state-janitorial .portal-nav-btn--janitorial {
+            transform: none;
         }
 
-
-        .split-logo {
-            width: clamp(270px, 58vw, 380px) !important;
-            margin-bottom: clamp(16px, 4vw, 24px) !important;
+        .portal-nav-btn--restoration:hover,
+        .state-restoration .portal-nav-btn--restoration {
+            transform: none;
         }
 
-        .split-panel:hover .split-logo,
-        .split-panel.active .split-logo {
-            margin-bottom: clamp(8px, 2vw, 12px) !important;
-        }
-
-        .split-panel__sub-services {
-            font-size: clamp(0.75rem, 3.8vw, 1.05rem) !important;
-            letter-spacing: 0.08em !important;
-            white-space: nowrap !important;
-        }
-
-        .split-panel__label {
-            font-size: clamp(2.0rem, 7.5vw, 2.8rem);
-        }
-
-        .split-panel.active .split-panel__label {
-            margin-bottom: -40px;
-        }
-
-        .split-panel__content {
-            gap: 10px;
-        }
-
-        .split-panel-wrapper--left .split-panel__bg {
-            height: 72vh;
+        .portal-right-panel {
+            position: absolute;
             top: 0;
-            bottom: auto;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(0 49%, 100% 43%, 100% 100%, 0 100%);
+            background-color: #f4f4f6;
+            z-index: 1;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .split-panel-wrapper--right .split-panel__bg {
-            height: 72vh;
-            top: auto;
-            bottom: 0;
-        }
-
-        .split-panel--left {
-            clip-path: polygon(0 0, 100% 0, 100% 57%, 0 43%);
-        }
-
-        .split-panel--right {
-            clip-path: polygon(0 43%, 100% 57%, 100% 100%, 0 100%);
-        }
-
-        .split-portal:has(.split-panel--left:hover) .split-panel--left,
-        .split-portal:has(.split-panel--left.active) .split-panel--left {
-            clip-path: polygon(0 0, 100% 0, 100% 67%, 0 53%);
-        }
-
-        .split-portal:has(.split-panel--left:hover) .split-panel--right,
-        .split-portal:has(.split-panel--left.active) .split-panel--right {
-            clip-path: polygon(0 53%, 100% 67%, 100% 100%, 0 100%);
-        }
-
-        .split-portal:has(.split-panel--right:hover) .split-panel--left,
-        .split-portal:has(.split-panel--right.active) .split-panel--left {
-            clip-path: polygon(0 0, 100% 0, 100% 47%, 0 33%);
-        }
-
-        .split-portal:has(.split-panel--right:hover) .split-panel--right,
-        .split-portal:has(.split-panel--right.active) .split-panel--right {
-            clip-path: polygon(0 33%, 100% 47%, 100% 100%, 0 100%);
-        }
-
-        .split-panel--left .split-panel__content {
+        .portal-right-content {
+            position: absolute;
+            top: 70%;
             left: 50%;
-            top: 30%;
             transform: translate(-50%, -50%);
-            transition: top 0.65s cubic-bezier(0.77, 0, 0.175, 1), transform 0.4s ease;
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+            align-items: center;
+            padding: 0 20px;
+            box-sizing: border-box;
+            z-index: 10;
         }
 
-        .split-panel--right .split-panel__content {
-            left: 50%;
-            top: 76%;
-            transform: translate(-50%, -50%);
-            transition: top 0.65s cubic-bezier(0.77, 0, 0.175, 1), transform 0.4s ease;
+        .portal-info-box {
+            text-align: center;
         }
 
-        .split-portal:has(.split-panel--left:hover) .split-panel--left .split-panel__content,
-        .split-portal:has(.split-panel--left.active) .split-panel--left .split-panel__content {
-            top: 33%;
-            left: 50%;
+        .portal-info-desc {
+            font-size: 0.98rem;
+            line-height: 1.5;
+            text-align: center;
+            color: rgba(5, 21, 42, 0.72);
         }
 
-        .split-portal:has(.split-panel--left:hover) .split-panel--right .split-panel__content,
-        .split-portal:has(.split-panel--left.active) .split-panel--right .split-panel__content {
-            top: 79%;
-            left: 50%;
+        .display-video {
+            position: absolute;
+            top: 310px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 310px);
+            object-fit: cover;
         }
 
-        .split-portal:has(.split-panel--right:hover) .split-panel--right .split-panel__content,
-        .split-portal:has(.split-panel--right.active) .split-panel--right .split-panel__content {
-            top: 73%;
-            left: 50%;
+        .display-subtitle {
+            font-size: clamp(2.2rem, 5.0vw, 3.0rem);
+            text-align: center;
+            margin-bottom: 10px;
         }
 
-        .split-portal:has(.split-panel--right:hover) .split-panel--left .split-panel__content,
-        .split-portal:has(.split-panel--right.active) .split-panel--left .split-panel__content {
-            top: 27%;
-            left: 50%;
+        .display-phone {
+            font-size: clamp(1.4rem, 5.5vw, 1.8rem);
+            font-weight: 300;
+            margin-bottom: 12px;
         }
 
-        /* Mobile divider line horizontal split */
+        .display-ticker {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .display-cta {
+            font-size: 0.95rem;
+            padding: 12px 32px;
+        }
+
+        .display-group {
+            align-items: center;
+        }
+
         .split-divider {
-            clip-path: polygon(0 43%, 100% 57%, 100% calc(57% + 2px), 0 calc(43% + 2px));
-        }
-
-        .split-portal:has(.split-panel--left:hover) .split-divider,
-        .split-portal:has(.split-panel--left.active) .split-divider {
-            clip-path: polygon(0 53%, 100% 67%, 100% calc(67% + 2px), 0 calc(53% + 2px));
-        }
-
-        .split-portal:has(.split-panel--right:hover) .split-divider,
-        .split-portal:has(.split-panel--right.active) .split-divider {
-            clip-path: polygon(0 33%, 100% 47%, 100% calc(47% + 2px), 0 calc(33% + 2px));
-        }
-
-        .split-panel__cta {
-            min-width: unset;
-            width: auto;
-            padding: 12px 28px;
+            display: block;
+            position: absolute;
+            inset: 0;
+            background-color: #d1d1d6;
+            z-index: 11;
+            pointer-events: none;
+            clip-path: polygon(0 49%, 100% 43%, 100% calc(43% + 2px), 0 calc(49% + 2px));
         }
     }
 </style>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const panels = document.querySelectorAll('.split-panel');
+        const videoJan = document.querySelector('.display-video--janitorial');
+        const videoResto = document.querySelector('.display-video--restoration');
+        const videoInitial = document.querySelector('.display-video--initial');
 
-        // Force mobile browsers to render the first frame of the paused videos on load
-        const vids = document.querySelectorAll('.split-panel__video');
-        vids.forEach(video => {
-            // Muted, inline videos can play programmatically on load without user interaction
-            const playPromise = video.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    // Pause briefly after 10ms to hold the rendered frame
-                    setTimeout(() => {
-                        video.pause();
-                    }, 10);
-                }).catch(err => {
-                    console.log('Video play on load failed, using seek fallback:', err);
-                    video.currentTime = 0.1;
-                });
+        // Video Playlist Loop (7 Seconds Each)
+        const playlist = [videoInitial, videoJan];
+        let currentPlaylistIndex = 0;
+
+        playlist.forEach(vid => {
+            if (vid) {
+                vid.muted = true;
+                vid.playsInline = true;
+                vid.loop = true;
             }
         });
 
-        // Service lists to cycle
-        const serviceLists = {
-            'panel-cleaning': [
-                "Commercial Workspaces",
-                "Post-Construction Cleanup",
-                "Industrial Facility Sanitizing",
-                "Government & Secure Facilities",
-                "Car Dealerships & Showrooms",
-                "Universities & Campuses"
-            ],
-            'panel-resto': [
-                "Water Damage",
-                "Fire & Smoke",
-                "Mold & Spores",
-                "Storm Damage",
-                "Hazmat & Asbestos",
-                "Trauma & Crime Scene",
-                "Full Rebuild",
-                "Janitorial Services"
-            ]
+        // Start initial video on load
+        if (playlist[0]) {
+            playlist[0].play().catch(err => console.log('Video load play:', err));
+            playlist[0].classList.add('active-vid');
+        }
+
+        // Cycle through videos every 7 seconds
+        setInterval(() => {
+            const nextPlaylistIndex = (currentPlaylistIndex + 1) % playlist.length;
+            const currentVid = playlist[currentPlaylistIndex];
+            const nextVid = playlist[nextPlaylistIndex];
+
+            if (nextVid) {
+                nextVid.currentTime = 0;
+                nextVid.play().catch(err => console.log('Playlist play:', err));
+                nextVid.classList.add('active-vid');
+            }
+
+            if (currentVid) {
+                currentVid.classList.remove('active-vid');
+                setTimeout(() => {
+                    currentVid.pause();
+                }, 600);
+            }
+
+            currentPlaylistIndex = nextPlaylistIndex;
+        }, 7000);
+
+        // Floating Navbar Dropdown Triggered by Janitorial & Restoration Buttons
+        const btnJan = document.getElementById('btn-janitorial');
+        const btnResto = document.getElementById('btn-restoration');
+        const dropdown = document.getElementById('nav-dropdown');
+        const overlay = document.getElementById('nav-overlay');
+
+        const openNavbarDropdown = (mode, triggerBtn) => {
+            if (!dropdown) return;
+            dropdown.classList.remove('show-janitorial-only', 'show-restoration-only');
+            if (mode === 'janitorial') dropdown.classList.add('show-janitorial-only');
+            if (mode === 'restoration') dropdown.classList.add('show-restoration-only');
+
+            // On mobile: position dropdown fixed below the clicked portal button
+            if (window.innerWidth <= 1024 && triggerBtn) {
+                const rect = triggerBtn.getBoundingClientRect();
+                dropdown.style.position = 'fixed';
+                dropdown.style.top = (rect.bottom + 10) + 'px';
+                dropdown.style.left = '50%';
+                dropdown.style.right = 'auto';
+                dropdown.style.transform = 'translateX(-50%)';
+            } else {
+                dropdown.style.position = '';
+                dropdown.style.top = '';
+                dropdown.style.left = '';
+                dropdown.style.right = '';
+                dropdown.style.transform = '';
+            }
+
+            dropdown.classList.add('open');
         };
 
-        const intervals = {};
-
-        function startCycling(panel) {
-            const panelId = panel.id;
-            const services = serviceLists[panelId];
-            if (!services) return;
-
-            const cycler = panel.querySelector('.split-panel__sub-services');
-            if (!cycler) return;
-
-            let index = 0;
-
-            // Clear any existing timer just in case
-            if (intervals[panelId]) {
-                clearInterval(intervals[panelId]);
-            }
-
-            intervals[panelId] = setInterval(() => {
-                index = (index + 1) % services.length;
-                const nextText = services[index];
-
-                // Trigger a smooth CSS crossfade slide transition
-                cycler.classList.add('crossfade');
-                
+        const closeNavbarDropdown = () => {
+            if (dropdown) {
+                dropdown.classList.remove('open');
                 setTimeout(() => {
-                    cycler.textContent = nextText;
-                    cycler.classList.remove('crossfade');
-                }, 160); // Matches the fast opacity slide transition
-            }, 1800); // Cycles every 1.8 seconds for comfortable reading
+                    if (!dropdown.classList.contains('open')) {
+                        dropdown.classList.remove('show-janitorial-only', 'show-restoration-only');
+                        dropdown.style.position = '';
+                        dropdown.style.top = '';
+                        dropdown.style.left = '';
+                        dropdown.style.right = '';
+                        dropdown.style.transform = '';
+                    }
+                }, 300);
+            }
+        };
+
+        if (btnJan) {
+            btnJan.addEventListener('mouseenter', () => {
+                if (container) container.classList.add('state-janitorial');
+            });
+            btnJan.addEventListener('mouseleave', () => {
+                if (container) container.classList.remove('state-janitorial');
+            });
+            btnJan.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (dropdown && dropdown.classList.contains('open') && dropdown.classList.contains('show-janitorial-only')) {
+                    closeNavbarDropdown();
+                } else {
+                    openNavbarDropdown('janitorial', btnJan);
+                }
+            });
         }
 
-        function stopCycling(panel) {
-            const panelId = panel.id;
-            if (intervals[panelId]) {
-                clearInterval(intervals[panelId]);
-                intervals[panelId] = null;
-            }
-
-            const cycler = panel.querySelector('.split-panel__sub-services');
-            const services = serviceLists[panelId];
-            if (cycler && services) {
-                // Reset to default first item in the list immediately
-                cycler.classList.remove('crossfade');
-                cycler.textContent = services[0];
-            }
+        if (btnResto) {
+            btnResto.addEventListener('mouseenter', () => {
+                if (container) container.classList.add('state-restoration');
+            });
+            btnResto.addEventListener('mouseleave', () => {
+                if (container) container.classList.remove('state-restoration');
+            });
+            btnResto.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (dropdown && dropdown.classList.contains('open') && dropdown.classList.contains('show-restoration-only')) {
+                    closeNavbarDropdown();
+                } else {
+                    openNavbarDropdown('restoration', btnResto);
+                }
+            });
         }
 
-        // Setup desktop mouseenter/mouseleave hover cycling listeners
-        panels.forEach(panel => {
-            panel.addEventListener('mouseenter', () => {
-                if (window.innerWidth > 1024) {
-                    startCycling(panel);
-                    const video = panel.querySelector('.split-panel__video');
-                    if (video) {
-                        video.play().catch(err => console.log('Video play failed:', err));
-                    }
-                }
-            });
-
-            panel.addEventListener('mouseleave', () => {
-                if (window.innerWidth > 1024) {
-                    stopCycling(panel);
-                    const video = panel.querySelector('.split-panel__video');
-                    if (video) {
-                        video.pause();
-                    }
-                }
-            });
-
-            // Mobile click handler
-            panel.addEventListener('click', (e) => {
-                if (window.innerWidth <= 1024) {
-                    if (!panel.classList.contains('active')) {
-                        // First press: prevent navigation, make panel active
-                        e.preventDefault();
-                        panels.forEach(p => {
-                            p.classList.remove('active');
-                            stopCycling(p);
-                            const vid = p.querySelector('.split-panel__video');
-                            if (vid) vid.pause();
-                        });
-                        panel.classList.add('active');
-                        startCycling(panel);
-                        const video = panel.querySelector('.split-panel__video');
-                        if (video) {
-                            video.play().catch(err => console.log('Video play failed:', err));
-                        }
-                    }
-                    // Second press: active class exists, navigates normally
-                }
-            });
-        });
-
-        // Reset when tapping outside panels on mobile
-        document.addEventListener('touchstart', (e) => {
-            if (window.innerWidth <= 1024) {
-                if (!e.target.closest('.split-panel')) {
-                    panels.forEach(p => {
-                        p.classList.remove('active');
-                        stopCycling(p);
-                        const vid = p.querySelector('.split-panel__video');
-                        if (vid) vid.pause();
-                    });
+        // Close when clicking off to the side (outside dropdown & buttons)
+        document.addEventListener('click', (e) => {
+            if (dropdown && dropdown.classList.contains('open')) {
+                const isInsideDropdown = dropdown.contains(e.target);
+                const isJanBtn = btnJan && btnJan.contains(e.target);
+                const isRestoBtn = btnResto && btnResto.contains(e.target);
+                if (!isInsideDropdown && !isJanBtn && !isRestoBtn) {
+                    closeNavbarDropdown();
                 }
             }
         });
+
+        // Close when selecting an option in the menu
+        if (dropdown) {
+            dropdown.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    closeNavbarDropdown();
+                });
+            });
+        }
     });
 </script>

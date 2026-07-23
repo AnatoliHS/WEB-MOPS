@@ -3,9 +3,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <!-- Primary SEO Tags -->
-  <title>{{ site.name }} | {{ site.title }} in Belleville & Quinte Region</title>
-  <meta name="description" content="Professional cleaning and janitorial services from {{ site.name }}. Specialized in home cleaning (Mommy Mops), commercial cleaning (Major Mops), and vacation rental turnarounds (Suite Services). Certified Ontario Living Wage Employer." />
-  <meta name="keywords" content="Cleaning Services, Janitorial Services, Home Cleaning, Commercial Cleaning, Office Cleaning, Vacation Rental Cleaning, Belleville, Quinte West, Prince Edward County, Mommy Mops, Major Mops, Mops Group Inc" />
+  <title>{{ site.name }} | Commercial Janitorial & Emergency Restoration Services in Belleville & Quinte Region</title>
+  <meta name="description" content="MOPS Group Inc. provides expert Commercial Janitorial & Cleaning Services alongside 24/7 Emergency Disaster Restoration (Water Damage, Fire & Smoke, Mold Remediation, and Full Property Rebuilds) across Belleville, Quinte West, and Prince Edward County." />
+  <meta name="keywords" content="Janitorial Services, Commercial Cleaning, Office Cleaning, Post-Construction Cleanup, Disaster Restoration, Water Damage Restoration, Fire Damage Repair, Mold Remediation, Structural Drying, Emergency Restoration, Belleville, Quinte West, Prince Edward County, MOPS Group Inc" />
   <meta name="author" content="{{ site.name }}" />
   <meta name="robots" content="index, follow" />
 
@@ -13,22 +13,21 @@
   <link rel="canonical" href="{{ site.url }}" />
 
   <!-- Preload Hero Images for LCP Optimization -->
-  <link rel="preload" as="image" href="/assets/mops-maid.jpg" media="(min-width: 769px)" fetchpriority="high" />
-  <link rel="preload" as="image" href="/assets/mops-maid-mobile.jpg" media="(max-width: 768px)" fetchpriority="high" />
-  <link rel="preload" as="image" href="/assets/smoke.webp" fetchpriority="low" />
+  <link rel="preload" as="image" href="/assets/commercial-spaces.png" media="(min-width: 769px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="/assets/water_damage_panorama.png" media="(min-width: 769px)" fetchpriority="high" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="{{ site.url }}" />
-  <meta property="og:title" content="{{ site.name }} | Janitorial and Restoration Services" />
-  <meta property="og:description" content="Professional cleaning services customized to your needs. Serving residential, commercial, and hospitality properties across the Quinte region." />
+  <meta property="og:title" content="{{ site.name }} | Commercial Janitorial & Emergency Restoration Services" />
+  <meta property="og:description" content="Professional commercial janitorial cleaning and 24/7 emergency disaster restoration (water, fire, mold, full rebuilds) serving Belleville and the Quinte region." />
   <meta property="og:image" content="{{ site.url }}assets/mops-group-logo-link.jpg" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content="{{ site.url }}" />
   <meta property="twitter:title" content="{{ site.name }} | Janitorial and Restoration Services" />
-  <meta property="twitter:description" content="Vibrant cleanliness with a human-first approach. Trusted home and commercial cleaning in Belleville." />
+  <meta property="twitter:description" content="Vibrant cleanliness and 24/7 disaster recovery. Trusted commercial janitorial and emergency restoration in Belleville & Quinte." />
   <meta property="twitter:image" content="{{ site.url }}assets/mops-group-logo-link.jpg" />
 
   <!-- Google Fonts & Fontshare — matching WEB-MOPS-GROUP source -->
@@ -47,13 +46,13 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <!-- Structured Data: House Cleaning Service -->
+  <!-- Structured Data: Local Business (Janitorial & Restoration Services) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "HouseCleaningService",
+    "@type": ["LocalBusiness", "CleaningService"],
     "name": "{{ site.name }}",
-    "description": "Professional cleaning and janitorial services in Belleville and the Quinte region. Specializing in home cleaning (Mommy Mops), commercial cleaning (Major Mops), and vacation rental turnover (Suite Services).",
+    "description": "MOPS Group Inc. provides expert Commercial Janitorial & Cleaning Services alongside 24/7 Emergency Disaster Restoration Services (Water Damage, Fire & Smoke, Mold Remediation, and Full Property Rebuilds) across Belleville and the Quinte region.",
     "url": "{{ site.url }}",
     "telephone": "{{ site.phone }}",
     "email": "{{ site.email }}",
@@ -80,7 +79,29 @@
         "@type": "AdministrativeArea",
         "name": "Prince Edward County, ON"
       }
-    ]
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "MOPS Group Inc Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Commercial Janitorial & Cleaning Services",
+            "description": "Comprehensive commercial office cleaning, post-construction cleanup, industrial sanitizing, and municipal facility maintenance."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Disaster Restoration & Recovery Services",
+            "description": "24/7 emergency response for water damage extraction, fire and smoke deodorization, HEPA mold remediation, hazmat abatement, and full property rebuilds."
+          }
+        }
+      ]
+    }
   }
   </script>
 
@@ -95,39 +116,63 @@
         "name": "What cleaning services does Mops Group Inc. offer?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Mops Group Inc. provides specialized commercial cleaning services tailored to different properties and needs: comprehensive Commercial office and janitorial services, secure sanitization for Municipal and Gov facilities, and fast, high-standard turnovers for Hotel Takeovers and Vacation Rentals."
+          "text": "Mops Group Inc. provides specialized commercial janitorial services tailored to different properties: office spaces, post-construction cleanup, industrial facilities, government properties, car dealerships, and vacation rentals."
         }
       },
       {
         "@type": "Question",
-        "name": "What areas does Mops Group Inc. serve?",
+        "name": "What types of restoration do you offer?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "We proudly serve the entire Quinte region in Ontario, including Belleville, Quinte West, and Prince Edward County."
+          "text": "We offer 24/7 emergency water damage restoration, fire and smoke recovery, HEPA mold remediation, hazmat abatement, trauma cleanup, and full property rebuilds for residential and commercial properties throughout the Quinte region."
         }
       },
       {
         "@type": "Question",
-        "name": "How much do your cleaning services cost?",
+        "name": "How quickly can you respond to an emergency?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Because we offer highly customized cleaning and janitorial solutions based on the specific needs of your office, commercial space, or rental property, we provide free consultations and personalized quotes rather than flat rates. Contact us at (613) 329-8439 or hello@mopsinc.com to get your quote."
+          "text": "Our emergency line is staffed 24 hours a day, 7 days a week. In most cases we can have a restoration crew on-site within 1–2 hours of your call to prevent secondary damage."
         }
       },
       {
         "@type": "Question",
-        "name": "What is your cleaning and safety standard?",
+        "name": "Do you work directly with insurance companies?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "We follow a 'human-first' approach, customizing our cleaning teams and protocols to the specific requirements of each facility. We utilize professional-grade disinfectants and follow strict safety guidelines to ensure vibrant cleanliness."
+          "text": "Yes. We provide direct insurance billing and coordinate with your adjuster from initial assessment through final sign-off with detailed documentation."
         }
       },
       {
         "@type": "Question",
-        "name": "Is Mops Group Inc. a certified living wage employer?",
+        "name": "What geographic areas do you serve?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, Mops Group Inc. is a certified Ontario Living Wage Employer. We are committed to paying fair wages, reducing employment barriers, and offering flexible hours, especially for mothers and those who need accommodating work schedules."
+          "text": "We are based in Belleville, Ontario, and proudly serve the entire Quinte region, including Belleville, Quinte West, and Prince Edward County."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much do your janitorial and restoration services cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Because every property is unique, we provide personalized quotes based on square footage, condition, frequency, and required restoration scope. Contact us at (613) 329-8439 or hello@mopsinc.com for a free quote."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are your technicians certified and vetted?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. All MOPS Group Inc. technicians hold IICRC (Institute of Inspection Cleaning and Restoration Certification) credentials, and all staff are fully vetted, bonded, and insured."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is MOPS Group Inc. a certified living wage employer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, MOPS Group Inc. is a certified Ontario Living Wage Employer. We are committed to paying fair wages, reducing employment barriers, and offering flexible hours across all operations."
         }
       }
     ]

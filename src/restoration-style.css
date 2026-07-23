@@ -5271,10 +5271,18 @@ main {
   gap: 16px;
 }
 
+.desktop-nav-btn {
+  display: inline-flex !important;
+}
+
+.mobile-nav-btn {
+  display: none !important;
+}
+
 .floating-nav-phone {
   font-family: 'Inter', system-ui, sans-serif;
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: 0.88rem;
+  font-weight: 600;
   color: #000000;
   text-decoration: none;
   padding: 8px 18px;
@@ -5290,6 +5298,42 @@ main {
   border-color: #000000;
   color: #ffffff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.floating-nav-cta {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 8px 22px;
+  border-radius: 50px;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.floating-nav-cta--janitorial {
+  background: linear-gradient(90deg, #ea2a4e, #f78625);
+  box-shadow: 0 4px 14px rgba(234, 42, 78, 0.3);
+}
+
+.floating-nav-cta--janitorial:hover {
+  background: linear-gradient(90deg, #d22042, #e57518);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(234, 42, 78, 0.45);
+}
+
+.floating-nav-cta--restoration {
+  background: linear-gradient(90deg, #652dff, #a25cff);
+  box-shadow: 0 4px 14px rgba(101, 45, 255, 0.3);
+}
+
+.floating-nav-cta--restoration:hover {
+  background: linear-gradient(90deg, #5320e0, #9148f5);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(101, 45, 255, 0.45);
 }
 
 .floating-nav-hamburger {
@@ -5526,8 +5570,12 @@ main {
     height: 32px;
   }
 
-  .floating-nav-phone {
-    display: inline-flex;
+  .desktop-nav-btn {
+    display: none !important;
+  }
+
+  .mobile-nav-btn {
+    display: inline-flex !important;
     font-size: 0.84rem;
     padding: 6px 14px;
     margin-right: 4px;
