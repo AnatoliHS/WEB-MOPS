@@ -5254,6 +5254,46 @@ main {
   pointer-events: auto;
 }
 
+.floating-nav-right {
+  margin-left: auto;
+}
+
+.desktop-only-info {
+  display: none !important;
+}
+
+@media (min-width: 1025px) {
+  .desktop-only-info {
+    display: flex !important;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+    justify-content: center;
+    font-size: 0.92rem;
+    gap: 0;
+    white-space: nowrap;
+    pointer-events: auto;
+  }
+
+  .desktop-only-info .floating-nav-divider {
+    display: inline-block !important;
+    margin: 0 12px;
+    color: #94a3b8;
+  }
+
+  .desktop-only-info .floating-nav-phone-text,
+  .desktop-only-info .floating-nav-email-text,
+  .desktop-only-info .floating-nav-phone-link,
+  .desktop-only-info .floating-nav-email {
+    color: #475569;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
 .floating-nav-logo {
   display: flex;
   align-items: center;

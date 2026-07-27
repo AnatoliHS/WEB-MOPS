@@ -3581,13 +3581,7 @@ section {
     gap: 12px;
   }
 
-  .dropdown-division--restoration .dropdown-services {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-auto-flow: column;
-    grid-template-rows: repeat(4, auto);
-    gap: 8px 12px;
-  }
+
 }
 
 /* Mobile Overlay — hidden entirely (no blur, no white screen) */
@@ -3613,16 +3607,45 @@ section {
   color: #cbd5e1;
 }
 
+.floating-nav-phone-text,
+.floating-nav-email-text,
+.floating-nav-phone-link,
 .floating-nav-email {
-  color: #0284c7;
+  color: #475569;
   text-decoration: none;
-  font-weight: 600;
-  transition: color 0.2s ease;
+  font-weight: 500;
+  cursor: default;
+  pointer-events: none;
 }
 
-.floating-nav-email:hover {
-  color: #0369a1;
-  text-decoration: underline;
+.floating-nav-right {
+  margin-left: auto;
+}
+
+.desktop-only-info {
+  display: none !important;
+}
+
+@media (min-width: 1025px) {
+  .desktop-only-info {
+    display: flex !important;
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 0.92rem;
+    gap: 0;
+    white-space: nowrap;
+    pointer-events: auto;
+    z-index: 10;
+  }
+
+  .desktop-only-info .floating-nav-divider {
+    display: inline-block !important;
+    margin: 0 12px;
+    color: #94a3b8;
+  }
 }
 
 @media (min-width: 1025px) {
@@ -3633,31 +3656,27 @@ section {
   .page-index-two .floating-nav-info {
     width: 100%;
     display: flex !important;
-    justify-content: space-between;
+    justify-content: center !important;
     align-items: center;
     font-size: 0.98rem;
-    gap: 12px;
+    gap: 0;
+    white-space: nowrap;
+  }
+
+  .desktop-only-nav {
+    display: inline-flex !important;
+    align-items: center;
   }
 
   .page-index-two .floating-nav-divider {
-    display: none !important;
+    display: inline-block !important;
+    margin: 0 16px;
+    color: #94a3b8;
   }
 
   .page-index-two .floating-nav-email {
-    margin-left: auto;
-    text-align: right;
-  }
-}
-
-@media (max-width: 520px) {
-
-  .floating-nav-address,
-  .floating-nav-divider {
-    display: none;
-  }
-
-  .floating-nav-info {
-    font-size: 0.8rem;
+    margin-left: 0;
+    text-align: left;
   }
 }
 
@@ -3665,6 +3684,7 @@ section {
 .page-index-two .floating-nav-logo {
   display: none !important;
 }
+
 @media (max-width: 1024px) {
   .page-index-two .floating-nav-logo {
     display: none !important;
@@ -3675,30 +3695,46 @@ section {
     width: 100%;
   }
 
+  .desktop-only-nav {
+    display: none !important;
+  }
+
   .page-index-two .floating-nav-info {
-    display: flex !important;
     width: 100%;
-    justify-content: space-between;
+    display: flex !important;
+    justify-content: space-between !important;
     align-items: center;
-    font-size: 0.75rem;
-    gap: 0;
+    font-size: 0.82rem;
+    gap: 8px;
     white-space: nowrap;
-    overflow: hidden;
   }
 
   .page-index-two .floating-nav-address {
-    display: inline !important;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    display: inline-block !important;
+    white-space: nowrap;
   }
 
-  /* Hide the dot divider — address is left, email is right */
   .page-index-two .floating-nav-divider {
-    display: none !important;
+    display: inline-block !important;
+    margin: 0 8px;
+    color: #94a3b8;
   }
 
   .page-index-two .floating-nav-email {
     flex-shrink: 0;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 580px) {
+  .floating-nav-address,
+  .floating-nav-divider {
+    display: none !important;
+  }
+
+  .page-index-two .floating-nav-info {
+    font-size: 0.82rem;
+    justify-content: center !important;
   }
 }
 
@@ -3721,19 +3757,6 @@ section {
 .portal-nav-wrapper {
   position: relative;
   display: inline-block;
-}
-
-/* Restoration Services 2 Columns (4 and 4) */
-.dropdown-division--restoration .dropdown-services {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  grid-auto-flow: column !important;
-  grid-template-rows: repeat(4, auto) !important;
-  gap: 8px 24px !important;
-}
-
-.dropdown-division--restoration .dropdown-services li a {
-  white-space: nowrap;
 }
 
 /* Single-Division Modes for Floating Navbar Dropdown (No Square-in-a-Square) */
@@ -3768,18 +3791,7 @@ section {
   box-shadow: none;
 }
 
-/* Restoration Services 2 Columns (4 and 4) */
-.dropdown-division--restoration .dropdown-services {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  grid-auto-flow: column !important;
-  grid-template-rows: repeat(4, auto) !important;
-  gap: 8px 24px !important;
-}
 
-.dropdown-division--restoration .dropdown-services li a {
-  white-space: nowrap;
-}
 
 .portal-hover-dropdown .dropdown-header {
   margin-bottom: 12px;

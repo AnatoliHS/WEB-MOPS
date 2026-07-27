@@ -11,6 +11,17 @@
         alt="MOPS Group Inc. Logo">
     </a>
 
+    <!-- Center Contact Info (Desktop Only on Janitorial & Restoration pages) -->
+    {% if page.url == '/janitorial/' or page.url == '/restoration/' %}
+    <div class="floating-nav-info floating-nav-info--center desktop-only-info">
+      <span class="floating-nav-address">41 Dussek St, Belleville, ON K8N 5R9</span>
+      <span class="floating-nav-divider">•</span>
+      <span class="floating-nav-phone-text">613-329-8439</span>
+      <span class="floating-nav-divider">•</span>
+      <span class="floating-nav-email-text">hello@mopsinc.com</span>
+    </div>
+    {% endif %}
+
     <!-- Right Controls: Contact Info & Hamburger Menu -->
     <div class="floating-nav-right">
       {% if page.url == '/janitorial/' %}
@@ -21,9 +32,13 @@
       <a href="tel:613-329-8439" class="floating-nav-phone mobile-nav-btn">613-329-8439</a>
       {% else %}
       <div class="floating-nav-info">
-        <span class="floating-nav-address">41 Dussek St, Belleville, ON</span>
+        <span class="floating-nav-address">41 Dussek St, Belleville, ON K8N 5R9</span>
         <span class="floating-nav-divider">•</span>
-        <a href="mailto:hello@mopsinc.com" class="floating-nav-email">hello@mopsinc.com</a>
+        <span class="desktop-only-nav">
+          <span class="floating-nav-phone-text">613-329-8439</span>
+          <span class="floating-nav-divider">•</span>
+        </span>
+        <span class="floating-nav-email-text">hello@mopsinc.com</span>
       </div>
       {% endif %}
       <button class="floating-nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation menu">
