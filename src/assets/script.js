@@ -58,6 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
       desc: "Vetted cleaning staff delivering high-security janitorial maintenance for administrative, municipal, and secure government properties.",
       cta: "Get a Quote \u2192"
     },
+    compassion: {
+      title: "Compassion Cleans",
+      subtitle: 'Respectful, Sensitive & <span class="sub-accent">Tactful</span> Deep Sanitizing',
+      img: "/assets/compassion-cleans.jpg",
+      imgMobile: "/assets/compassion-cleans.jpg",
+      desc: "Specialized, empathetic deep cleaning and sanitization for sensitive environments, estate clearing, hoarding assistance, and vulnerable living spaces.",
+      cta: "Get a Quote \u2192"
+    },
     dealerships: {
       title: "Car Dealerships & Showrooms",
       subtitle: 'Spotless Showrooms & <span class="sub-accent">Polished</span> Glass Facades',

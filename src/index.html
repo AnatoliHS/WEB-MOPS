@@ -37,12 +37,12 @@ Quinte region."
             </div>
 
             <div class="portal-navigation">
-                <button class="portal-nav-btn portal-nav-btn--janitorial" id="btn-janitorial">
+                <a href="/janitorial/" class="portal-nav-btn portal-nav-btn--janitorial" id="btn-janitorial">
                     <span>Janitorial</span>
-                </button>
-                <button class="portal-nav-btn portal-nav-btn--restoration" id="btn-restoration">
+                </a>
+                <a href="/restoration/" class="portal-nav-btn portal-nav-btn--restoration" id="btn-restoration">
                     <span>Restoration</span>
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -64,16 +64,11 @@ Quinte region."
 
         <div class="portal-right-content" style="text-align: center;">
             <h1 class="portal-info-desc portal-info-desc--general"
-                style="color: #000000; text-align: center; max-width: 680px; margin: 0 auto 16px; font-size: clamp(1.8rem, 4.4vw, 2.7rem); font-weight: 400; line-height: 1.25;">
+                style="color: #000000; text-align: center; max-width: 680px; margin: 0 auto 24px; font-size: clamp(1.8rem, 4.4vw, 2.7rem); font-weight: 400; line-height: 1.25;">
                 Your <span class="accent-gradient accent-gradient--janitorial">premier</span> partner for
                 professional commercial cleaning and <span
                     class="accent-gradient accent-gradient--restoration">expert</span> disaster recovery.
             </h1>
-
-            <a href="tel:613-329-8439" class="display-phone"
-                style="display: inline-block; color: #000000; font-size: clamp(1.7rem, 4.2vw, 2.4rem); font-weight: 400; text-decoration: none; margin-bottom: 22px; letter-spacing: 0.02em;">
-                613-329-8439
-            </a>
 
             <a href="/restoration/#contact" class="btn btn-primary btn-purple"
                 style="display: inline-flex; margin-bottom: 24px; padding: 14px 32px; border-radius: 50px; font-weight: 700; font-size: 1.05rem; letter-spacing: 0.02em;">
@@ -87,9 +82,6 @@ Quinte region."
                     <div class="display-subtitle">
                         Ready for a <span class="accent-gradient accent-gradient--janitorial">Spotless</span> Space?
                     </div>
-                    <a href="tel:613-329-8439" class="display-phone">
-                        613-329-8439
-                    </a>
                     <div class="display-ticker" id="janitorial-ticker">Commercial Workspaces</div>
                     <a href="/janitorial/" class="display-cta display-cta--janitorial">Janitorial Services →</a>
                 </div>
@@ -99,9 +91,6 @@ Quinte region."
                         Don't Wait.<br><span class="accent-gradient accent-gradient--restoration">Damage</span> Gets
                         Worse.
                     </div>
-                    <a href="tel:613-329-8439" class="display-phone">
-                        613-329-8439
-                    </a>
                     <div class="display-ticker" id="restoration-ticker">Water Damage</div>
                     <a href="/restoration/" class="display-cta display-cta--restoration">Restoration
                         Services →</a>
@@ -234,6 +223,7 @@ Quinte region."
         margin: 0 !important;
         cursor: pointer;
         outline: none;
+        text-decoration: none;
         box-shadow: 0 4px 12px rgba(5, 21, 42, 0.02) !important;
         position: relative;
         display: inline-flex;
@@ -893,15 +883,6 @@ Quinte region."
             btnJan.addEventListener('mouseleave', () => {
                 if (container) container.classList.remove('state-janitorial');
             });
-            btnJan.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                if (dropdown && dropdown.classList.contains('open') && dropdown.classList.contains('show-janitorial-only')) {
-                    closeNavbarDropdown();
-                } else {
-                    openNavbarDropdown('janitorial', btnJan);
-                }
-            });
         }
 
         if (btnResto) {
@@ -910,15 +891,6 @@ Quinte region."
             });
             btnResto.addEventListener('mouseleave', () => {
                 if (container) container.classList.remove('state-restoration');
-            });
-            btnResto.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                if (dropdown && dropdown.classList.contains('open') && dropdown.classList.contains('show-restoration-only')) {
-                    closeNavbarDropdown();
-                } else {
-                    openNavbarDropdown('restoration', btnResto);
-                }
             });
         }
 

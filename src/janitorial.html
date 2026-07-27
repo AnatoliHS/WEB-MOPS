@@ -43,12 +43,13 @@ permalink: /janitorial/index.html
             </span>
           </button>
           <div class="hero-mobile-dropdown-menu" id="hero-mobile-dropdown-menu">
-            <button type="button" class="hero-mobile-dropdown-item is-active" data-dmg="workspaces">Commercial Workspaces</button>
-            <button type="button" class="hero-mobile-dropdown-item" data-dmg="construction">Post-Construction Cleanup</button>
-            <button type="button" class="hero-mobile-dropdown-item" data-dmg="industrial">Industrial Facility Sanitizing</button>
-            <button type="button" class="hero-mobile-dropdown-item" data-dmg="government">Government &amp; Secure Facilities</button>
-            <button type="button" class="hero-mobile-dropdown-item" data-dmg="dealerships">Car Dealerships &amp; Showrooms</button>
-            <button type="button" class="hero-mobile-dropdown-item" data-dmg="campuses">Universities &amp; Campuses</button>
+            <button type="button" class="hero-mobile-dropdown-item is-active" data-dmg="workspaces">Commercial</button>
+            <button type="button" class="hero-mobile-dropdown-item" data-dmg="construction">Post-Construction</button>
+            <button type="button" class="hero-mobile-dropdown-item" data-dmg="industrial">Industrial</button>
+            <button type="button" class="hero-mobile-dropdown-item" data-dmg="government">Government</button>
+            <button type="button" class="hero-mobile-dropdown-item" data-dmg="compassion">Compassion Cleans</button>
+            <button type="button" class="hero-mobile-dropdown-item" data-dmg="dealerships">Dealerships</button>
+            <button type="button" class="hero-mobile-dropdown-item" data-dmg="campuses">Campuses</button>
           </div>
         </div>
       </div>
@@ -60,27 +61,31 @@ permalink: /janitorial/index.html
         <div class="hero-damages-row">
 
           <button type="button" class="hero-damage-pill is-active" data-dmg="workspaces">
-            <span class="hdp-label">Commercial Workspaces</span>
+            <span class="hdp-label">Commercial</span>
           </button>
 
           <button type="button" class="hero-damage-pill" data-dmg="construction">
-            <span class="hdp-label">Post-Construction Cleanup</span>
+            <span class="hdp-label">Post-Construction</span>
           </button>
 
           <button type="button" class="hero-damage-pill" data-dmg="industrial">
-            <span class="hdp-label">Industrial Facility Sanitizing</span>
+            <span class="hdp-label">Industrial</span>
           </button>
 
           <button type="button" class="hero-damage-pill" data-dmg="government">
-            <span class="hdp-label">Government &amp; Secure Facilities</span>
+            <span class="hdp-label">Government</span>
+          </button>
+
+          <button type="button" class="hero-damage-pill" data-dmg="compassion">
+            <span class="hdp-label">Compassion Cleans</span>
           </button>
 
           <button type="button" class="hero-damage-pill" data-dmg="dealerships">
-            <span class="hdp-label">Car Dealerships &amp; Showrooms</span>
+            <span class="hdp-label">Dealerships</span>
           </button>
 
           <button type="button" class="hero-damage-pill" data-dmg="campuses">
-            <span class="hdp-label">Universities &amp; Campuses</span>
+            <span class="hdp-label">Campuses</span>
           </button>
 
         </div>
@@ -231,7 +236,20 @@ permalink: /janitorial/index.html
                 </div>
             </div>
 
-            <!-- Card 5 (60% width) -->
+            <!-- Card 5 (100% width featured card) -->
+            <div class="janitorial-bento-card bento-full" id="compassion-cleans">
+                <div class="feat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                    </svg>
+                </div>
+                <div class="feat-text">
+                    <h4>Compassion Cleans</h4>
+                    <p>Specialized, empathetic deep cleaning and sanitization for sensitive environments, estate clearing, hoarding assistance, and vulnerable living spaces.</p>
+                </div>
+            </div>
+
+            <!-- Card 6 (60% width) -->
             <div class="janitorial-bento-card bento-wide" id="car-dealerships">
                 <div class="feat-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -247,7 +265,7 @@ permalink: /janitorial/index.html
                 </div>
             </div>
 
-            <!-- Card 6 (40% width) -->
+            <!-- Card 7 (40% width) -->
             <div class="janitorial-bento-card bento-narrow" id="universities-campuses">
                 <div class="feat-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -519,18 +537,17 @@ permalink: /janitorial/index.html
                             inputmode="tel">
                     </div>
                     <div class="form-group">
-                        <label for="contact-service">Preferred Service / Damage Type</label>
+                        <label for="contact-service">Preferred Service</label>
                         <select id="contact-service" name="service" required>
-                            <option value="" disabled selected>Select service or damage...</option>
-                            <option value="water">Water Damage</option>
-                            <option value="fire">Fire & Smoke</option>
-                            <option value="mold">Mold Remediation</option>
-                            <option value="storm">Storm Damage</option>
-                            <option value="hazmat">Hazmat & Asbestos</option>
-                            <option value="trauma">Trauma & Crime Scene</option>
-                            <option value="rebuild">Full Rebuild</option>
-                            <option value="janitorial">Janitorial Services</option>
-                            <option value="other">Other / Not Sure</option>
+                            <option value="" disabled selected>Select a janitorial service...</option>
+                            <option value="commercial-workspaces">Commercial Workspaces</option>
+                            <option value="post-construction">Post-Construction Cleanup</option>
+                            <option value="industrial-sanitizing">Industrial Facility Sanitizing</option>
+                            <option value="government-secure">Government &amp; Secure Facilities</option>
+                            <option value="compassion-cleans">Compassion Cleans</option>
+                            <option value="car-dealerships">Car Dealerships &amp; Showrooms</option>
+                            <option value="universities-campuses">Universities &amp; Campuses</option>
+                            <option value="other">Other / General Inquiry</option>
                         </select>
                     </div>
                     <div class="form-group">
