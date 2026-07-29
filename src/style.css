@@ -1442,7 +1442,6 @@ section {
 .mission {
   background-color: var(--bg-color);
   padding: 100px 0 0 0;
-  scroll-margin-top: -100px;
 }
 
 .mission-header {
@@ -1910,7 +1909,6 @@ section {
 /* 9. Contact Section & Glassmorphic Form */
 .contact {
   background-color: var(--white);
-  scroll-margin-top: -100px;
 }
 
 .contact-grid {
@@ -2301,7 +2299,6 @@ section {
 /* 11.5 Trust Section Carousel */
 .trust-section {
   padding: 100px 0;
-  scroll-margin-top: -100px;
 }
 
 @media (min-width: 993px) {
@@ -2490,7 +2487,6 @@ section {
 .pricing-section {
   background-color: #e8274e !important;
   padding: 100px 0;
-  scroll-margin-top: -100px;
   position: relative;
   z-index: 10;
 }
@@ -2695,7 +2691,6 @@ section {
 .reviews-section {
   background-color: var(--white) !important;
   padding: 100px 0;
-  scroll-margin-top: -100px;
 }
 
 .reviews-section .section-header h2 {
@@ -2981,7 +2976,6 @@ section {
 
 .faq {
   background-color: #fafafa !important;
-  scroll-margin-top: -100px;
 }
 
 .footer {
@@ -3448,6 +3442,66 @@ section {
   color: #652dff;
 }
 
+/* Staggered Slide-In Left-to-Right Animation for Dropdown Links */
+@keyframes slideInLeftToRight {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.floating-dropdown .dropdown-services li,
+.floating-dropdown .dropdown-action {
+  opacity: 0;
+  transform: translateX(-24px);
+}
+
+.floating-dropdown.open .dropdown-services li,
+.floating-dropdown.open .dropdown-action {
+  animation: slideInLeftToRight 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.floating-dropdown.open .dropdown-services li:nth-child(1) {
+  animation-delay: 0.04s;
+}
+
+.floating-dropdown.open .dropdown-services li:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.floating-dropdown.open .dropdown-services li:nth-child(3) {
+  animation-delay: 0.12s;
+}
+
+.floating-dropdown.open .dropdown-services li:nth-child(4) {
+  animation-delay: 0.16s;
+}
+
+.floating-dropdown.open .dropdown-services li:nth-child(5) {
+  animation-delay: 0.20s;
+}
+
+.floating-dropdown.open .dropdown-services li:nth-child(6) {
+  animation-delay: 0.24s;
+}
+
+.floating-dropdown.open .dropdown-services li:nth-child(7) {
+  animation-delay: 0.28s;
+}
+
+.floating-dropdown.open .dropdown-services li:nth-child(8) {
+  animation-delay: 0.32s;
+}
+
+.floating-dropdown.open .dropdown-action {
+  animation-delay: 0.32s;
+}
+
 .dropdown-action {
   display: inline-flex;
   align-items: center;
@@ -3548,16 +3602,19 @@ section {
   }
 
   /* On mobile, floating-dropdown defaults to sitting directly below the header navbar */
-  .floating-dropdown {
+  .floating-dropdown,
+  .floating-dropdown.show-janitorial-only,
+  .floating-dropdown.show-restoration-only {
     position: absolute;
     top: calc(100% + 12px);
-    right: 0;
-    left: auto;
+    right: 0 !important;
+    left: 0 !important;
     bottom: auto;
     transform: translateY(-8px);
-    width: calc(100vw - 32px);
-    max-width: 440px;
-    padding: 14px;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 24px 20px !important;
+    box-sizing: border-box;
     z-index: 10000;
     opacity: 0;
     visibility: hidden;
@@ -3574,12 +3631,29 @@ section {
 
   .floating-dropdown-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 16px;
   }
 
   .dropdown-division {
-    padding: 14px;
-    gap: 12px;
+    padding: 20px 16px !important;
+    gap: 16px !important;
+  }
+
+  .dropdown-services {
+    gap: 12px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .dropdown-services li a {
+    font-size: 1.15rem !important;
+    font-weight: 600 !important;
+    padding: 8px 12px !important;
+    display: block;
+  }
+
+  .dropdown-action {
+    padding: 14px 20px !important;
+    font-size: 1.02rem !important;
   }
 
 
@@ -3742,6 +3816,7 @@ section {
 }
 
 @media (max-width: 580px) {
+
   .floating-nav-address,
   .floating-nav-divider {
     display: none !important;
@@ -3780,16 +3855,11 @@ section {
   display: none !important;
 }
 
-.floating-dropdown.show-janitorial-only {
+.floating-dropdown.show-janitorial-only,
+.floating-dropdown.show-restoration-only {
   width: 320px;
   max-width: calc(100vw - 48px);
   padding: 20px;
-}
-
-.floating-dropdown.show-restoration-only {
-  width: 490px;
-  max-width: calc(100vw - 48px);
-  padding: 22px;
 }
 
 .floating-dropdown.show-janitorial-only .floating-dropdown-grid,
@@ -3873,4 +3943,14 @@ section {
 
 .portal-hover-dropdown .dropdown-action:hover {
   transform: translateY(-2px);
+}
+
+/* Mobile-only scroll margin offset so floating navbar never cuts off section titles on mobile */
+@media (max-width: 1024px) {
+  section[id],
+  div[id],
+  div[id].janitorial-hero-media,
+  div[id].janitorial-bento-card {
+    scroll-margin-top: 20px !important;
+  }
 }

@@ -49,15 +49,13 @@
       </button>
     </div>
 
-    <!-- Dropdown Menu with Two Separate Division Cards -->
-    <div class="floating-dropdown" id="nav-dropdown">
+    <!-- Dropdown Menu with Separate Division Cards -->
+    <div class="floating-dropdown{% if page.url == '/janitorial/' %} show-janitorial-only{% elif page.url == '/restoration/' %} show-restoration-only{% endif %}" id="nav-dropdown">
       <div class="floating-dropdown-grid">
 
+        {% if page.url != '/restoration/' %}
         <!-- Janitorial Division Dropdown Card -->
         <div class="dropdown-division dropdown-division--janitorial">
-          <div class="dropdown-header">
-            <img src="/assets/mops-group-janitorial.png" alt="Mops Group Janitorial Logo" class="dropdown-logo">
-          </div>
           <ul class="dropdown-services">
             <li><a href="/janitorial/#hero">Home</a></li>
             <li><a href="/janitorial/#services">Services</a></li>
@@ -65,16 +63,21 @@
             <li><a href="/janitorial/#faq">Common Questions</a></li>
             <li><a href="/janitorial/#contact">Get in Touch</a></li>
           </ul>
+          {% if page.url == '/janitorial/' %}
+          <a href="/restoration/" class="dropdown-action dropdown-action--restoration">
+            Switch to Restoration &rarr;
+          </a>
+          {% else %}
           <a href="/janitorial/" class="dropdown-action dropdown-action--janitorial">
             Janitorial Services
           </a>
+          {% endif %}
         </div>
+        {% endif %}
 
+        {% if page.url != '/janitorial/' %}
         <!-- Restoration Division Dropdown Card -->
         <div class="dropdown-division dropdown-division--restoration">
-          <div class="dropdown-header">
-            <img src="/assets/mops-group-resoration.png" alt="Mops Group Restoration Logo" class="dropdown-logo">
-          </div>
           <ul class="dropdown-services">
             <li><a href="/restoration/#hero">Home</a></li>
             <li><a href="/restoration/#services">Services</a></li>
@@ -85,10 +88,17 @@
             <li><a href="/restoration/#faq">FAQ</a></li>
             <li><a href="/restoration/#contact">Contact Us</a></li>
           </ul>
+          {% if page.url == '/restoration/' %}
+          <a href="/janitorial/" class="dropdown-action dropdown-action--janitorial">
+            Switch to Janitorial &rarr;
+          </a>
+          {% else %}
           <a href="/restoration/" class="dropdown-action dropdown-action--restoration">
             Restoration Services
           </a>
+          {% endif %}
         </div>
+        {% endif %}
 
       </div>
     </div>
@@ -130,16 +140,6 @@
         const link = e.target.closest('a');
         if (link) {
           toggleMenu(false);
-          setTimeout(() => {
-            if (!dropdown.classList.contains('open')) {
-              dropdown.style.position = '';
-              dropdown.style.top = '';
-              dropdown.style.left = '';
-              dropdown.style.right = '';
-              dropdown.style.transform = '';
-              dropdown.classList.remove('show-janitorial-only', 'show-restoration-only');
-            }
-          }, 300);
         }
       });
     }
