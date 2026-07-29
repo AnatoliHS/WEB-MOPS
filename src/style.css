@@ -1442,6 +1442,7 @@ section {
 .mission {
   background-color: var(--bg-color);
   padding: 100px 0 0 0;
+  scroll-margin-top: -100px;
 }
 
 .mission-header {
@@ -1909,6 +1910,7 @@ section {
 /* 9. Contact Section & Glassmorphic Form */
 .contact {
   background-color: var(--white);
+  scroll-margin-top: -100px;
 }
 
 .contact-grid {
@@ -2299,6 +2301,7 @@ section {
 /* 11.5 Trust Section Carousel */
 .trust-section {
   padding: 100px 0;
+  scroll-margin-top: -100px;
 }
 
 @media (min-width: 993px) {
@@ -2487,6 +2490,7 @@ section {
 .pricing-section {
   background-color: #e8274e !important;
   padding: 100px 0;
+  scroll-margin-top: -100px;
   position: relative;
   z-index: 10;
 }
@@ -2691,6 +2695,7 @@ section {
 .reviews-section {
   background-color: var(--white) !important;
   padding: 100px 0;
+  scroll-margin-top: -100px;
 }
 
 .reviews-section .section-header h2 {
@@ -2976,6 +2981,7 @@ section {
 
 .faq {
   background-color: #fafafa !important;
+  scroll-margin-top: -100px;
 }
 
 .footer {
