@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Set up mobile image sources on initial load if screen is narrow
   if (window.innerWidth <= 1024) {
     const isRestoPage = document.querySelector('.hero-damage-pill[data-dmg="water"]') !== null;
-    const initialMobileImg = isRestoPage ? '/assets/water_damage_panorama.png' : '/assets/commercial-spaces.png';
+    const initialMobileImg = isRestoPage ? '/assets/water_damage_panorama.png' : '/assets/commercial.jpg';
     document.querySelectorAll('.hero-banner-img').forEach(img => {
       img.src = initialMobileImg;
     });
@@ -29,16 +29,16 @@ document.addEventListener('DOMContentLoaded', () => {
     workspaces: {
       title: "Commercial Workspaces",
       subtitle: 'Immaculate & Safe <span class="sub-accent">Office</span> Environments',
-      img: "/assets/commercial-spaces.png",
-      imgMobile: "/assets/commercial-spaces.png",
+      img: "/assets/commercial.jpg",
+      imgMobile: "/assets/commercial.jpg",
       desc: "Tailored janitorial plans to keep office spaces, meeting rooms, and common areas immaculate, safe, and hygienic.",
       cta: "Get a Quote \u2192"
     },
     construction: {
       title: "Post-Construction Cleanup",
       subtitle: 'Complete <span class="sub-accent">Dust</span> Suppression & Scrubbing',
-      img: "/assets/construction-cleanup.png",
-      imgMobile: "/assets/construction-cleanup.png",
+      img: "/assets/post-construction.jpg",
+      imgMobile: "/assets/post-construction.jpg",
       desc: "Comprehensive dust suppression, plaster residue scrubbing, and detail cleaning to prepare new builds for immediate occupancy.",
       cta: "Get a Quote \u2192"
     },
@@ -77,8 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
     campuses: {
       title: "Universities & Campuses",
       subtitle: 'High-Frequency <span class="sub-accent">Disinfection</span> of Lecture Halls',
-      img: "/assets/campus-disinfection.png",
-      imgMobile: "/assets/campus-disinfection.png",
+      img: "/assets/campus.jpg",
+      imgMobile: "/assets/campus.jpg",
       desc: "High-frequency disinfection of classrooms, labs, lecture halls, and student centers to promote a safe and healthy campus experience.",
       cta: "Get a Quote \u2192"
     }
@@ -136,8 +136,8 @@ document.addEventListener('DOMContentLoaded', () => {
     rebuild: {
       title: "Full Rebuild",
       subtitle: 'Turnkey <span class="sub-accent">Reconstruction</span> &amp; Remodeling',
-      img: "/assets/full_rebuild_panorama.png",
-      imgMobile: "/assets/full_rebuild_panorama.png",
+      img: "/assets/re-build.jpg",
+      imgMobile: "/assets/re-build.jpg",
       desc: "Full-service general contracting and property reconstruction to restore structures to pre-loss condition.",
       cta: "Request Help for Full Rebuild \u2192"
     }
@@ -456,9 +456,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Utility to show form status (general success or error)
   function showFormStatus(msg, type = 'error') {
+    if (!formStatus) return;
     formStatus.textContent = msg;
     formStatus.className = `form-status-msg ${type}`;
     formStatus.style.display = 'block';
+    if (type === 'success') {
+      formStatus.style.backgroundColor = '#10b981';
+      formStatus.style.color = '#ffffff';
+      formStatus.style.padding = '12px 16px';
+      formStatus.style.borderRadius = '8px';
+      formStatus.style.marginBottom = '16px';
+      formStatus.style.fontWeight = '500';
+    } else {
+      formStatus.style.backgroundColor = '#ef4444';
+      formStatus.style.color = '#ffffff';
+      formStatus.style.padding = '12px 16px';
+      formStatus.style.borderRadius = '8px';
+      formStatus.style.marginBottom = '16px';
+      formStatus.style.fontWeight = '500';
+    }
   }
 
   // Utility to clear form status
@@ -568,12 +584,20 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (submitResponse.ok) {
-        // If redirected to thank you page, follow it
-        if (submitResponse.redirected) {
-          window.location.href = submitResponse.url;
-        } else {
-          // Fallback if no redirect header: redirect manually
-          window.location.href = '/thanks';
+        showFormStatus('✓ Thank you! Your message has been sent successfully. We will get back to you shortly.', 'success');
+        contactForm.reset();
+
+        // Re-enable form fields
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+        formFields.forEach(field => field.disabled = false);
+
+        // Smooth scroll to top of form status message
+        formStatus.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // Reset turnstile if it exists
+        if (window.turnstile) {
+          window.turnstile.reset();
         }
       } else {
         const errorText = await submitResponse.text();

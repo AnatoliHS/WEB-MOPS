@@ -1457,6 +1457,8 @@ permalink: /restoration/index.html
       <!-- Form Side -->
       <div class="contact-form-wrap reveal-right">
         <form class="contact-form" action="/api/submit" method="POST" id="contact-form">
+          <!-- Form Status / Message Container (Top of Form) -->
+          <div class="form-status-msg" id="form-status-msg" style="display: none;"></div>
           <!-- Honeypot -->
           <input type="text" name="website" style="display:none !important" tabindex="-1" autocomplete="off">
           <div class="form-row">
@@ -1500,9 +1502,6 @@ permalink: /restoration/index.html
           <!-- Cloudflare Turnstile spam protection -->
           <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="light"
             style="margin-bottom: 20px;"></div>
-          <!-- Form Status / General Error Container -->
-          <div class="form-status-msg" id="form-status-msg"
-            style="display: none; font-size: 0.9rem; padding: 12px; border-radius: 8px; margin-bottom: 20px;"></div>
           <button type="submit" class="btn-primary btn-full" id="form-submit">Send Message</button>
         </form>
       </div>

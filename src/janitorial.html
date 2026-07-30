@@ -97,22 +97,22 @@ permalink: /janitorial/index.html
   <div class="hero-bottom-panel is-janitorial reveal" style="--d:900ms">
     <div class="hero-banners is-active">
       <div class="hero-banner-slice" style="--slice-idx: 0; --left: 0%; --right: calc(80% - 1px);">
-        <img class="hero-banner-img" src="/assets/commercial-spaces.png" alt="Professional Janitorial Services">
+        <img class="hero-banner-img" src="/assets/commercial.jpg" alt="Professional Janitorial Services">
       </div>
       <div class="hero-banner-slice" style="--slice-idx: 1; --left: calc(20% - 1px); --right: calc(60% - 1px);">
-        <img class="hero-banner-img" src="/assets/commercial-spaces.png" alt="Professional Janitorial Services">
+        <img class="hero-banner-img" src="/assets/commercial.jpg" alt="Professional Janitorial Services">
       </div>
       <div class="hero-banner-slice" style="--slice-idx: 2; --left: calc(40% - 1px); --right: calc(40% - 1px);">
-        <img class="hero-banner-img" src="/assets/commercial-spaces.png" alt="Professional Janitorial Services">
+        <img class="hero-banner-img" src="/assets/commercial.jpg" alt="Professional Janitorial Services">
       </div>
       <div class="hero-banner-slice" style="--slice-idx: 3; --left: calc(60% - 1px); --right: calc(20% - 1px);">
-        <img class="hero-banner-img" src="/assets/commercial-spaces.png" alt="Professional Janitorial Services">
+        <img class="hero-banner-img" src="/assets/commercial.jpg" alt="Professional Janitorial Services">
       </div>
       <div class="hero-banner-slice" style="--slice-idx: 4; --left: calc(80% - 1px); --right: 0%;">
-        <img class="hero-banner-img" src="/assets/commercial-spaces.png" alt="Professional Janitorial Services">
+        <img class="hero-banner-img" src="/assets/commercial.jpg" alt="Professional Janitorial Services">
       </div>
     </div>
-    <img id="hero-main-img" class="hero-main-img" src="/assets/commercial-spaces.png" alt="Professional Janitorial Services"
+    <img id="hero-main-img" class="hero-main-img" src="/assets/commercial.jpg" alt="Professional Janitorial Services"
       style="opacity: 0; pointer-events: none;">
 
     <div class="hero-bottom-overlay"></div>
@@ -518,6 +518,8 @@ permalink: /janitorial/index.html
 
             <div class="contact-form-container">
                 <form class="contact-form" action="/api/submit" method="POST" id="contact-form">
+                    <!-- Form Status / Message Container (Top of Form) -->
+                    <div class="form-status-msg" id="form-status-msg" style="display: none;"></div>
                     <!-- Honeypot spam protection -->
                     <input type="text" name="website" style="display:none !important" tabindex="-1" autocomplete="off">
                     <div class="form-group">
@@ -558,9 +560,6 @@ permalink: /janitorial/index.html
                     <!-- Cloudflare Turnstile spam protection -->
                     <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="dark"
                         style="margin-top: 10px; margin-bottom: 5px;"></div>
-                    <!-- Form Status / General Error Container -->
-                    <div class="form-status-msg" id="form-status-msg"
-                        style="display: none; font-size: 0.9rem; padding: 12px; border-radius: 8px; margin-bottom: 20px; color: #ffffff; background-color: #ea2a4e;"></div >
                     <button type="submit" class="btn btn-primary" id="form-submit">Send Message</button>
                 </form>
             </div>
