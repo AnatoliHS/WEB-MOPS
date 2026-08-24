@@ -7,33 +7,53 @@ title: Terms of Service
     <h1 style="font-family: 'Teodor', var(--font-serif); font-size: clamp(2.5rem, 5vw, 4rem); color: var(--primary-color); margin-bottom: 40px; line-height: 1.1;">Terms of Service</h1>
     
     <div style="line-height: 1.8; color: var(--text-light); font-size: 1.1rem; display: flex; flex-direction: column; gap: 30px;">
-        <p>At Mops, Inc., we strive to provide exceptional cleaning services to our valued clients in the Ontario region. Please review our Terms of Service before booking.</p>
+        <p>At <strong>Mops Group Inc.</strong> ("Mops Group", "Mops", "we", "us", or "our"), we strive to provide exceptional commercial janitorial cleaning, property maintenance, and 24/7 emergency disaster restoration services to our clients across Belleville, Quinte West, Prince Edward County, and surrounding regions. Please review these Terms of Service prior to booking or engaging our services.</p>
 
         <div>
-            <h2 style="color: var(--primary-color); font-size: 1.5rem; margin-bottom: 15px;">Service Agreement</h2>
-            <p>Mops, Inc. offers a variety of cleaning services for residential and commercial properties including general cleaning, deep cleaning, move-in/move-out cleaning, and more. Services can be scheduled on a one-time, weekly, bi-weekly or monthly basis based on your needs. Our service rates and pricing can be found <a href="/#contact" style="color: var(--accent-orange); text-decoration: underline;">here</a>. Payment is due at the time of service unless other arrangements have been made.</p>
+            <h2 style="color: var(--primary-color); font-size: 1.5rem; margin-bottom: 15px;">1. Service Agreement & Booking</h2>
+            <p>Mops Group Inc. offers a wide array of specialized services for commercial, industrial, municipal, and residential properties—including commercial janitorial maintenance, post-construction cleanup, compassion cleans, and 24/7 emergency disaster restoration (water damage, fire & smoke repair, mold remediation, and structural rebuilds).</p>
+            <p style="margin-top: 10px;">Services may be scheduled on a recurring (daily, weekly, bi-weekly, monthly) or one-time basis. Service quotes and pricing are detailed during initial consultation or emergency dispatch. Payment is due upon completion of services or as agreed upon under commercial billing terms.</p>
         </div>
 
         <div>
-            <h2 style="color: var(--primary-color); font-size: 1.5rem; margin-bottom: 15px;">Client Responsibilities</h2>
-            <p>To ensure a safe and efficient cleaning experience, we ask that clients provide clear access to all areas requiring service and secure any valuables or fragile items. Please contain pets in a separate room during your scheduled service time. Any hazardous materials or unsafe conditions must be disclosed to our staff prior to service.</p>
+            <h2 style="color: var(--primary-color); font-size: 1.5rem; margin-bottom: 15px;">2. Client Responsibilities</h2>
+            <p>To ensure efficient, high-quality, and safe service delivery, clients agree to:</p>
+            <ul style="margin-top: 10px; padding-left: 25px; display: flex; flex-direction: column; gap: 8px;">
+                <li>Provide clear, secure access to all requested work areas at the scheduled service time.</li>
+                <li>Disclose any known biohazards, structural instability, electrical hazards, or unsafe site conditions prior to service execution.</li>
+                <li>Secure pets, delicate equipment, confidential documents, and personal valuables prior to crew arrival.</li>
+            </ul>
         </div>
 
         <div>
-            <h2 style="color: var(--primary-color); font-size: 1.5rem; margin-bottom: 15px;">Our Guarantee</h2>
-            <p>Mops, Inc. takes pride in our quality work and your satisfaction is our top priority. If you are not completely satisfied with our cleaning, simply notify us within 24 hours and we will re-service your home or office free of charge. We also guarantee the protection of your property while our staff is on site.</p>
+            <h2 style="color: var(--primary-color); font-size: 1.5rem; margin-bottom: 15px;">3. Disaster Restoration & Emergency Services</h2>
+            <p>For emergency restoration projects, Mops Group Inc. provides 24/7 rapid response dispatch. By engaging our emergency restoration services, you authorize Mops Group Inc. to perform necessary mitigation, structural drying, and restoration procedures. Where applicable, we will assist and coordinate directly with your insurance adjusters and carriers upon your authorization.</p>
         </div>
 
         <div>
-            <h2 style="color: var(--primary-color); font-size: 1.5rem; margin-bottom: 15px;">Safety First</h2>
-            <p>Your safety is important to us. We only use eco-friendly, non-toxic cleaning solutions that are safe for your family and pets. Our employees undergo thorough background checks and training to adhere to all health and safety standards.</p>
+            <h2 style="color: var(--primary-color); font-size: 1.5rem; margin-bottom: 15px;">4. Quality Guarantee & Satisfaction</h2>
+            <p>Mops Group Inc. takes immense pride in our quality of work. If you are not completely satisfied with any aspect of our cleaning service, notify us within 24 hours of service completion and our team will re-service the specified area at no additional charge.</p>
         </div>
 
         <div>
-            <h2 style="color: var(--primary-color); font-size: 1.5rem; margin-bottom: 15px;">Cancellation Policy</h2>
-            <p>We understand that plans can change. Scheduled services may be cancelled or rescheduled with at least 24 hours notice. Failure to provide adequate notice may result in fees.</p>
+            <h2 style="color: var(--primary-color); font-size: 1.5rem; margin-bottom: 15px;">5. Safety & Employee Standards</h2>
+            <p>We prioritize health, safety, and property protection. All Mops Group Inc. technicians and cleaning personnel undergo rigorous background checks, site safety training, and adhere to strict quality assurance protocols. We utilize professional-grade, eco-friendly, and non-toxic cleaning products whenever feasible.</p>
         </div>
 
-        <p style="font-weight: 600; margin-top: 10px;">By booking services with Mops, Inc., you agree to the above terms. <a href="/#contact" style="color: var(--accent-orange); text-decoration: underline;">Contact us</a> with any other questions!</p>
+        <div>
+            <h2 style="color: var(--primary-color); font-size: 1.5rem; margin-bottom: 15px;">6. Cancellation & Rescheduling Policy</h2>
+            <p>We understand schedules change. Standard recurring or scheduled cleaning services may be cancelled or rescheduled with at least 24 hours advance notice. Cancellations made with less than 24 hours notice may be subject to a standard cancellation fee.</p>
+        </div>
+
+        <div style="background: #f8fafc; padding: 40px; border-radius: 8px; border-left: 4px solid var(--accent-color);">
+            <h2 style="color: var(--primary-color); font-size: 1.5rem; margin-bottom: 15px;">Contact & Inquiries</h2>
+            <p style="font-weight: 600; margin-bottom: 5px;">Mops Group Inc.</p>
+            <p style="margin-bottom: 5px;">41 Dussek St</p>
+            <p style="margin-bottom: 10px;">Belleville, ON K8N 5R9</p>
+            <p style="margin-bottom: 5px;"><strong>Telephone:</strong> <a href="tel:6133298439" style="color: var(--primary-color);">(613) 329-8439</a></p>
+            <p><strong>Email:</strong> <a href="mailto:mopsgroupofcompanies@gmail.com" style="color: var(--accent-color);">mopsgroupofcompanies@gmail.com</a></p>
+        </div>
+
+        <p style="font-weight: 600; margin-top: 10px;">By booking or utilizing services with Mops Group Inc., you agree to these Terms of Service. If you have any questions, please <a href="/#contact" style="color: var(--accent-color); text-decoration: underline;">contact us</a>.</p>
     </div>
 </section>

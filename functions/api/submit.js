@@ -92,7 +92,7 @@ export async function onRequestPost(context) {
       return Response.redirect(new URL('/thanks', context.request.url).toString(), 303);
     }
 
-    const recipientEmail = context.env.NOTIFICATION_EMAIL || "hello@mopsinc.com";
+    const recipientEmail = context.env.NOTIFICATION_EMAIL || "mopsgroupofcompanies@gmail.com";
     const senderEmail = context.env.FROM_EMAIL || "website@mopsinc.com";
 
     const response = await fetch('https://api.resend.com/emails', {
