@@ -15,26 +15,34 @@ export async function onRequestPost(context) {
     // ---------------------------------------------------------
     const turnstileToken = data['cf-turnstile-response'];
     const ip = context.request.headers.get('CF-Connecting-IP');
+    const turnstileSecret = context.env.TURNSTILE_SECRET_KEY;
 
-    if (!turnstileToken) {
-      return new Response("Turnstile token missing. Please verify you are human.", { status: 400 });
-    }
+    if (turnstileSecret) {
+      if (!turnstileToken) {
+        return new Response("Turnstile security check missing. Please complete the security check.", { status: 400 });
+      }
 
-    let verificationBody = new FormData();
-    // Ensure you added TURNSTILE_SECRET_KEY to your Cloudflare Pages environment variables
-    verificationBody.append('secret', context.env.TURNSTILE_SECRET_KEY);
-    verificationBody.append('response', turnstileToken);
-    verificationBody.append('remoteip', ip);
+      let verificationBody = new FormData();
+      verificationBody.append('secret', turnstileSecret);
+      verificationBody.append('response', turnstileToken);
+      if (ip) {
+        verificationBody.append('remoteip', ip);
+      }
 
-    const verificationResult = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-      body: verificationBody,
-      method: 'POST',
-    });
+      const verificationResult = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+        body: verificationBody,
+        method: 'POST',
+      });
 
-    const outcome = await verificationResult.json();
+      const outcome = await verificationResult.json();
 
-    if (!outcome.success) {
-      return new Response("Turnstile verification failed. Spam detected.", { status: 403 });
+      if (!outcome.success) {
+        const errorDetails = (outcome['error-codes'] || []).join(', ');
+        console.error("Turnstile verification failed:", errorDetails);
+        return new Response(`Turnstile verification failed: ${errorDetails || 'Invalid token'}. Please try again.`, { status: 403 });
+      }
+    } else {
+      console.warn("TURNSTILE_SECRET_KEY environment variable is not defined. Skipping server-side Turnstile verification.");
     }
     // ---------------------------------------------------------
     // END Turnstile Verification
@@ -44,33 +52,24 @@ export async function onRequestPost(context) {
     const emailStr = data.email || '';
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(emailStr)) {
-      return new Response(`
-        <div style="font-family: sans-serif; text-align: center; margin-top: 50px; color: #191f4f; padding: 20px;">
-          <h2>Email Validation Failed</h2>
-          <p>The email address "<b>${emailStr}</b>" is not in a valid email format.</p>
-          <button onclick="window.history.back()" style="padding: 10px 20px; cursor: pointer; background: #fe9502; color: white; border: none; border-radius: 5px; font-weight: bold;">Go Back</button>
-        </div>
-      `, { status: 400, headers: { 'Content-Type': 'text/html' } });
+      return new Response(`The email address "${emailStr}" is not in a valid email format.`, { status: 400 });
     }
 
     // 1.6 Validate Email Domain (DNS MX Record Check)
     const domain = emailStr.split('@')[1];
+    try {
+      const dnsResponse = await fetch(`https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=MX`, {
+        headers: { 'Accept': 'application/dns-json' }
+      });
 
-    const dnsResponse = await fetch(`https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=MX`, {
-      headers: { 'Accept': 'application/dns-json' }
-    });
-
-    if (dnsResponse.ok) {
-      const dnsData = await dnsResponse.json();
-      if (dnsData.Status !== 0 || !dnsData.Answer || dnsData.Answer.length === 0) {
-        return new Response(`
-          <div style="font-family: sans-serif; text-align: center; margin-top: 50px; color: #191f4f; padding: 20px;">
-            <h2>Email Validation Failed</h2>
-            <p>The email domain "<b>@${domain}</b>" does not appear to exist or cannot receive emails.</p>
-            <button onclick="window.history.back()" style="padding: 10px 20px; cursor: pointer; background: #fe9502; color: white; border: none; border-radius: 5px; font-weight: bold;">Go Back</button>
-          </div>
-        `, { status: 400, headers: { 'Content-Type': 'text/html' } });
+      if (dnsResponse.ok) {
+        const dnsData = await dnsResponse.json();
+        if (dnsData.Status !== 0 || !dnsData.Answer || dnsData.Answer.length === 0) {
+          return new Response(`The email domain "@${domain}" does not appear to exist or cannot receive emails.`, { status: 400 });
+        }
       }
+    } catch (e) {
+      console.warn("DNS check error, continuing:", e.message);
     }
 
     // 2. Build the email body
@@ -87,9 +86,8 @@ export async function onRequestPost(context) {
     // 3. Send email using Resend
     const resendApiKey = context.env.RESEND_API_KEY;
     if (!resendApiKey) {
-      console.error("RESEND_API_KEY is not defined in the environment variables.");
-      // Fallback: still redirect the user so the form submission doesn't fail visually
-      return Response.redirect(new URL('/thanks', context.request.url).toString(), 303);
+      console.error("RESEND_API_KEY is not defined in environment variables.");
+      return new Response("Server configuration error: RESEND_API_KEY environment variable is missing.", { status: 500 });
     }
 
     const recipientEmail = context.env.NOTIFICATION_EMAIL || "mopsgroupofcompanies@gmail.com";
@@ -115,7 +113,13 @@ export async function onRequestPost(context) {
       return Response.redirect(new URL('/thanks', context.request.url).toString(), 303);
     } else {
       const errorText = await response.text();
-      return new Response('Error sending email: ' + errorText, { status: 500 });
+      let cleanErrorMessage = errorText;
+      try {
+        const parsedObj = JSON.parse(errorText);
+        cleanErrorMessage = parsedObj.message || parsedObj.name || errorText;
+      } catch (e) {}
+      console.error("Resend API error:", cleanErrorMessage);
+      return new Response('Email service error: ' + cleanErrorMessage, { status: 500 });
     }
   } catch (err) {
     return new Response('Server Error: ' + err.message, { status: 500 });

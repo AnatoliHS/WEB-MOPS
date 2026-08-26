@@ -603,9 +603,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const errorText = await submitResponse.text();
         let errorMsg = 'An error occurred while sending your message. Please try again.';
 
-        // Try parsing error message if it's simple text
-        if (errorText && errorText.length < 200 && !errorText.includes('<html')) {
-          errorMsg = errorText;
+        // Display specific error message from server if available
+        if (errorText && !errorText.includes('<html')) {
+          try {
+            const parsed = JSON.parse(errorText);
+            errorMsg = parsed.message || parsed.error || errorText;
+          } catch (e) {
+            errorMsg = errorText;
+          }
         }
 
         showFormStatus(errorMsg, 'error');
