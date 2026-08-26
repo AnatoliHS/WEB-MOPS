@@ -93,7 +93,7 @@ export async function onRequestPost(context) {
     }
 
     const recipientEmail = context.env.NOTIFICATION_EMAIL || "mopsgroupofcompanies@gmail.com";
-    const senderEmail = context.env.FROM_EMAIL || "website@mopsinc.com";
+    const senderEmail = context.env.FROM_EMAIL || "onboarding@resend.dev";
 
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
