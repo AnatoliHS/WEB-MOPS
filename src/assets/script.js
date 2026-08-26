@@ -537,25 +537,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const email = emailInput.value.trim();
     if (!email) return;
 
+    // Capture form data BEFORE disabling any buttons/fields
+    const formData = new FormData(contactForm);
+
     // Show loading state
     submitBtn.disabled = true;
     submitBtn.textContent = 'Verifying email...';
-    formFields.forEach(field => field.disabled = true);
 
     // Validate email format and domain
     const validation = await validateEmail(email);
     if (!validation.valid) {
       showEmailError(validation.message);
 
-      // Re-enable form fields
+      // Re-enable submit button
       submitBtn.disabled = false;
       submitBtn.textContent = 'Send Message';
-      formFields.forEach(field => field.disabled = false);
       return;
     }
-
-    // Prepare form data
-    const formData = new FormData(contactForm);
 
     // Validate Cloudflare Turnstile token
     const turnstileContainer = contactForm.querySelector('.cf-turnstile');
@@ -564,10 +562,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!turnstileResponse) {
         showFormStatus('Please complete the security check.', 'error');
 
-        // Re-enable form fields
+        // Re-enable submit button
         submitBtn.disabled = false;
         submitBtn.textContent = 'Send Message';
-        formFields.forEach(field => field.disabled = false);
         return;
       }
     }
@@ -587,10 +584,9 @@ document.addEventListener('DOMContentLoaded', () => {
         showFormStatus('✓ Thank you! Your message has been sent successfully. We will get back to you shortly.', 'success');
         contactForm.reset();
 
-        // Re-enable form fields
+        // Re-enable submit button
         submitBtn.disabled = false;
         submitBtn.textContent = 'Send Message';
-        formFields.forEach(field => field.disabled = false);
 
         // Smooth scroll to top of form status message
         formStatus.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -615,10 +611,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         showFormStatus(errorMsg, 'error');
 
-        // Re-enable form fields
+        // Re-enable submit button
         submitBtn.disabled = false;
         submitBtn.textContent = 'Send Message';
-        formFields.forEach(field => field.disabled = false);
 
         // Reset turnstile if it exists to allow re-submission
         if (window.turnstile) {
@@ -629,10 +624,9 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Submit connection error:', err);
       showFormStatus('Unable to connect to the server. Please check your internet connection.', 'error');
 
-      // Re-enable form fields
+      // Re-enable submit button
       submitBtn.disabled = false;
       submitBtn.textContent = 'Send Message';
-      formFields.forEach(field => field.disabled = false);
 
       if (window.turnstile) {
         window.turnstile.reset();

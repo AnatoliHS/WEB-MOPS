@@ -15,7 +15,7 @@ export async function onRequestPost(context) {
     // ---------------------------------------------------------
     const turnstileToken = data['cf-turnstile-response'];
     const ip = context.request.headers.get('CF-Connecting-IP');
-    const turnstileSecret = context.env.TURNSTILE_SECRET_KEY;
+    const turnstileSecret = (context.env.TURNSTILE_SECRET_KEY || '').trim();
 
     if (turnstileSecret) {
       if (!turnstileToken) {
@@ -39,7 +39,7 @@ export async function onRequestPost(context) {
       if (!outcome.success) {
         const errorDetails = (outcome['error-codes'] || []).join(', ');
         console.error("Turnstile verification failed:", errorDetails);
-        return new Response(`Turnstile verification failed: ${errorDetails || 'Invalid token'}. Please try again.`, { status: 403 });
+        return new Response(`Turnstile verification failed (${errorDetails || 'Invalid token'}). Please try again.`, { status: 403 });
       }
     } else {
       console.warn("TURNSTILE_SECRET_KEY environment variable is not defined. Skipping server-side Turnstile verification.");
@@ -49,7 +49,7 @@ export async function onRequestPost(context) {
     // ---------------------------------------------------------
 
     // 1.5 Validate Email Format
-    const emailStr = data.email || '';
+    const emailStr = (data.email || '').trim();
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(emailStr)) {
       return new Response(`The email address "${emailStr}" is not in a valid email format.`, { status: 400 });
@@ -75,23 +75,23 @@ export async function onRequestPost(context) {
     // 2. Build the email body
     const emailBody = `
       <h2>New Contact Form Inquiry</h2>
-      <p><strong>Name:</strong> ${data.name}</p>
-      <p><strong>Email:</strong> ${data.email}</p>
+      <p><strong>Name:</strong> ${data.name || 'Not provided'}</p>
+      <p><strong>Email:</strong> ${emailStr}</p>
       <p><strong>Phone:</strong> ${data.phone || 'Not provided'}</p>
-      <p><strong>Preferred Service:</strong> ${data.service}</p>
+      <p><strong>Preferred Service:</strong> ${data.service || 'Not specified'}</p>
       <p><strong>Message:</strong></p>
-      <p style="white-space: pre-wrap;">${data.message}</p>
+      <p style="white-space: pre-wrap;">${data.message || 'No message provided'}</p>
     `;
 
     // 3. Send email using Resend
-    const resendApiKey = context.env.RESEND_API_KEY;
+    const resendApiKey = (context.env.RESEND_API_KEY || '').trim();
     if (!resendApiKey) {
       console.error("RESEND_API_KEY is not defined in environment variables.");
-      return new Response("Server configuration error: RESEND_API_KEY environment variable is missing.", { status: 500 });
+      return new Response("Server configuration error: RESEND_API_KEY environment variable is missing in Cloudflare Pages.", { status: 500 });
     }
 
-    const recipientEmail = context.env.NOTIFICATION_EMAIL || "mopsgroupofcompanies@gmail.com";
-    const senderEmail = context.env.FROM_EMAIL || "onboarding@resend.dev";
+    const recipientEmail = "mopsgroupofcompanies@gmail.com";
+    const senderEmail = (context.env.FROM_EMAIL || "onboarding@resend.dev").trim();
 
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -102,8 +102,8 @@ export async function onRequestPost(context) {
       body: JSON.stringify({
         from: `Mops Inc. Website <${senderEmail}>`,
         to: [recipientEmail],
-        reply_to: data.email,
-        subject: `New Mops Inc. Inquiry: ${data.service} - ${data.name}`,
+        reply_to: emailStr,
+        subject: `New Mops Inc. Inquiry: ${data.service || 'General'} - ${data.name || 'Customer'}`,
         html: emailBody,
       }),
     });
@@ -119,7 +119,7 @@ export async function onRequestPost(context) {
         cleanErrorMessage = parsedObj.message || parsedObj.name || errorText;
       } catch (e) {}
       console.error("Resend API error:", cleanErrorMessage);
-      return new Response('Email service error: ' + cleanErrorMessage, { status: 500 });
+      return new Response('Resend email error: ' + cleanErrorMessage, { status: 500 });
     }
   } catch (err) {
     return new Response('Server Error: ' + err.message, { status: 500 });
