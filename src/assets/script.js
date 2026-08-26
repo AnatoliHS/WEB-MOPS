@@ -528,110 +528,128 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Handle Form Submit
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    clearEmailError();
-    clearFormStatus();
+  // Handle Form Submit for all contact forms
+  document.querySelectorAll('form.contact-form, #contact-form').forEach(activeForm => {
+    activeForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearEmailError();
+      clearFormStatus();
 
-    const email = emailInput.value.trim();
-    if (!email) return;
+      const activeNameInput = activeForm.querySelector('input[name="name"]');
+      const activeEmailInput = activeForm.querySelector('input[name="email"], input[type="email"]') || emailInput;
+      const activePhoneInput = activeForm.querySelector('input[name="phone"]');
+      const activeServiceInput = activeForm.querySelector('select[name="service"]');
+      const activeMessageInput = activeForm.querySelector('textarea[name="message"]');
+      const activeSubmitBtn = activeForm.querySelector('button[type="submit"]') || submitBtn;
+      const activeFormStatus = activeForm.querySelector('.form-status-msg') || formStatus;
 
-    // Capture form data BEFORE disabling any buttons/fields
-    const formData = new FormData(contactForm);
+      const name = activeNameInput ? activeNameInput.value.trim() : '';
+      const email = activeEmailInput ? activeEmailInput.value.trim() : '';
+      const phone = activePhoneInput ? activePhoneInput.value.trim() : '';
+      const service = activeServiceInput ? activeServiceInput.value : '';
+      const message = activeMessageInput ? activeMessageInput.value.trim() : '';
 
-    // Show loading state
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Verifying email...';
+      const turnstileInput = activeForm.querySelector('[name="cf-turnstile-response"]');
+      const turnstileToken = turnstileInput ? turnstileInput.value : '';
 
-    // Validate email format and domain
-    const validation = await validateEmail(email);
-    if (!validation.valid) {
-      showEmailError(validation.message);
-
-      // Re-enable submit button
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Send Message';
-      return;
-    }
-
-    // Validate Cloudflare Turnstile token
-    const turnstileContainer = contactForm.querySelector('.cf-turnstile');
-    if (turnstileContainer) {
-      const turnstileResponse = formData.get('cf-turnstile-response');
-      if (!turnstileResponse) {
-        showFormStatus('Please complete the security check.', 'error');
-
-        // Re-enable submit button
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Send Message';
+      if (!email) {
+        showEmailError('Please enter your email address.');
         return;
       }
-    }
 
-    submitBtn.textContent = 'Sending message...';
+      // Show loading state
+      if (activeSubmitBtn) {
+        activeSubmitBtn.disabled = true;
+        activeSubmitBtn.textContent = 'Verifying email...';
+      }
 
-    try {
-      const submitResponse = await fetch(contactForm.action || '/api/submit', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json, text/html'
+      // Validate email format and domain
+      const validation = await validateEmail(email);
+      if (!validation.valid) {
+        showEmailError(validation.message);
+        if (activeSubmitBtn) {
+          activeSubmitBtn.disabled = false;
+          activeSubmitBtn.textContent = 'Send Message';
         }
-      });
+        return;
+      }
 
-      if (submitResponse.ok) {
-        showFormStatus('✓ Thank you! Your message has been sent successfully. We will get back to you shortly.', 'success');
-        contactForm.reset();
-
-        // Re-enable submit button
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Send Message';
-
-        // Smooth scroll to top of form status message
-        formStatus.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-        // Reset turnstile if it exists
-        if (window.turnstile) {
-          window.turnstile.reset();
+      // Validate Turnstile token if widget is present on form
+      const turnstileContainer = activeForm.querySelector('.cf-turnstile');
+      if (turnstileContainer && !turnstileToken) {
+        showFormStatus('Please complete the security check.', 'error');
+        if (activeSubmitBtn) {
+          activeSubmitBtn.disabled = false;
+          activeSubmitBtn.textContent = 'Send Message';
         }
-      } else {
-        const errorText = await submitResponse.text();
-        let errorMsg = 'An error occurred while sending your message. Please try again.';
+        return;
+      }
 
-        // Display specific error message from server if available
-        if (errorText && !errorText.includes('<html')) {
-          try {
-            const parsed = JSON.parse(errorText);
-            errorMsg = parsed.message || parsed.error || errorText;
-          } catch (e) {
-            errorMsg = errorText;
+      if (activeSubmitBtn) {
+        activeSubmitBtn.textContent = 'Sending message...';
+      }
+
+      try {
+        const response = await fetch(activeForm.action || '/api/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            phone,
+            service,
+            message,
+            'cf-turnstile-response': turnstileToken
+          })
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          showFormStatus('✓ Thank you! Your message has been sent successfully. We will get back to you shortly.', 'success');
+          activeForm.reset();
+
+          if (activeSubmitBtn) {
+            activeSubmitBtn.disabled = false;
+            activeSubmitBtn.textContent = 'Send Message';
+          }
+
+          if (activeFormStatus) {
+            activeFormStatus.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+
+          if (window.turnstile) {
+            window.turnstile.reset();
+          }
+        } else {
+          showFormStatus(result.error || 'An error occurred while sending your message. Please try again.', 'error');
+
+          if (activeSubmitBtn) {
+            activeSubmitBtn.disabled = false;
+            activeSubmitBtn.textContent = 'Send Message';
+          }
+
+          if (window.turnstile) {
+            window.turnstile.reset();
           }
         }
+      } catch (err) {
+        console.error('Submit connection error:', err);
+        showFormStatus('Unable to connect to the server. Please check your internet connection.', 'error');
 
-        showFormStatus(errorMsg, 'error');
+        if (activeSubmitBtn) {
+          activeSubmitBtn.disabled = false;
+          activeSubmitBtn.textContent = 'Send Message';
+        }
 
-        // Re-enable submit button
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Send Message';
-
-        // Reset turnstile if it exists to allow re-submission
         if (window.turnstile) {
           window.turnstile.reset();
         }
       }
-    } catch (err) {
-      console.error('Submit connection error:', err);
-      showFormStatus('Unable to connect to the server. Please check your internet connection.', 'error');
-
-      // Re-enable submit button
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Send Message';
-
-      if (window.turnstile) {
-        window.turnstile.reset();
-      }
-    }
+    });
   });
 
   // Autoplay all videos programmatically on DOM load and user interaction

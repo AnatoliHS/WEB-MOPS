@@ -1,127 +1,162 @@
-export async function onRequestPost(context) {
+export async function onRequestPost({ request, env }) {
   try {
-    // 1. Get the form data
-    const formData = await context.request.formData();
-    const data = Object.fromEntries(formData.entries());
-
-    // 1.1 Honeypot Check
-    // If a bot fills out the hidden 'website' field, silently succeed without sending the email
-    if (data.website) {
-      return Response.redirect(new URL('/thanks', context.request.url).toString(), 303);
-    }
-
-    // ---------------------------------------------------------
-    // 1.2 Turnstile Verification
-    // ---------------------------------------------------------
-    const turnstileToken = data['cf-turnstile-response'];
-    const ip = context.request.headers.get('CF-Connecting-IP');
-    const turnstileSecret = (context.env.TURNSTILE_SECRET_KEY || '').trim();
-
-    if (turnstileSecret) {
-      if (!turnstileToken) {
-        return new Response("Turnstile security check missing. Please complete the security check.", { status: 400 });
-      }
-
-      let verificationBody = new FormData();
-      verificationBody.append('secret', turnstileSecret);
-      verificationBody.append('response', turnstileToken);
-      if (ip) {
-        verificationBody.append('remoteip', ip);
-      }
-
-      const verificationResult = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-        body: verificationBody,
-        method: 'POST',
-      });
-
-      const outcome = await verificationResult.json();
-
-      if (!outcome.success) {
-        const errorDetails = (outcome['error-codes'] || []).join(', ');
-        console.error("Turnstile verification failed:", errorDetails);
-        return new Response(`Turnstile verification failed (${errorDetails || 'Invalid token'}). Please try again.`, { status: 403 });
-      }
+    let data;
+    const contentType = request.headers.get('content-type') || '';
+    
+    if (contentType.includes('application/json')) {
+      data = await request.json();
     } else {
-      console.warn("TURNSTILE_SECRET_KEY environment variable is not defined. Skipping server-side Turnstile verification.");
-    }
-    // ---------------------------------------------------------
-    // END Turnstile Verification
-    // ---------------------------------------------------------
-
-    // 1.5 Validate Email Format
-    const emailStr = (data.email || '').trim();
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailRegex.test(emailStr)) {
-      return new Response(`The email address "${emailStr}" is not in a valid email format.`, { status: 400 });
+      const formData = await request.formData();
+      data = Object.fromEntries(formData.entries());
     }
 
-    // 1.6 Validate Email Domain (DNS MX Record Check)
-    const domain = emailStr.split('@')[1];
+    // Honeypot check
+    if (data.website) {
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+
+    const name = (data.name || '').trim();
+    const email = (data.email || '').trim();
+    const phone = (data.phone || '').trim();
+    const service = (data.service || '').trim();
+    const message = (data.message || '').trim();
+    const turnstileToken = data['cf-turnstile-response'] || data.turnstileToken || '';
+
+    if (!name || !email || !message) {
+      return new Response(JSON.stringify({ error: "Missing required fields" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+
+    // 1. Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return new Response(JSON.stringify({ error: "Invalid email format" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+
+    // 2. Email domain validation (check for MX records)
+    const domain = email.split('@')[1];
     try {
       const dnsResponse = await fetch(`https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=MX`, {
-        headers: { 'Accept': 'application/dns-json' }
+        headers: {
+          'Accept': 'application/dns-json'
+        }
       });
 
       if (dnsResponse.ok) {
         const dnsData = await dnsResponse.json();
-        if (dnsData.Status !== 0 || !dnsData.Answer || dnsData.Answer.length === 0) {
-          return new Response(`The email domain "@${domain}" does not appear to exist or cannot receive emails.`, { status: 400 });
+        if (!dnsData.Answer || dnsData.Answer.length === 0) {
+          return new Response(JSON.stringify({ error: "Invalid email domain. The domain does not accept emails." }), {
+            status: 400,
+            headers: { "Content-Type": "application/json" }
+          });
         }
       }
     } catch (e) {
-      console.warn("DNS check error, continuing:", e.message);
+      console.error("DNS check failed", e);
     }
 
-    // 2. Build the email body
-    const emailBody = `
-      <h2>New Contact Form Inquiry</h2>
-      <p><strong>Name:</strong> ${data.name || 'Not provided'}</p>
-      <p><strong>Email:</strong> ${emailStr}</p>
-      <p><strong>Phone:</strong> ${data.phone || 'Not provided'}</p>
-      <p><strong>Preferred Service:</strong> ${data.service || 'Not specified'}</p>
-      <p><strong>Message:</strong></p>
-      <p style="white-space: pre-wrap;">${data.message || 'No message provided'}</p>
-    `;
+    // 3. Cloudflare Turnstile Verification
+    const turnstileSecret = env.TURNSTILE_SECRET_KEY;
+    if (turnstileSecret) {
+      if (!turnstileToken) {
+        return new Response(JSON.stringify({ error: "Please complete the security check" }), {
+          status: 400,
+          headers: { "Content-Type": "application/json" }
+        });
+      }
 
-    // 3. Send email using Resend
-    const resendApiKey = (context.env.RESEND_API_KEY || '').trim();
+      const turnstileFormData = new FormData();
+      turnstileFormData.append('secret', turnstileSecret.trim());
+      turnstileFormData.append('response', turnstileToken);
+      
+      const ip = request.headers.get('CF-Connecting-IP');
+      if (ip) {
+        turnstileFormData.append('remoteip', ip);
+      }
+
+      const turnstileResult = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+        method: 'POST',
+        body: turnstileFormData
+      });
+
+      const turnstileOutcome = await turnstileResult.json();
+      if (!turnstileOutcome.success) {
+        return new Response(JSON.stringify({ error: "Anti-spam verification failed. Please try again." }), {
+          status: 400,
+          headers: { "Content-Type": "application/json" }
+        });
+      }
+    } else {
+      console.warn("TURNSTILE_SECRET_KEY is not defined. Skipping Turnstile verification.");
+    }
+
+    // 4. Send Email via Resend
+    const resendApiKey = env.RESEND_API_KEY;
     if (!resendApiKey) {
-      console.error("RESEND_API_KEY is not defined in environment variables.");
-      return new Response("Server configuration error: RESEND_API_KEY environment variable is missing in Cloudflare Pages.", { status: 500 });
+      return new Response(JSON.stringify({ error: "Server configuration error: RESEND_API_KEY environment variable is missing." }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" }
+      });
     }
 
-    const recipientEmail = "mopsgroupofcompanies@gmail.com";
-    const senderEmail = (context.env.FROM_EMAIL || "onboarding@resend.dev").trim();
+    const fromEmail = env.RESEND_FROM_EMAIL || env.FROM_EMAIL || "onboarding@resend.dev";
+    const toEmail = "mopsgroupofcompanies@gmail.com";
 
-    const response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
+    const emailResponse = await fetch("https://api.resend.com/emails", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${resendApiKey}`,
+        "Authorization": `Bearer ${resendApiKey.trim()}`,
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        from: `Mops Inc. Website <${senderEmail}>`,
-        to: [recipientEmail],
-        reply_to: emailStr,
-        subject: `New Mops Inc. Inquiry: ${data.service || 'General'} - ${data.name || 'Customer'}`,
-        html: emailBody,
-      }),
+        from: `MOPS Website <${fromEmail.trim()}>`,
+        to: [toEmail],
+        reply_to: email,
+        subject: `New Mops Inc. Inquiry: ${service || 'General'} - ${name}`,
+        html: `
+          <h3>New Message from MOPS Inc. Website</h3>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
+          <p><strong>Preferred Service / Damage Type:</strong> ${service || 'Not specified'}</p>
+          <p><strong>Message:</strong></p>
+          <p>${message.replace(/\n/g, '<br>')}</p>
+        `
+      })
     });
 
-    // 4. If successful, redirect the user to your custom thanks page
-    if (response.ok) {
-      return Response.redirect(new URL('/thanks', context.request.url).toString(), 303);
-    } else {
-      const errorText = await response.text();
-      let cleanErrorMessage = errorText;
+    if (!emailResponse.ok) {
+      const errorText = await emailResponse.text();
+      let resendErr = errorText;
       try {
-        const parsedObj = JSON.parse(errorText);
-        cleanErrorMessage = parsedObj.message || parsedObj.name || errorText;
+        const errJson = JSON.parse(errorText);
+        resendErr = errJson.message || errorText;
       } catch (e) {}
-      console.error("Resend API error:", cleanErrorMessage);
-      return new Response('Resend email error: ' + cleanErrorMessage, { status: 500 });
+      console.error("Resend API Error:", resendErr);
+      return new Response(JSON.stringify({ error: `Failed to send email: ${resendErr}` }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" }
+      });
     }
-  } catch (err) {
-    return new Response('Server Error: ' + err.message, { status: 500 });
+
+    return new Response(JSON.stringify({ success: true, message: "Email sent successfully" }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" }
+    });
+
+  } catch (error) {
+    console.error("Function error:", error);
+    return new Response(JSON.stringify({ error: "Internal server error: " + error.message }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" }
+    });
   }
 }
