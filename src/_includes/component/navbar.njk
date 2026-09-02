@@ -16,7 +16,7 @@
     <div class="floating-nav-info floating-nav-info--center desktop-only-info">
       <span class="floating-nav-address">41 Dussek St, Belleville, ON K8N 5R9</span>
       <span class="floating-nav-divider">•</span>
-      <span class="floating-nav-phone-text">613-329-8439</span>
+      <span class="floating-nav-phone-text">{{ site.phone }}</span>
       <span class="floating-nav-divider">•</span>
       <span class="floating-nav-email-text">mopsgroupofcompanies@gmail.com</span>
     </div>
@@ -26,20 +26,20 @@
     <div class="floating-nav-right">
       {% if page.url == '/janitorial/' %}
       <a href="#contact" class="floating-nav-cta floating-nav-cta--janitorial desktop-nav-btn">Contact</a>
-      <a href="tel:613-329-8439" class="floating-nav-phone mobile-nav-btn">613-329-8439</a>
+      <a href="tel:6136144463" class="floating-nav-phone mobile-nav-btn">{{ site.phone }}</a>
       {% elif page.url == '/restoration/' %}
       <a href="#contact" class="floating-nav-cta floating-nav-cta--restoration desktop-nav-btn">Contact</a>
-      <a href="tel:613-329-8439" class="floating-nav-phone mobile-nav-btn">613-329-8439</a>
+      <a href="tel:6136144463" class="floating-nav-phone mobile-nav-btn">{{ site.phone }}</a>
       {% else %}
       <div class="floating-nav-info">
         <span class="floating-nav-address">41 Dussek St, Belleville, ON K8N 5R9</span>
         <span class="floating-nav-divider">•</span>
         <span class="desktop-only-nav">
-          <span class="floating-nav-phone-text">613-329-8439</span>
+          <span class="floating-nav-phone-text">{{ site.phone }}</span>
           <span class="floating-nav-divider">•</span>
         </span>
         <span class="floating-nav-email-text desktop-only-email">mopsgroupofcompanies@gmail.com</span>
-        <a href="tel:613-329-8439" class="floating-nav-mobile-phone mobile-only-phone">613-329-8439</a>
+        <a href="tel:6136144463" class="floating-nav-mobile-phone mobile-only-phone">{{ site.phone }}</a>
       </div>
       {% endif %}
       <button class="floating-nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation menu">

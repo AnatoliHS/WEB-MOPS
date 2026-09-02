@@ -63,7 +63,7 @@ title: Privacy Policy
             <p style="font-weight: 600; margin-bottom: 5px;">Mops Group Inc.</p>
             <p style="margin-bottom: 5px;">41 Dussek St</p>
             <p style="margin-bottom: 10px;">Belleville, ON K8N 5R9</p>
-            <p style="margin-bottom: 5px;"><strong>Telephone:</strong> <a href="tel:6133298439" style="color: var(--primary-color);">(613) 329-8439</a></p>
+            <p style="margin-bottom: 5px;"><strong>Telephone:</strong> <a href="tel:6136144463" style="color: var(--primary-color);">613 614-4463</a></p>
             <p><strong>Email:</strong> <a href="mailto:mopsgroupofcompanies@gmail.com" style="color: var(--accent-color);">mopsgroupofcompanies@gmail.com</a></p>
         </div>
 
