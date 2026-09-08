@@ -652,6 +652,290 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // --- Universal Reviews Slider Track (Janitorial & Restoration) ---
+  const reviewContainers = document.querySelectorAll('.reviews-slider-container, .reviews-slider');
+
+  reviewContainers.forEach(container => {
+    const reviewTrack = container.querySelector('.reviews-slider-track, .reviews-track');
+    if (!reviewTrack) return;
+
+    const reviewCards = reviewTrack.querySelectorAll('.review-card');
+    if (reviewCards.length === 0) return;
+
+    const prevBtn = container.querySelector('.prev-btn, .reviews-prev');
+    const nextBtn = container.querySelector('.next-btn, .reviews-next');
+    const dotsContainer = container.querySelector('.reviews-dots');
+
+    let currentReviewIndex = 0;
+
+    const getItemsPerPage = () => {
+      if (window.innerWidth <= 640) return 1;
+      if (window.innerWidth <= 1024) return 2;
+      return 3;
+    };
+
+    const getMaxIndex = () => {
+      const itemsPerPage = getItemsPerPage();
+      return Math.max(0, reviewCards.length - itemsPerPage);
+    };
+
+    const createDots = () => {
+      const maxIndex = getMaxIndex();
+
+      if (dotsContainer) {
+        dotsContainer.innerHTML = '';
+        if (maxIndex === 0) {
+          dotsContainer.style.display = 'none';
+        } else {
+          dotsContainer.style.display = 'flex';
+          for (let i = 0; i <= maxIndex; i++) {
+            const dot = document.createElement('div');
+            dot.className = `reviews-dot ${i === currentReviewIndex ? 'active' : ''}`;
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+          }
+        }
+      }
+
+      if (prevBtn && nextBtn) {
+        if (maxIndex === 0) {
+          prevBtn.style.display = 'none';
+          nextBtn.style.display = 'none';
+        } else {
+          prevBtn.style.display = 'flex';
+          nextBtn.style.display = 'flex';
+        }
+      }
+    };
+
+    const updateSlider = () => {
+      const maxIndex = getMaxIndex();
+      if (currentReviewIndex > maxIndex) currentReviewIndex = maxIndex;
+      if (currentReviewIndex < 0) currentReviewIndex = 0;
+
+      const targetCard = reviewCards[currentReviewIndex];
+      const firstCard = reviewCards[0];
+      const offset = targetCard && firstCard ? (targetCard.offsetLeft - firstCard.offsetLeft) : 0;
+      reviewTrack.style.transform = `translateX(-${offset}px)`;
+
+      if (dotsContainer) {
+        const dots = dotsContainer.querySelectorAll('.reviews-dot');
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === currentReviewIndex);
+        });
+      }
+    };
+
+    const goToSlide = (index) => {
+      currentReviewIndex = index;
+      updateSlider();
+    };
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const maxIndex = getMaxIndex();
+        currentReviewIndex = currentReviewIndex > 0 ? currentReviewIndex - 1 : maxIndex;
+        updateSlider();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const maxIndex = getMaxIndex();
+        currentReviewIndex = currentReviewIndex < maxIndex ? currentReviewIndex + 1 : 0;
+        updateSlider();
+      });
+    }
+
+    // Touch swipe support for mobile devices
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    reviewTrack.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    reviewTrack.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diffX = touchStartX - touchEndX;
+      const maxIndex = getMaxIndex();
+
+      if (Math.abs(diffX) > 40) {
+        if (diffX > 0 && currentReviewIndex < maxIndex) {
+          currentReviewIndex++;
+          updateSlider();
+        } else if (diffX < 0 && currentReviewIndex > 0) {
+          currentReviewIndex--;
+          updateSlider();
+        }
+      }
+    }, { passive: true });
+
+    window.addEventListener('resize', () => {
+      createDots();
+      updateSlider();
+    });
+
+    createDots();
+    updateSlider();
+  });
+
+  // --- Rentals Equipment Slider (restoration.html) ---
+  const rentalsWrap = document.querySelector('.rentals-slider-wrap');
+  const rentalsTrack = document.querySelector('.rentals-grid, .rentals-track');
+  const rentalsPrev = document.getElementById('rentals-prev') || document.querySelector('.rentals-carousel-prev');
+  const rentalsNext = document.getElementById('rentals-next') || document.querySelector('.rentals-carousel-next');
+  const rentalsDotsContainer = document.getElementById('rentals-dots') || document.querySelector('.rentals-dots');
+
+  if (rentalsWrap && rentalsTrack) {
+    const rentalCards = rentalsTrack.querySelectorAll('.rental-card');
+
+    if (rentalCards.length > 0) {
+      let currentRentalIndex = 0;
+
+      const createRentalDots = () => {
+        if (!rentalsDotsContainer) return;
+        rentalsDotsContainer.innerHTML = '';
+        rentalCards.forEach((_, idx) => {
+          const dot = document.createElement('div');
+          dot.className = `rentals-dot ${idx === currentRentalIndex ? 'active' : ''}`;
+          dot.addEventListener('click', () => scrollToRentalCard(idx));
+          rentalsDotsContainer.appendChild(dot);
+        });
+      };
+
+      const updateRentalActiveDot = (idx) => {
+        currentRentalIndex = idx;
+        if (!rentalsDotsContainer) return;
+        const dots = rentalsDotsContainer.querySelectorAll('.rentals-dot');
+        dots.forEach((dot, dIdx) => {
+          dot.classList.toggle('active', dIdx === idx);
+        });
+      };
+
+      const scrollToRentalCard = (idx) => {
+        if (idx < 0) idx = 0;
+        if (idx >= rentalCards.length) idx = rentalCards.length - 1;
+        currentRentalIndex = idx;
+
+        const targetCard = rentalCards[idx];
+        if (targetCard) {
+          const scrollLeft = targetCard.offsetLeft - (rentalsWrap.clientWidth - targetCard.offsetWidth) / 2;
+          rentalsWrap.scrollTo({
+            left: Math.max(0, scrollLeft),
+            behavior: 'smooth'
+          });
+        }
+        updateRentalActiveDot(idx);
+      };
+
+      if (rentalsPrev) {
+        rentalsPrev.addEventListener('click', (e) => {
+          e.preventDefault();
+          scrollToRentalCard(currentRentalIndex - 1 < 0 ? rentalCards.length - 1 : currentRentalIndex - 1);
+        });
+      }
+
+      if (rentalsNext) {
+        rentalsNext.addEventListener('click', (e) => {
+          e.preventDefault();
+          scrollToRentalCard(currentRentalIndex + 1 >= rentalCards.length ? 0 : currentRentalIndex + 1);
+        });
+      }
+
+      rentalsWrap.addEventListener('scroll', () => {
+        const wrapCenter = rentalsWrap.scrollLeft + rentalsWrap.clientWidth / 2;
+        let closestIndex = 0;
+        let minDiff = Infinity;
+
+        rentalCards.forEach((card, idx) => {
+          const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+          const diff = Math.abs(wrapCenter - cardCenter);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestIndex = idx;
+          }
+        });
+
+        updateRentalActiveDot(closestIndex);
+      }, { passive: true });
+
+      createRentalDots();
+    }
+  }
+
+  // --- Restoration Services Accordion (restoration.html) ---
+  const serviceAccordionItems = document.querySelectorAll('.service-accordion-item');
+  const serviceImageWrappers = document.querySelectorAll('.service-image-wrapper');
+
+  if (serviceAccordionItems.length > 0) {
+    serviceAccordionItems.forEach(item => {
+      const header = item.querySelector('.service-accordion-header') || item;
+
+      header.addEventListener('click', (e) => {
+        const isCurrentlyActive = item.classList.contains('active');
+        const serviceKey = item.dataset.service;
+        const isMobile = window.innerWidth <= 992;
+
+        if (isMobile) {
+          if (isCurrentlyActive) {
+            item.classList.remove('active');
+          } else {
+            serviceAccordionItems.forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+          }
+        } else {
+          serviceAccordionItems.forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+
+          if (serviceImageWrappers.length > 0 && serviceKey) {
+            serviceImageWrappers.forEach(imgWrap => {
+              if (imgWrap.dataset.service === serviceKey) {
+                imgWrap.classList.add('active');
+              } else {
+                imgWrap.classList.remove('active');
+              }
+            });
+          }
+        }
+      });
+    });
+  }
+
+  // --- Restoration FAQ Accordion (restoration.html) ---
+  const faqItems = document.querySelectorAll('.faq-item');
+
+  if (faqItems.length > 0) {
+    faqItems.forEach(item => {
+      const questionBtn = item.querySelector('.faq-question') || item;
+      const answer = item.querySelector('.faq-answer');
+
+      questionBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isOpen = item.classList.contains('open');
+
+        faqItems.forEach(otherItem => {
+          otherItem.classList.remove('open');
+          const otherAnswer = otherItem.querySelector('.faq-answer');
+          if (otherAnswer) {
+            otherAnswer.style.maxHeight = null;
+          }
+        });
+
+        if (!isOpen) {
+          item.classList.add('open');
+          if (answer) {
+            const inner = answer.querySelector('.faq-answer-inner');
+            const height = inner ? inner.offsetHeight + 24 : 300;
+            answer.style.maxHeight = `${height}px`;
+          }
+        }
+      });
+    });
+  }
+
   // Autoplay all videos programmatically on DOM load and user interaction
   const forceAutoplay = () => {
     document.querySelectorAll('video').forEach(video => {

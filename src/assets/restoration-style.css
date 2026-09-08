@@ -685,6 +685,7 @@ body.hero-janitorial-active .nav-cta:hover {
   /* Purple accent brand word */
   background: linear-gradient(90deg, #5d22fe, #a828fe);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -703,6 +704,7 @@ body.hero-janitorial-active .nav-cta:hover {
   color: #ea2a4e;
   background: linear-gradient(90deg, #ea2a4e, #f78625);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -1846,6 +1848,7 @@ body.hero-janitorial-active .nav-cta:hover {
 }
 
 .service-accordion-item.active .service-accordion-content {
+  max-height: 1000px;
   opacity: 1;
   padding-top: 20px;
 }
@@ -4261,9 +4264,31 @@ body.hero-janitorial-active .nav-cta:hover {
 
 .reviews-controls {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
-  gap: 12px;
+  gap: 16px;
   margin-top: 28px;
+}
+
+.reviews-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.reviews-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(35, 31, 32, 0.2);
+  cursor: pointer;
+  transition: var(--dur-fast);
+}
+
+.reviews-dot.active {
+  background-color: #5d22fe;
+  width: 24px;
+  border-radius: 5px;
 }
 
 .reviews-prev,
@@ -4390,6 +4415,10 @@ body.hero-janitorial-active .nav-cta:hover {
 
 .faq-item.open .faq-question {
   color: #b86fff;
+}
+
+.faq-item.open .faq-answer {
+  max-height: 500px;
 }
 
 .faq-answer {
@@ -4640,6 +4669,7 @@ body.hero-janitorial-active .nav-cta:hover {
   transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
   width: 100%;
   -webkit-appearance: none;
+  appearance: none;
 }
 
 .form-group select {
