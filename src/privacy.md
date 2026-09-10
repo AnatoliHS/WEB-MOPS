@@ -7,7 +7,7 @@ title: Privacy Policy
     <h1 style="font-family: 'Teodor', var(--font-serif); font-size: clamp(2.5rem, 5vw, 4rem); color: var(--primary-color); margin-bottom: 40px; line-height: 1.1;">Privacy Policy</h1>
     
     <div style="line-height: 1.8; color: var(--text-light); font-size: 1.1rem; display: flex; flex-direction: column; gap: 30px;">
-        <p><strong>Mops Group Inc.</strong> ("Mops Group", "Mops", "we", "us", or "our") is committed to protecting your privacy and maintaining a high level of security and respect for your personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard your personal information when you visit our website at <a href="https://mopsinc.com/" style="color: var(--accent-color);">mopsinc.com</a> or use our commercial janitorial, cleaning, and disaster restoration services.</p>
+        <p><strong>Mops Group Inc.</strong> ("Mops Group", "Mops", "we", "us", or "our") is committed to protecting your privacy and maintaining a high level of security and respect for your personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard your personal information when you visit our website at <a href="https://mopsgroup.ca/" style="color: var(--accent-color);">mopsgroup.ca</a> or use our commercial janitorial, cleaning, and disaster restoration services.</p>
 
         <div>
             <h2 style="color: var(--primary-color); font-size: 1.5rem; margin-bottom: 15px;">1. Information We Collect</h2>
@@ -64,7 +64,7 @@ title: Privacy Policy
             <p style="margin-bottom: 5px;">41 Dussek St</p>
             <p style="margin-bottom: 10px;">Belleville, ON K8N 5R9</p>
             <p style="margin-bottom: 5px;"><strong>Telephone:</strong> <a href="tel:6136144463" style="color: var(--primary-color);">613 614-4463</a></p>
-            <p><strong>Email:</strong> <a href="mailto:mopsgroupofcompanies@gmail.com" style="color: var(--accent-color);">mopsgroupofcompanies@gmail.com</a></p>
+            <p><strong>Email:</strong> <a href="mailto:hello@mopsgroup.ca" style="color: var(--accent-color);">hello@mopsgroup.ca</a></p>
         </div>
 
         <p style="font-size: 0.9rem; color: #94a3b8; font-style: italic;">Effective Date: January 1, 2026. Last updated: February 2026.</p>

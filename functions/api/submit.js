@@ -2,7 +2,7 @@ export async function onRequestPost({ request, env }) {
   try {
     let data;
     const contentType = request.headers.get('content-type') || '';
-    
+
     if (contentType.includes('application/json')) {
       data = await request.json();
     } else {
@@ -76,7 +76,7 @@ export async function onRequestPost({ request, env }) {
       const turnstileFormData = new FormData();
       turnstileFormData.append('secret', turnstileSecret.trim());
       turnstileFormData.append('response', turnstileToken);
-      
+
       const ip = request.headers.get('CF-Connecting-IP');
       if (ip) {
         turnstileFormData.append('remoteip', ip);
@@ -99,16 +99,16 @@ export async function onRequestPost({ request, env }) {
     }
 
     // 4. Send Email via Resend
-    const resendApiKey = env.RESEND_API_KEY;
+    const resendApiKey = env.NEW_RESEND_API_KEY;
     if (!resendApiKey) {
-      return new Response(JSON.stringify({ error: "Server configuration error: RESEND_API_KEY environment variable is missing." }), {
+      return new Response(JSON.stringify({ error: "Server configuration error: NEW_RESEND_API_KEY environment variable is missing." }), {
         status: 500,
         headers: { "Content-Type": "application/json" }
       });
     }
 
-    const fromEmail = env.RESEND_FROM_EMAIL || env.FROM_EMAIL || "onboarding@resend.dev";
-    const toEmail = "mopsgroupofcompanies@gmail.com";
+    const fromEmail = env.RESEND_FROM_EMAIL || env.FROM_EMAIL || "website@forms.mopsgroup.ca";
+    const toEmail = "hello@mopsgroup.ca";
 
     const emailResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -139,7 +139,7 @@ export async function onRequestPost({ request, env }) {
       try {
         const errJson = JSON.parse(errorText);
         resendErr = errJson.message || errorText;
-      } catch (e) {}
+      } catch (e) { }
       console.error("Resend API Error:", resendErr);
       return new Response(JSON.stringify({ error: `Failed to send email: ${resendErr}` }), {
         status: 500,

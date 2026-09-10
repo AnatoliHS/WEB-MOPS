@@ -51,7 +51,7 @@ title: Terms of Service
             <p style="margin-bottom: 5px;">41 Dussek St</p>
             <p style="margin-bottom: 10px;">Belleville, ON K8N 5R9</p>
             <p style="margin-bottom: 5px;"><strong>Telephone:</strong> <a href="tel:6136144463" style="color: var(--primary-color);">613 614-4463</a></p>
-            <p><strong>Email:</strong> <a href="mailto:mopsgroupofcompanies@gmail.com" style="color: var(--accent-color);">mopsgroupofcompanies@gmail.com</a></p>
+            <p><strong>Email:</strong> <a href="mailto:hello@mopsgroup.ca" style="color: var(--accent-color);">hello@mopsgroup.ca</a></p>
         </div>
 
         <p style="font-weight: 600; margin-top: 10px;">By booking or utilizing services with Mops Group Inc., you agree to these Terms of Service. If you have any questions, please <a href="/#contact" style="color: var(--accent-color); text-decoration: underline;">contact us</a>.</p>
