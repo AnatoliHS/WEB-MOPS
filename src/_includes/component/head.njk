@@ -1,34 +1,41 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+  {%- set seoTitle = title or (site.name + " | Commercial Janitorial & Restoration in Belleville") %}
+  {%- set seoDescription = description or "Commercial janitorial cleaning and 24/7 emergency disaster restoration for water, fire and mold damage across Belleville, Quinte West and Prince Edward County." %}
+  {%- set canonicalUrl = page.url | htmlBaseUrl(site.url) %}
+
   <!-- Primary SEO Tags -->
-  <title>{{ site.name }} | Commercial Janitorial & Emergency Restoration Services in Belleville & Quinte Region</title>
-  <meta name="description" content="MOPS Group Inc. provides expert Commercial Janitorial & Cleaning Services alongside 24/7 Emergency Disaster Restoration (Water Damage, Fire & Smoke, Mold Remediation, and Full Property Rebuilds) across Belleville, Quinte West, and Prince Edward County." />
-  <meta name="keywords" content="Janitorial Services, Commercial Cleaning, Office Cleaning, Post-Construction Cleanup, Disaster Restoration, Water Damage Restoration, Fire Damage Repair, Mold Remediation, Structural Drying, Emergency Restoration, Belleville, Quinte West, Prince Edward County, MOPS Group Inc" />
+  <title>{{ seoTitle }}</title>
+  <meta name="description" content="{{ seoDescription }}" />
   <meta name="author" content="{{ site.name }}" />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="{% if noindex %}noindex, follow{% else %}index, follow{% endif %}" />
+  {%- if not noindex %}
 
   <!-- Canonical URL -->
-  <link rel="canonical" href="{{ site.url }}" />
+  <link rel="canonical" href="{{ canonicalUrl }}" />
+  {%- endif %}
+  {%- if preloadImage %}
 
-  <!-- Preload Hero Images for LCP Optimization -->
-  <link rel="preload" as="image" href="/assets/commercial.jpg" media="(min-width: 769px)" fetchpriority="high" />
-  <link rel="preload" as="image" href="/assets/water_damage_panorama.png" media="(min-width: 769px)" fetchpriority="high" />
+  <!-- Preload Hero Image for LCP Optimization -->
+  <link rel="preload" as="image" href="{{ preloadImage }}" media="(min-width: 769px)" fetchpriority="high" />
+  {%- endif %}
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="{{ site.url }}" />
-  <meta property="og:title" content="{{ site.name }} | Commercial Janitorial & Emergency Restoration Services" />
-  <meta property="og:description" content="Professional commercial janitorial cleaning and 24/7 emergency disaster restoration (water, fire, mold, full rebuilds) serving Belleville and the Quinte region." />
-  <meta property="og:image" content="{{ site.url }}assets/mops-group-logo-link.jpg" />
+  <meta property="og:url" content="{{ canonicalUrl }}" />
+  <meta property="og:title" content="{{ seoTitle }}" />
+  <meta property="og:description" content="{{ seoDescription }}" />
+  <meta property="og:image" content="{{ site.url }}assets/mops-group-og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="{{ site.url }}" />
-  <meta property="twitter:title" content="{{ site.name }} | Janitorial and Restoration Services" />
-  <meta property="twitter:description" content="Vibrant cleanliness and 24/7 disaster recovery. Trusted commercial janitorial and emergency restoration in Belleville & Quinte." />
-  <meta property="twitter:image" content="{{ site.url }}assets/mops-group-logo-link.jpg" />
+  <meta property="twitter:url" content="{{ canonicalUrl }}" />
+  <meta property="twitter:title" content="{{ seoTitle }}" />
+  <meta property="twitter:description" content="{{ seoDescription }}" />
+  <meta property="twitter:image" content="{{ site.url }}assets/mops-group-og.jpg" />
 
   <!-- Google Fonts & Fontshare — matching WEB-MOPS-GROUP source -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,6 +58,7 @@
   {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "CleaningService"],
+    "@id": "{{ site.url }}#business",
     "name": "{{ site.name }}",
     "description": "MOPS Group Inc. provides expert Commercial Janitorial & Cleaning Services alongside 24/7 Emergency Disaster Restoration Services (Water Damage, Fire & Smoke, Mold Remediation, and Full Property Rebuilds) across Belleville and the Quinte region.",
     "url": "{{ site.url }}",
@@ -64,7 +72,8 @@
       "postalCode": "K8N 5R9",
       "addressCountry": "CA"
     },
-    "image": "{{ site.url }}assets/mops-group-logo-link.jpg",
+    "image": "{{ site.url }}assets/mops-group-og.jpg",
+    "logo": "{{ site.url }}assets/mops-group-logo-link.jpg",
     "priceRange": "$$",
     "areaServed": [
       {
@@ -104,8 +113,9 @@
     }
   }
   </script>
+  {%- if page.url == "/janitorial/" %}
 
-  <!-- Structured Data: FAQ Page Schema -->
+  <!-- Structured Data: FAQ Page Schema (mirrors the FAQ shown on this page) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -116,31 +126,7 @@
         "name": "What cleaning services does Mops Group Inc. offer?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Mops Group Inc. provides specialized commercial janitorial services tailored to different properties: office spaces, post-construction cleanup, industrial facilities, government properties, car dealerships, and vacation rentals."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What types of restoration do you offer?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "We offer 24/7 emergency water damage restoration, fire and smoke recovery, HEPA mold remediation, hazmat abatement, trauma cleanup, and full property rebuilds for residential and commercial properties throughout the Quinte region."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How quickly can you respond to an emergency?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Our emergency line is staffed 24 hours a day, 7 days a week. In most cases we can have a restoration crew on-site within 1–2 hours of your call to prevent secondary damage."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do you work directly with insurance companies?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. We provide direct insurance billing and coordinate with your adjuster from initial assessment through final sign-off with detailed documentation."
+          "text": "Mops Group Inc. provides specialized commercial cleaning services tailored to different properties and needs: comprehensive Commercial office and janitorial services; secure sanitization for Municipal and Gov facilities; and fast, high-standard turnovers for Hotel Takeovers and Vacation Rentals."
         }
       },
       {
@@ -153,31 +139,32 @@
       },
       {
         "@type": "Question",
-        "name": "How much do your janitorial and restoration services cost?",
+        "name": "How much do your cleaning services cost?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Because every property is unique, we provide personalized quotes based on square footage, condition, frequency, and required restoration scope. Contact us at 613 614-4463 or hello@mopsgroup.ca for a free quote."
+          "text": "Because every space is unique, we do not have a standard flat-rate price list. We provide personalized quotes based on factors like square footage, the current condition of the space, cleaning frequency, and specific tasks required. Contact us today for a free walkthrough and customized quote!"
         }
       },
       {
         "@type": "Question",
-        "name": "Are your technicians certified and vetted?",
+        "name": "What are your safety and sanitization standards?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. All MOPS Group Inc. technicians hold IICRC (Institute of Inspection Cleaning and Restoration Certification) credentials, and all staff are fully vetted, bonded, and insured."
+          "text": "Safety and hygiene are our top priorities. We follow strict disinfection protocols and use professional-grade, eco-friendly sanitizers. Additionally, all Mops Group Inc. staff members are fully vetted, bonded, insured, and trained to meet strict standards."
         }
       },
       {
         "@type": "Question",
-        "name": "Is MOPS Group Inc. a certified living wage employer?",
+        "name": "Why is being a Living Wage Employer important?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, MOPS Group Inc. is a certified Ontario Living Wage Employer. We are committed to paying fair wages, reducing employment barriers, and offering flexible hours across all operations."
+          "text": "By paying certified living wages, we invest in our employees' health and financial well-being. This ensures lower staff turnover, higher job satisfaction, and a dedicated, motivated team that takes pride in delivering exceptional service to our clients."
         }
       }
     ]
   }
   </script>
+  {%- endif %}
 
   <!-- Cloudflare Turnstile API Script -->
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>

@@ -1,6 +1,7 @@
 ---
 layout: policy.njk
-title: Privacy Policy
+title: "Privacy Policy | Mops Group Inc."
+description: "How Mops Group Inc. collects, uses and protects personal information from clients and website visitors."
 ---
 
 <section style="padding: 160px 20px 100px; max-width: 900px; margin: 0 auto;">

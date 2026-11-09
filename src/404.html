@@ -1,0 +1,18 @@
+---
+layout: policy.njk
+title: "Page Not Found | Mops Group Inc."
+description: "The page you are looking for could not be found."
+permalink: /404.html
+noindex: true
+eleventyExcludeFromCollections: true
+---
+
+<section style="padding: 160px 20px 100px; max-width: 900px; margin: 0 auto; text-align: center;">
+    <h1 style="font-family: 'Teodor', var(--font-serif); font-size: clamp(2.5rem, 5vw, 4rem); color: var(--primary-color); margin-bottom: 24px; line-height: 1.1;">Page not found</h1>
+    <p style="line-height: 1.8; color: var(--text-light); font-size: 1.1rem; margin-bottom: 32px;">The page you're looking for has moved or doesn't exist. Try one of these instead, or call us at <a href="tel:{{ site.phone | replace(' ', '') | replace('-', '') }}">{{ site.phone }}</a>.</p>
+    <p style="display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; font-size: 1.1rem;">
+        <a href="/">Home</a>
+        <a href="/janitorial/">Janitorial Services</a>
+        <a href="/restoration/">Restoration Services</a>
+    </p>
+</section>

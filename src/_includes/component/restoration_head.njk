@@ -1,30 +1,32 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {%- set canonicalUrl = page.url | htmlBaseUrl(site.url) %}
 
   <!-- Primary SEO Tags -->
-  <title>{{ site.name }} – {{ site.title }}</title>
-  <meta name="description" content="{{ site.name }} provides professional restoration services for homes and businesses, including water damage, fire and smoke recovery, mold remediation, and full rebuilds. From emergency response to final repair, we restore properties with care and clarity." />
-  <meta name="keywords" content="Restoration Services, Water Damage Restoration, Fire Damage Repair, Mold Remediation, Property Restoration, Emergency Restoration, Belleville, Quinte West, Prince Edward County, MOPS GROUP INC" />
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}" />
   <meta name="author" content="{{ site.name }}" />
   <meta name="robots" content="index, follow" />
 
   <!-- Canonical URL -->
-  <link rel="canonical" href="{{ site.url }}" />
+  <link rel="canonical" href="{{ canonicalUrl }}" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="{{ site.url }}" />
-  <meta property="og:title" content="{{ site.name }} – {{ site.title }}" />
-  <meta property="og:description" content="Professional restoration services for homes and businesses. Water damage, fire & smoke recovery, mold remediation, and full rebuilds." />
-  <meta property="og:image" content="{{ site.url }}assets/mops-group-logo-link.jpg" />
+  <meta property="og:url" content="{{ canonicalUrl }}" />
+  <meta property="og:title" content="{{ title }}" />
+  <meta property="og:description" content="{{ description }}" />
+  <meta property="og:image" content="{{ site.url }}assets/mops-group-og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="{{ site.url }}" />
-  <meta property="twitter:title" content="{{ site.name }} – {{ site.title }}" />
-  <meta property="twitter:description" content="From emergency response to final repair — we restore properties with care and clarity." />
-  <meta property="twitter:image" content="{{ site.url }}assets/mops-group-logo-link.jpg" />
+  <meta property="twitter:url" content="{{ canonicalUrl }}" />
+  <meta property="twitter:title" content="{{ title }}" />
+  <meta property="twitter:description" content="{{ description }}" />
+  <meta property="twitter:image" content="{{ site.url }}assets/mops-group-og.jpg" />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,11 +49,20 @@
   {
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
+    "@id": "{{ site.url }}#business",
     "name": "{{ site.name }}",
     "description": "Professional restoration services for homes and businesses, including water damage, fire and smoke recovery, mold remediation, and full rebuilds.",
     "url": "{{ site.url }}",
     "telephone": "{{ site.phone }}",
     "email": "{{ site.email }}",
+    "image": "{{ site.url }}assets/mops-group-og.jpg",
+    "logo": "{{ site.url }}assets/mops-group-logo-link.jpg",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "00:00",
+      "closes": "23:59"
+    },
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "41 Dussek St",

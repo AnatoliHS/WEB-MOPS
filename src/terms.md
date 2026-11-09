@@ -1,6 +1,7 @@
 ---
 layout: policy.njk
-title: Terms of Service
+title: "Terms of Service | Mops Group Inc."
+description: "The terms that apply to janitorial, restoration and website services provided by Mops Group Inc."
 ---
 
 <section style="padding: 160px 20px 100px; max-width: 900px; margin: 0 auto;">
